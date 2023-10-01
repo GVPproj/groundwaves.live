@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  html[data-theme="light"] {
+    --color-fill: 33.3, 100%, 96.5%; /* main bg color */
+    --color-fill-gradient-end: 34.3, 100%, 91.8%; /* grad end bg color */
+    --color-text-base: 143.8, 61.2%, 20.2%; /* main text */
+    --color-accent: 142.4, 71.8%, 29.2%; /* Link color, hover color etc. */
+    --color-accent-inverted: 32.1, 97.7%, 83.1%; /* Link color, hover color etc. */
+    --color-card: 27, 96%, 61%; /* card, scrollbar, code etc */
+    --color-card-muted: 27, 96%, 71%; /* scrollbar hover */
+    --color-border: 142.1, 76.2%, 36.3%; /* hr */
+  }
+  html[data-theme="dark"] {
+    --color-fill: 143.8, 61.2%, 20.2%; /* main bg color */
+    --color-fill-gradient-end: 142.8, 64.2%, 24.1%; /* grad end bg color */
+    --color-text-base: 33.3, 100%, 96.5%; /* main text */
+    --color-accent: 32.1, 97.7%, 83.1%; /* Link color, hover color etc. */
+    --color-accent-inverted: 142.4, 71.8%, 29.2%; /* Link color, hover color etc.
+    --color-card: 27, 96%, 61%; /* card, scrollbar, code etc */
+    --color-card-muted: 27, 96%, 71%; /* scrollbar hover */
+    --color-border: 142.1, 76.2%, 36.3%; /* hr */
+  }
+  body {
+    @apply flex flex-col min-h-screen bg-gradient-to-b from-fill to-gradend font-serif  text-skin-base text-opacity-90 
+        antialiased selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted;
+  }
+  #sun-svg,
+  html[data-theme="dark"] #moon-svg {
+    display: none;
+  }
+  #moon-svg,
+  html[data-theme="dark"] #sun-svg {
+    display: block;
+  }
+  main {
+    @apply mt-32;
+  }
+  section {
+    @apply grid content-center px-8 max-w-screen-lg mx-auto;
+  }
+
+  p {
+    @apply mb-8;
+  }
+  a {
+    @apply text-skin-accent;
+  }
+  button {
+    @apply outline-2 outline-offset-1 outline-skin-fill 
+    focus-visible:no-underline;
+  }
+  svg {
+    @apply inline-block fill-skin-base hover:fill-skin-accent;
+  }
+}
+.cta {
+  @apply flex h-fit flex-col items-center rounded border border-skin-line p-8 text-center font-semibold;
+}
+
+.cta-button {
+  @apply cursor-pointer bg-skin-accent text-skin-fill rounded-full text-xl px-5 py-2.5 
+  uppercase transition duration-150 ease-in-out hover:bg-skin-inverted 
+   hover:shadow-[0_2px_2px_-2px_rgba(21,128,61,0.3),0_2px_2px_0_rgba(21,128,61,0.2)] 
+    focus:shadow-[0_2px_2px_-2px_rgba(21,128,61,0.3),0_4px_18px_0_rgba(21,128,61,0.2)] 
+  
+   active:bg-skin-accent active:shadow-[0_8px_9px_-4px_rgba(21,128,61,0.3),0_2px_2px_0_rgba(21,128,61,0.2)];
+}
+
+/* fonts */
+
+/* fraunces-300 - latin */
+@font-face {
+  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/fonts/fraunces-v30-latin-300.woff2");
+}
+
+/* fraunces-regular - latin */
+@font-face {
+  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/fraunces-v30-latin-regular.woff2") format("woff2");
+}
+
+/* fraunces-italic - latin */
+@font-face {
+  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Fraunces";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/fonts/fraunces-v30-latin-italic.woff2") format("woff2");
+}
+
+/* fraunces-500 - latin */
+@font-face {
+  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/fraunces-v30-latin-500.woff2") format("woff2");
+}
+
+/* fraunces-700 - latin */
+@font-face {
+  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/fraunces-v30-latin-700.woff2") format("woff2");
+}
+
+/* fraunces-800 - latin */
+@font-face {
+  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 800;
+  src: url("/fonts/fraunces-v30-latin-800.woff2") format("woff2");
+}
+
+/* fraunces-900 - latin */
+@font-face {
+  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 900;
+  src: url("/fonts/fraunces-v30-latin-900.woff2") format("woff2");
+}
