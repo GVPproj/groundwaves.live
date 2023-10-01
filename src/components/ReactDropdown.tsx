@@ -30,7 +30,7 @@ export default function ReactDropdown() {
 
   return (
     <DropdownMenu.Root open={showNav} onOpenChange={setShowNav}>
-      <DropdownMenu.Trigger className="rounded px-1.5 focus:bg-skin-fill-muted  md:hidden">
+      <DropdownMenu.Trigger className="focus:bg-skin-fill-muted  md:hidden">
         {!showNav && (
           <svg
             xmlns="http://www.w3.org/2000/svg"

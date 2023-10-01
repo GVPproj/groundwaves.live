@@ -23,7 +23,7 @@ export default function ReactSiteHeader() {
         className="flex items-baseline justify-between gap-12 px-8 max-w-screen-xl mx-auto my-4  "
         // style={{ height: height }}
       >
-        <a className="text-4xl font-bold" href="/">
+        <a className="text-3xl md:text-4xl font-bold" href="/">
           groundwaves
         </a>
         <div id="desktop" className="hidden md:flex items-center gap-4 w-full">
@@ -32,7 +32,7 @@ export default function ReactSiteHeader() {
             <a href="/about">about</a>
             <button
               id="theme-btn"
-              className="focus-outline"
+              className="focus-outline ml-4"
               title="Light or dark mode?"
               aria-label="auto"
               aria-live="polite"
