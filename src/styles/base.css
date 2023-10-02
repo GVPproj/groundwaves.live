@@ -58,7 +58,7 @@
   }
 }
 .cta {
-  @apply flex h-fit flex-col items-center rounded border border-skin-line p-8 text-center font-semibold;
+  @apply flex h-fit flex-col items-center rounded border border-skin-line p-8 text-center font-semibold  mt-8;
 }
 
 .cta-button {
