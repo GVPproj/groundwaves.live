@@ -70,7 +70,7 @@ export default function ReactDropdown() {
             <DropdownMenu.Content
               className="font-sans flex h-screen w-screen flex-col
                       items-center gap-16 bg-opacity-30 px-6 py-24 text-2xl font-medium 
-                      backdrop-blur 
+                      backdrop-blur  z-50
                         md:hidden"
               asChild
             >

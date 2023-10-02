@@ -1,9 +1,43 @@
 ---
 import Layout from "../layouts/Layout.astro"
+import { Image } from "astro:assets";
+import squareMbio from '../assets/square-Mbio.jpeg'
 ---
-
-<Layout title="groundwaves events">
+<Layout title="events">
     <main>
-        <p>events</p>
+
+        <section class="flex flex-col mx-auto items-center pb-16">
+            <!-- <div class="wrapper mt-12"> -->
+ 
+
+                <Image
+
+                src={squareMbio}
+                alt="Modern Biology poster for SSI event"
+                width={800}
+                height={800} 
+                
+                format={"webp"}
+                />
+                <div class="mt-16">
+                <h2 class="font-semibold text-2xl mb-12">
+                    Modern Biology’s Field Trip // April 28 2023 @ Beaver Point Hall
+                </h2>
+                <p>
+                    On Earth Day, Modern Biology kicked off his touring series of intimate
+                    pop-up plant and mushroom music shows at Beaver Point Hall on Salt Spring
+                    Island. The event combined foraging, trail cleanup, and a live deep
+                    listening experience. He used proceeds from the show to support local
+                    environmental charities.
+                </p>
+                <h2 class="font-semibold text-2xl mb-12 text-skin-accent mt-32">
+                    ...stay tuned, more on the way...
+                </h2>
+            </div>
+                
+                
+            <!-- </div> -->
+        </section>
     </main>
-</Layout>
+    </Layout>
+    
