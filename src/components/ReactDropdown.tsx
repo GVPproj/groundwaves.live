@@ -68,7 +68,7 @@ export default function ReactDropdown() {
         {showNav && (
           <DropdownMenu.Portal forceMount>
             <DropdownMenu.Content
-              className="font-sans flex h-screen w-screen flex-col
+              className="font-sans flex h-screen w-screen flex-col bg
                       items-center gap-16 bg-opacity-30 px-6 py-24 text-2xl font-medium 
                       backdrop-blur  z-50
                         md:hidden"
@@ -95,6 +95,17 @@ export default function ReactDropdown() {
                 <a href="/about" className="max-w-max">
                   <Item closeMenu={closeMenu}>About Us</Item>
                 </a>
+                <a href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO">
+                <button
+            type="button"
+            className="cta-button font-bold "
+            // onClick="location.href='https://rkbce3s6n3o.typeform.com/to/FMhtniXO';"
+            value="Join Mailing List"
+          >
+
+            Join
+          </button>
+          </a>
               </motion.div>
             </DropdownMenu.Content>
           </DropdownMenu.Portal>

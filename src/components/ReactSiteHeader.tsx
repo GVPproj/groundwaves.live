@@ -53,7 +53,7 @@ export default function ReactSiteHeader() {
               </svg>
             </button>
           </nav>
-
+<a href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO">
           <button
             type="button"
             className="cta-button font-bold ml-auto"
@@ -62,6 +62,7 @@ export default function ReactSiteHeader() {
           >
             Join
           </button>
+          </a>
         </div>
         <ReactDropdown />
       </motion.div>
