@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro"
 import { Image } from "astro:assets";
 import squareMbio from '../assets/square-Mbio.jpeg'
+import squareShabason from '../assets/ShabasonKrgovich_IG_square.jpeg'
 ---
 <Layout title="events">
     <main>  
@@ -10,12 +11,43 @@ import squareMbio from '../assets/square-Mbio.jpeg'
             <!-- <div class="wrapper mt-12"> -->
  
 
-                <div class="">
-                    <h1 class="text-left mb-12 italic">Past events:</h1>
+                <div class="items-center">
+                    <h2 class="font-semibold text-2xl">
+                        Joseph Shabason w/Nicholas Krgovich <br/>& Friends Under a Big Maple Tree
+                    </h2>
+                    <h2 class="font-semibold text-2xl mb-12 italic">
+                        June 30 2024 @ Salty Pear
+                    </h2>
+                    <p class="text-left">
+                        Groundwaves is excited to welcome acclaimed multi-instrumentalist and composer Joseph Shabason and singer, songwriter and composer Nicholas Krgovich for a special outdoor performance on Salt Spring Island with Thom Gill, Bram Gielen and Phil Melanson.
+<br/><br/>
+                        Join us at <span class='font-bold'>
+                            Salty Pear
+                            </span>
+                             for a rare Gulf Islands show in a stunning outdoor setting - starting with a Bring Your Own Picnic Community gathering. Hope to see you there.
+                    </p>
+                    <Image
+                    class="mx-auto mt-16 cursor-pointer"
+                    src={squareShabason}
+                    alt="Joseph Shabason poster for SSI event"
+                    width={800}
+					onclick="location.href='https://www.eventbrite.ca/e/joseph-shabason-wnicholas-krgovich-friends-under-a-big-maple-tree-tickets-918461341597?aff=GroundworksSite';"
+
+                    height={800} 
+                    format={"webp"}
+                    />
+                    <button
+					type="button"
+					class="cta-button mt-16"
+					onclick="location.href='https://www.eventbrite.ca/e/joseph-shabason-wnicholas-krgovich-friends-under-a-big-maple-tree-tickets-918461341597?aff=GroundworksSite';"
+					value="Get Tickets">Get Tickets</button
+					>
+
+                    <h1 class="text-left mb-12 mt-32 italic">Past events:</h1>
                     <h2 class="font-semibold text-2xl">
                         Modern Biology’s Field Trip
                     </h2>
-                    <h2 class="font-semibold text-2xl mb-12">
+                    <h2 class="font-semibold text-2xl mb-12 italic">
                         April 28 2023 @ Beaver Point Hall
                     </h2>
                     <p class="text-left">
@@ -26,7 +58,7 @@ import squareMbio from '../assets/square-Mbio.jpeg'
                         environmental charities.
                     </p>
                     <Image
-    
+                    class='mx-auto'
                     src={squareMbio}
                     alt="Modern Biology poster for SSI event"
                     width={800}
@@ -34,7 +66,7 @@ import squareMbio from '../assets/square-Mbio.jpeg'
                     
                     format={"webp"}
                     />
-                <h2 class="font-semibold text-2xl mb-12 text-skin-accent mt-32 text-left">
+                <h2 class="font-semibold text-2xl mb-12 text-skin-accent mt-32 text-center">
                     ...stay tuned, more on the way...
                 </h2>
             </div>
