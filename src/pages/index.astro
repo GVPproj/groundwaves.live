@@ -1,7 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro"
 import Carousel from "../components/Carousel.astro";
-
+import { Image } from "astro:assets";
+import squareShabason from '../assets/ShabasonKrgovich_IG_square.jpeg'
 ---
 
 <Layout title="groundwaves">
@@ -14,6 +15,37 @@ import Carousel from "../components/Carousel.astro";
 					relationship between nature, technology, and ourselves through
 					immersive art experiences.
 				</p>
+				<div class="items-center flex flex-col my-16">
+                    <h2 class="font-semibold text-2xl">
+                        Joseph Shabason w/Nicholas Krgovich <br/>& Friends Under a Big Maple Tree
+                    </h2>
+                    <h2 class="font-semibold text-2xl mb-12 italic">
+                        June 30 2024 @ Salty Pear
+                    </h2>
+                    <p class="text-left">
+                        Groundwaves is excited to welcome acclaimed multi-instrumentalist and composer Joseph Shabason and singer, songwriter and composer Nicholas Krgovich for a special outdoor performance on Salt Spring Island with Thom Gill, Bram Gielen and Phil Melanson.
+<br/><br/>
+                        Join us at <span class='font-bold'>
+                            Salty Pear
+                            </span>
+                             for a rare Gulf Islands show in a stunning outdoor setting - starting with a Bring Your Own Picnic Community gathering. Hope to see you there.
+                    </p>
+                    <Image
+                    class="mx-auto mt-16 cursor-pointer"
+                    src={squareShabason}
+                    alt="Joseph Shabason poster for SSI event"
+                    width={800}
+					onclick="location.href='https://www.eventbrite.ca/e/joseph-shabason-wnicholas-krgovich-friends-under-a-big-maple-tree-tickets-918461341597?aff=GroundworksSite';"
+
+                    height={800} 
+                    format={"webp"}
+                    />
+                    <button
+					type="button"
+					class="cta-button mt-16"
+					onclick="location.href='https://www.eventbrite.ca/e/joseph-shabason-wnicholas-krgovich-friends-under-a-big-maple-tree-tickets-918461341597?aff=GroundworksSite';"
+					value="Get Tickets">Get Tickets</button
+					></div>
 				<div class="cta">
 					<p>Join our mailing list for early access to our next event...</p>
 					
