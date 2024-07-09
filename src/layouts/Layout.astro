@@ -1,98 +1,91 @@
 ---
-import { ViewTransitions } from "astro:transitions"
-import "../styles/base.css"
-import ReactSiteHeader from "../components/ReactSiteHeader"
-import Footer from "../components/Footer.astro"
+import { ViewTransitions } from "astro:transitions";
+import "../styles/base.css";
+import ReactSiteHeader from "../components/ReactSiteHeader";
+import Footer from "../components/Footer.astro";
 
 export interface Props {
-	title: string
+  title: string;
 }
 
-const { title } = Astro.props
+const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link
-			rel="icon"
-			href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌀</text></svg>"
-		/>
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		<!-- Preload Fonts -->
-		<link
-			rel="preload"
-			href="/fonts/fraunces-v30-latin-300.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
-		<link
-			rel="preload"
-			href="/fonts/fraunces-v30-latin-regular.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
-		<link
-			rel="preload"
-			href="/fonts/fraunces-v30-latin-italic.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
-		<link
-			rel="preload"
-			href="/fonts/fraunces-v30-latin-500.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
-		<link
-			rel="preload"
-			href="/fonts/fraunces-v30-latin-500.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
-		<link
-			rel="preload"
-			href="/fonts/fraunces-v30-latin-700.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
-		<link
-			rel="preload"
-			href="/fonts/fraunces-v30-latin-800.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
-		<link
-			rel="preload"
-			href="/fonts/fraunces-v30-latin-900.woff2"
-			as="font"
-			type="font/woff2"
-			crossorigin
-		/>
-		<!-- <ViewTransitions />  -->
-		<script is:inline src="/toggle-theme.js"></script>
-	</head>
-	<body>
-		<ReactSiteHeader client:load />
-		<!-- <SiteHeader /> -->
-		<slot />
-		<Footer />
-		<script>
-			import 'flowbite';
-			// import 'flowbite/dist/datepicker.js';
-			document.addEventListener('astro:after-swap', flowbite)
-		</script>
-		<!-- <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script> -->
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌀</text></svg>"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <!-- Preload Fonts -->
+    <link
+      rel="preload"
+      href="/fonts/fraunces-v30-latin-300.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/fraunces-v30-latin-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/fraunces-v30-latin-italic.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/fraunces-v30-latin-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/fraunces-v30-latin-500.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/fraunces-v30-latin-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/fraunces-v30-latin-800.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/fraunces-v30-latin-900.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <ViewTransitions />
+    <script is:inline src="/toggle-theme.js"></script>
+  </head>
+  <body>
+    <ReactSiteHeader client:load />
+    <slot />
+    <Footer />
+  </body>
 </html>
