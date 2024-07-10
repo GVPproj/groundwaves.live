@@ -1,25 +1,25 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
-import april202331 from "../assets/April2023-31.jpg";
-import april202352 from "../assets/April2023-52.jpg";
-import april202353 from "../assets/April2023-53.jpg";
-import april202356 from "../assets/April2023-56.jpg";
-import april202387 from "../assets/April2023-87.jpg";
-import april202389 from "../assets/April2023-89.jpg";
-import april202393 from "../assets/April2023-93.jpg";
+import { sanityClient } from "sanity:client";
+import imageUrlBuilder from "@sanity/image-url";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-let images = [
-  april202393,
-  april202331,
-  april202352,
-  april202353,
-  april202356,
-  april202387,
-  april202389,
-];
+// Get a pre-configured url-builder from your sanity client
+const builder = imageUrlBuilder(sanityClient);
 
-export default () => {
+// Then we like to make a simple function like this that gives the
+// builder an image and returns the builder for you to specify additional
+// parameters:
+function urlFor(source: any) {
+  return builder.image(source);
+}
+
+interface CarouselProps {
+  // images: ImageMetadata[];
+  images: any[];
+}
+
+export default ({ images }: CarouselProps) => {
   let [index, setIndex] = useState(0);
 
   return (
@@ -28,13 +28,15 @@ export default () => {
         <div className="mx-auto flex md:max-h-[500px] max-w-[100%] flex-col aspect-[3/2] rounded-xl">
           <div className="relative overflow-x-hidden">
             <motion.div animate={{ x: `-${index * 100}%` }} className="flex">
-              {images.map((image) => (
-                <img
-                  key={image.src}
-                  src={image.src}
-                  className="aspect-[3/2] object-cover rounded-xl"
-                />
-              ))}
+              {images.map((image) => {
+                return (
+                  <img
+                    key={image._key}
+                    src={urlFor(image).width(960).url()}
+                    className="aspect-[3/2] object-cover rounded-xl"
+                  />
+                );
+              })}
             </motion.div>
             <AnimatePresence initial={false}>
               {index > 0 && (

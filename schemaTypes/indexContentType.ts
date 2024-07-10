@@ -14,5 +14,11 @@ export const indexContentType = defineType({
       type: "array",
       of: [{ type: "block" }],
     }),
+    defineField({
+      name: "imageGallery",
+      title: "Image gallery",
+      type: "array",
+      of: [{ type: "image" }],
+    }),
   ],
 });

@@ -10,12 +10,53 @@ const pastEvents = await sanityClient.fetch(
         && date < now()
         ]{_id, name, date, eventCopy, image, headline->, venue->}|order(date desc)`
 );
+const upcomingEvents = await sanityClient.fetch(
+  `*[
+        _type == "event"
+        && date > now()
+        ]{_id, name, date, eventCopy, image, tickets, headline->, venue->}|order(date desc)`
+);
 ---
 
 <Layout title="events">
   <main>
     <section class="flex text-center flex-col mx-auto items-center pb-16">
-      <h1 class="font-semibold text-2xl text-skin-accent mb-16 text-center">
+      {
+        upcomingEvents.length > 0 &&
+          upcomingEvents.map((event: any) => {
+            return (
+              <div class="items-center my-6">
+                <SanityImage
+                  node={event.image}
+                  width="800"
+                  classNames="mx-auto mb-16"
+                />
+                <h2 class="font-semibold text-2xl">{event.name}</h2>
+                <h2 class="font-semibold text-2xl mb-12 italic">
+                  {new Date(event?.date).toLocaleDateString()} @{" "}
+                  {event.venue?.name}
+                </h2>
+                <div class="text-left">
+                  <PortableText value={event.eventCopy} />
+                </div>
+                {event?.tickets && (
+                  <a href={event.tickets} aria-label="Ticket Link">
+                    <button
+                      type="button"
+                      class="cta-button mt-16"
+                      value="Get Tickets"
+                    >
+                      Get Tickets
+                    </button>
+                  </a>
+                )}
+              </div>
+            );
+          })
+      }
+      <h1
+        class={`font-semibold text-2xl text-skin-accent mb-16 text-center  ${upcomingEvents.length > 0 && "mt-16"}`}
+      >
         Past events:
       </h1>
       {

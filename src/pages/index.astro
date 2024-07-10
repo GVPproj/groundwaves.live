@@ -1,18 +1,18 @@
 ---
-import { sanityClient } from "sanity:client";
-import { PortableText } from "astro-portabletext";
 import Layout from "../layouts/Layout.astro";
 import Carousel from "../components/Carousel";
+import { sanityClient } from "sanity:client";
+import { PortableText } from "astro-portabletext";
 
-const { headline, heroText } = await sanityClient.fetch(
-  `*[_type == "indexContent"]{headline, heroText}[0]`
+const { headline, heroText, imageGallery } = await sanityClient.fetch(
+  `*[_type == "indexContent"]{headline, heroText, imageGallery}[0]`
 );
 ---
 
 <Layout title="groundwaves">
   <main>
     <section class="pb-32">
-      <Carousel client:load />
+      {imageGallery && <Carousel client:load images={imageGallery} />}
       {
         headline && (
           <h1 class="font-bold text-3xl mb-8 mt-16 text-center">{headline}</h1>

@@ -12,10 +12,10 @@ export const structure: StructureResolver = (S) =>
     .title("Content")
     .items([
       S.documentTypeListItem("indexContent")
-        .title("Front Page Conent")
+        .title("Front Page Content")
         .icon(AddDocumentIcon),
       S.documentTypeListItem("aboutContent")
-        .title("About Page Conent")
+        .title("About Page Content")
         .icon(AddDocumentIcon),
       S.divider(),
       S.documentTypeListItem("event").title("All Events").icon(CalendarIcon),
