@@ -24,9 +24,9 @@ export default () => {
 
   return (
     <MotionConfig transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}>
-      <div className="h-[500px] bg-black rounded-xl">
-        <div className="mx-auto flex h-[500px] max-w-[85%] flex-col aspect-[3/2] rounded-xl">
-          <div className="relative overflow-hidden">
+      <div className="md:h-[500px] bg-black rounded-xl">
+        <div className="mx-auto flex md:max-h-[500px] max-w-[100%] flex-col aspect-[3/2] rounded-xl">
+          <div className="relative overflow-x-hidden">
             <motion.div animate={{ x: `-${index * 100}%` }} className="flex">
               {images.map((image) => (
                 <img
