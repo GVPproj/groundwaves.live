@@ -1,36 +1,24 @@
 ---
+import { sanityClient } from "sanity:client";
+import { PortableText } from "astro-portabletext";
 import Layout from "../layouts/Layout.astro";
 import Carousel from "../components/Carousel";
-// import { Image } from "astro:assets";
 
-// import { sanityClient } from "sanity:client";
-// const events = await sanityClient.fetch(`*[_type == "event" && defined(slug)]`);
+const { headline, heroText } = await sanityClient.fetch(
+  `*[_type == "indexContent"]{headline, heroText}[0]`
+);
 ---
 
 <Layout title="groundwaves">
   <main>
-    <!-- <ul>
-      {
-        events.map((event: any) => {
-          console.log(event);
-          return (
-            <li>
-              <a href={"/posts/" + event.slug.current}>{event.name}</a>
-            </li>
-          );
-        })
-      }
-    </ul> -->
     <section class="pb-32">
       <Carousel client:load />
-      <h1 class="font-bold text-3xl mb-8 mt-16 text-center">
-        Connection Is In Our Nature
-      </h1>
-      <p>
-        Groundwaves is an outdoor performance series that explores the
-        relationship between nature, technology, and ourselves through immersive
-        art experiences.
-      </p>
+      {
+        headline && (
+          <h1 class="font-bold text-3xl mb-8 mt-16 text-center">{headline}</h1>
+        )
+      }
+      {heroText && <PortableText value={heroText} />}
       <div class="cta">
         <p>Join our mailing list for early access to our next event...</p>
 
