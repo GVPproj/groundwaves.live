@@ -1,6 +1,7 @@
 ---
 import { sanityClient } from "sanity:client";
 import { PortableText } from "astro-portabletext";
+import { YouTube } from "astro-embed";
 import Layout from "../layouts/Layout.astro";
 import SanityImage from "../components/SanityImage.astro";
 
@@ -8,7 +9,7 @@ const pastEvents = await sanityClient.fetch(
   `*[
         _type == "event"
         && date < now()
-        ]{_id, name, date, eventCopy, image, headline->, venue->}|order(date desc)`
+        ]{_id, name, date, eventCopy, image, youtubeEmbeds, headline->, venue->}|order(date desc)`
 );
 const upcomingEvents = await sanityClient.fetch(
   `*[
@@ -16,6 +17,8 @@ const upcomingEvents = await sanityClient.fetch(
         && date > now()
         ]{_id, name, date, eventCopy, image, tickets, headline->, venue->}|order(date desc)`
 );
+
+console.log(pastEvents)
 ---
 
 <Layout title="events">
@@ -50,6 +53,13 @@ const upcomingEvents = await sanityClient.fetch(
                 <div class="text-left">
                   <PortableText value={event.eventCopy} />
                 </div>
+                {event.youtubeEmbeds && event.youtubeEmbeds.map(emb => {
+  if (typeof emb !== 'string') {
+    console.warn(`Invalid YouTube ID: ${emb}`);
+    return null;
+  }
+  return <YouTube class='w-full mx-auto mt-8' id={emb}/>;
+})}
                 {event?.tickets && (
                   <a href={event.tickets} aria-label="Ticket Link">
                     <button
@@ -61,19 +71,20 @@ const upcomingEvents = await sanityClient.fetch(
                     </button>
                   </a>
                 )}
+              
               </div>
             );
           })
       }
-      <h1
-        class={`font-semibold text-2xl text-skin-accent mb-16 text-center  ${upcomingEvents.length > 0 && "mt-16"}`}
-      >
-        Past events:
-      </h1>
       {
         pastEvents.map((event: any) => {
           return (
-            <div class="items-center my-6">
+            <div class="items-center mt-6 mb-12">
+        <h1
+          class={`font-semibold text-2xl text-skin-accent mb-16 text-center  ${upcomingEvents.length > 0 && "mt-16"}`}
+        >
+          Past event:
+        </h1>
               <SanityImage
                 node={event.image}
                 width="800"
@@ -87,23 +98,18 @@ const upcomingEvents = await sanityClient.fetch(
               <div class="text-left">
                 <PortableText value={event.eventCopy} />
               </div>
-              {/* <button
-                type="button"
-                class="cta-button mt-16"
-                onclick="location.href='https://www.eventbrite.ca/e/joseph-shabason-wnicholas-krgovich-friends-under-a-big-maple-tree-tickets-918461341597?aff=GroundworksSite';"
-                value="Get Tickets"
-              >
-                Get Tickets
-              </button> */}
+              {event.youtubeEmbeds && event.youtubeEmbeds.map(emb => {
+  if (typeof emb !== 'string') {
+    console.warn(`Invalid YouTube ID: ${emb}`);
+    return null;
+  }
+  return <YouTube class='w-full mx-auto mt-8' id={emb}/>;
+})}
             </div>
           );
         })
       }
-      <h2
-        class="font-semibold text-2xl mb-12 text-skin-accent mt-32 text-center"
-      >
-        ...stay tuned, more on the way...
-      </h2>
+
     </section>
 
     <!-- </div> -->

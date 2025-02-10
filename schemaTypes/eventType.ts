@@ -1,36 +1,37 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from "sanity";
 // import {CalendarIcon} from '@sanity/icons'
-import {DoorsOpenInput} from './components/DoorsOpenInput'
+import { DoorsOpenInput } from "./components/DoorsOpenInput";
 
 export const eventType = defineType({
-  name: 'event',
-  title: 'Event',
-  type: 'document',
+  name: "event",
+  title: "Event",
+  type: "document",
   // icon: CalendarIcon,
   groups: [
-    {name: 'details', title: 'Details'},
-    {name: 'editorial', title: 'Editorial'},
+    { name: "details", title: "Details" },
+    { name: "editorial", title: "Editorial" },
   ],
   fields: [
     defineField({
-      name: 'name',
-      type: 'string',
-      group: ['details', 'editorial'],
+      name: "name",
+      type: "string",
+      group: ["details", "editorial"],
     }),
     defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {source: 'name'},
-      validation: (rule) => rule.required().error(`Required to generate a page on the website`),
-      hidden: ({document}) => !document?.name,
-      group: 'details',
+      name: "slug",
+      type: "slug",
+      options: { source: "name" },
+      validation: (rule) =>
+        rule.required().error(`Required to generate a page on the website`),
+      hidden: ({ document }) => !document?.name,
+      group: "details",
     }),
     defineField({
-      name: 'eventType',
-      type: 'string',
+      name: "eventType",
+      type: "string",
       options: {
-        list: ['in-person', 'virtual'],
-        layout: 'radio',
+        list: ["in-person", "virtual"],
+        layout: "radio",
       },
       //   validation: (rule) =>
       //     rule.custom((value, context) => {
@@ -40,80 +41,90 @@ export const eventType = defineType({
 
       //       return true
       //     }),
-      group: 'details',
+      group: "details",
     }),
     defineField({
-      name: 'venue',
-      type: 'reference',
-      to: [{type: 'venue'}],
-      readOnly: ({value, document}) => !value && document?.eventType === 'virtual',
-      group: 'details',
-      hidden: ({document}) => document?.eventType !== 'in-person',
+      name: "venue",
+      type: "reference",
+      to: [{ type: "venue" }],
+      readOnly: ({ value, document }) =>
+        !value && document?.eventType === "virtual",
+      group: "details",
+      hidden: ({ document }) => document?.eventType !== "in-person",
     }),
     defineField({
-      name: 'date',
-      type: 'datetime',
-      group: 'details',
+      name: "date",
+      type: "datetime",
+      group: "details",
     }),
     defineField({
-      name: 'doorsOpen',
-      type: 'number',
-      description: 'Number of minutes between doors opening and event start time',
+      name: "doorsOpen",
+      type: "number",
+      description:
+        "Number of minutes between doors opening and event start time",
       initialValue: 60,
-      group: 'details',
+      group: "details",
       components: {
         input: DoorsOpenInput,
       },
     }),
     defineField({
-      name: 'headline',
-      type: 'reference',
-      to: [{type: 'artist'}],
-      group: 'details',
+      name: "headline",
+      type: "reference",
+      to: [{ type: "artist" }],
+      group: "details",
     }),
     defineField({
-      name: 'image',
-      type: 'image',
-      group: 'editorial',
+      name: "image",
+      type: "image",
+      group: "editorial",
     }),
     defineField({
-      name: 'eventCopy',
-      type: 'array',
-      of: [{type: 'block'}],
-      group: 'editorial',
+      name: "eventCopy",
+      type: "array",
+      of: [{ type: "block" }],
+      group: "editorial",
     }),
     defineField({
-      name: 'tickets',
-      type: 'url',
-      group: 'details',
+      name: "tickets",
+      type: "url",
+      group: "details",
+    }),
+    defineField({
+      name: "youtubeEmbeds",
+      description:
+        "Add a full URL like this fop each: https://youtu.be/2JrMJE5odOU?si=Ryg76xdySlZVaFJz",
+      type: "array",
+      of: [{ type: "string" }],
+      group: ["editorial"],
     }),
   ],
   // Update the preview key in the schema
   preview: {
     select: {
-      name: 'name',
-      venue: 'venue.name',
-      artist: 'headline.name',
-      date: 'date',
-      image: 'image',
+      name: "name",
+      venue: "venue.name",
+      artist: "headline.name",
+      date: "date",
+      image: "image",
     },
-    prepare({name, venue, artist, date, image}) {
-      const nameFormatted = name || 'Untitled event'
+    prepare({ name, venue, artist, date, image }) {
+      const nameFormatted = name || "Untitled event";
       const dateFormatted = date
         ? new Date(date).toLocaleDateString(undefined, {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
           })
-        : 'No date'
+        : "No date";
 
       return {
         title: artist ? `${nameFormatted} (${artist})` : nameFormatted,
         subtitle: venue ? `${dateFormatted} at ${venue}` : dateFormatted,
         // media: image || CalendarIcon,
-      }
+      };
     },
   },
-})
+});
