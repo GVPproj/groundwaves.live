@@ -15,10 +15,9 @@ const upcomingEvents = await sanityClient.fetch(
   `*[
         _type == "event"
         && date > now()
-        ]{_id, name, date, eventCopy, image, tickets, headline->, venue->}|order(date desc)`
+        ]{_id, name, date, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}|order(date desc)`
 );
 
-console.log(pastEvents)
 ---
 
 <Layout title="events">
