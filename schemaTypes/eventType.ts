@@ -93,7 +93,7 @@ export const eventType = defineType({
     defineField({
       name: "youtubeEmbeds",
       description:
-        "Add a full URL like this fop each: https://youtu.be/2JrMJE5odOU?si=Ryg76xdySlZVaFJz",
+        "Add a full URL like this for each one: https://youtu.be/2JrMJE5odOU?si=Ryg76xdySlZVaFJz",
       type: "array",
       of: [{ type: "string" }],
       group: ["editorial"],
