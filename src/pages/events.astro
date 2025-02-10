@@ -31,6 +31,17 @@ const upcomingEvents = await sanityClient.fetch(
                   width="800"
                   classNames="mx-auto mb-16"
                 />
+                  {event?.tickets && (
+                  <a href={event.tickets} aria-label="Ticket Link">
+                    <button
+                      type="button"
+                      class="cta-button mb-16"
+                      value="Get Tickets"
+                    >
+                      Get Tickets
+                    </button>
+                  </a>
+                )}
                 <h2 class="font-semibold text-2xl">{event.name}</h2>
                 <h2 class="font-semibold text-2xl mb-12 italic">
                   {new Date(event?.date).toLocaleDateString()} @{" "}
