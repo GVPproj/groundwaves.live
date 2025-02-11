@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import { sanityClient } from "sanity:client";
 import imageUrlBuilder from "@sanity/image-url";
@@ -21,6 +21,16 @@ interface CarouselProps {
 
 export default ({ images }: CarouselProps) => {
   let [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((currentIndex) => {
+        return currentIndex + 1 < images.length ? currentIndex + 1 : 0;
+      });
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, [images.length]);
 
   return (
     <MotionConfig transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}>
