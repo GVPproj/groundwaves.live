@@ -1,4 +1,5 @@
-const primaryColorScheme = ""; // "light" | "dark"
+// MODIFIED: Force dark mode only
+const primaryColorScheme = "dark"; // "light" | "dark"
 
 // Get theme data from local storage
 const currentTheme = localStorage.getItem("theme");
@@ -54,11 +55,14 @@ window.onload = () => {
     // set on load so screen readers can get the latest value on the button
     reflectPreference();
 
+    // MODIFIED: Commented out theme toggle button functionality
+    /*
     // now this script can find and listen for clicks on the control
     document.querySelector("#theme-btn")?.addEventListener("click", () => {
       themeValue = themeValue === "light" ? "dark" : "light";
       setPreference();
     });
+    */
   }
 
   setThemeFeature();
@@ -67,10 +71,12 @@ window.onload = () => {
   document.addEventListener("astro:after-swap", setThemeFeature);
 };
 
-// sync with system changes
+// MODIFIED: Commented out system theme sync to force dark mode only
+/*
 window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", ({ matches: isDark }) => {
     themeValue = isDark ? "dark" : "light";
     setPreference();
   });
+*/
