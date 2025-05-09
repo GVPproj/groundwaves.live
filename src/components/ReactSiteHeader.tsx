@@ -19,15 +19,19 @@ export default function ReactSiteHeader() {
   //   }, [height, scrollY]);
   return (
     <header className="fixed z-40 w-full bg-opacity-30 shadow backdrop-blur ">
-      <motion.div
-        className="flex items-baseline justify-between gap-12 px-8 max-w-screen-xl mx-auto my-4  "
-        // style={{ height: height }}
-      >
-        <a className="text-3xl md:text-4xl font-bold" href="/" data-astro-reload>
+      <motion.div className="flex items-baseline justify-between gap-12 px-8 max-w-screen-xl mx-auto my-4  ">
+        <a
+          className="text-3xl md:text-4xl font-bold"
+          href="/"
+          data-astro-reload
+        >
           groundwaves
         </a>
         <div id="desktop" className="hidden md:flex items-center gap-4 w-full">
           <nav className="flex-initial md:flex-1 flex gap-4 ">
+            <a className="afw-link" href="/afw">
+              a friendly wave
+            </a>
             <a href="/events">events</a>
             <a href="/about">about</a>
             <button
@@ -53,15 +57,15 @@ export default function ReactSiteHeader() {
               </svg>
             </button>
           </nav>
-<a href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO">
-          <button
-            type="button"
-            className="cta-button font-bold ml-auto"
-            // onClick="location.href='https://rkbce3s6n3o.typeform.com/to/FMhtniXO';"
-            value="Join Mailing List"
-          >
-            Join
-          </button>
+          <a href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO">
+            <button
+              type="button"
+              className="cta-button font-bold ml-auto"
+              // onClick="location.href='https://rkbce3s6n3o.typeform.com/to/FMhtniXO';"
+              value="Join Mailing List"
+            >
+              Join
+            </button>
           </a>
         </div>
         <ReactDropdown />

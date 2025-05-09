@@ -47,7 +47,30 @@
     @apply mb-8;
   }
   a {
-    @apply text-skin-accent;
+    @apply text-skin-accent text-lg;
+  }
+  .afw-link {
+    @apply relative;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(
+      90deg,
+      hsl(var(--color-accent)) 0%,
+      hsl(var(--color-card)) 50%,
+      hsl(var(--color-accent)) 100%
+    );
+    background-size: 200% 100%;
+    animation: gradientMove 3s linear infinite;
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 200% 50%;
+    }
   }
   button {
     @apply outline-2 outline-offset-1 outline-skin-fill 

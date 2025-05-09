@@ -69,7 +69,7 @@ export default function ReactDropdown() {
           <DropdownMenu.Portal forceMount>
             <DropdownMenu.Content
               className="font-sans flex h-screen w-screen flex-col bg
-                      items-center gap-16 bg-opacity-30 px-6 py-24 text-2xl font-medium 
+                      items-center gap-16 bg-opacity-30  px-6 py-24 text-2xl font-medium 
                       backdrop-blur  z-50
                         md:hidden"
               asChild
@@ -89,23 +89,25 @@ export default function ReactDropdown() {
                   },
                 }}
               >
+                <a href="/afw" className="max-w-max afw-link">
+                  <Item closeMenu={closeMenu}>a friendly wave</Item>
+                </a>
                 <a href="/events" className="max-w-max">
-                  <Item closeMenu={closeMenu}>Events</Item>
+                  <Item closeMenu={closeMenu}>events</Item>
                 </a>
                 <a href="/about" className="max-w-max">
-                  <Item closeMenu={closeMenu}>About Us</Item>
+                  <Item closeMenu={closeMenu}>about us</Item>
                 </a>
                 <a href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO">
-                <button
-            type="button"
-            className="cta-button font-bold "
-            // onClick="location.href='https://rkbce3s6n3o.typeform.com/to/FMhtniXO';"
-            value="Join Mailing List"
-          >
-
-            Join
-          </button>
-          </a>
+                  <button
+                    type="button"
+                    className="cta-button font-bold "
+                    // onClick="location.href='https://rkbce3s6n3o.typeform.com/to/FMhtniXO';"
+                    value="Join Mailing List"
+                  >
+                    Join
+                  </button>
+                </a>
               </motion.div>
             </DropdownMenu.Content>
           </DropdownMenu.Portal>

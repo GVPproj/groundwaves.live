@@ -1,0 +1,95 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { sanityClient } from "sanity:client";
+import { PortableText } from "astro-portabletext";
+import SanityImage from "../components/SanityImage.astro";
+
+const events = await sanityClient.fetch(
+  `*[_type == 'event' && slug.current == 'afw']{_id, name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}`
+);
+
+const event = events[0];
+---
+
+<Layout title="groundwaves">
+  <main>
+    <section class="flex text-center flex-col mx-auto items-center pb-16">
+      <h2 class="font-semibold text-2xl">{event.name}</h2>
+      <h2 class="font-semibold text-2xl mb-12 italic">
+        {
+          new Date(event?.date).toLocaleDateString("en-US", {
+            timeZone: "America/Los_Angeles",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }{" "}
+        {
+          event.endDate &&
+            "- " +
+              new Date(event.endDate).toLocaleDateString("en-US", {
+                timeZone: "America/Los_Angeles",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+        }{" "}
+         @ {event.venue?.name}
+      </h2>
+      <div class="items-center my-6">
+        <SanityImage
+          node={event.image}
+          width="800"
+          classNames="mx-auto mb-16"
+        />
+        {
+          event?.tickets && (
+            <a href={event.tickets} aria-label="Ticket Link">
+              <button
+                type="button"
+                class="cta-button mb-16"
+                value="Get Tickets"
+              >
+                Get Tickets
+              </button>
+            </a>
+          )
+        }
+        <div class="text-left">
+          <PortableText value={event.eventCopy} />
+        </div>
+        <!-- {event.youtubeEmbeds &&
+                  event.youtubeEmbeds.map((emb: string) => {
+                    if (typeof emb !== "string") {
+                      console.warn(`Invalid YouTube ID: ${emb}`);
+                      return null;
+                    }
+                    return <YouTube class="w-full mx-auto mt-8" id={emb} />;
+                  })} -->
+        {
+          event?.tickets && (
+            <a href={event.tickets} aria-label="Ticket Link">
+              <button
+                type="button"
+                class="cta-button mt-16"
+                value="Get Tickets"
+              >
+                Get Tickets
+              </button>
+            </a>
+          )
+        }
+      </div>
+      <div class="cta">
+        <p>Join our mailing list for early access to our next event...</p>
+
+        <button
+          type="button"
+          class="cta-button"
+          onclick="location.href='https://rkbce3s6n3o.typeform.com/to/FMhtniXO';"
+          value="Join Mailing List">Join</button
+        >
+      </div>
+    </section>
+  </main>
+</Layout>
