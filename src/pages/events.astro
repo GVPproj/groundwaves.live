@@ -9,15 +9,14 @@ const pastEvents = await sanityClient.fetch(
   `*[
         _type == "event"
         && date < now()
-        ]{_id, name, date, eventCopy, image, youtubeEmbeds, headline->, venue->}|order(date desc)`
+        ]{_id, name, date, endDate, eventCopy, image, youtubeEmbeds, headline->, venue->}|order(date desc)`
 );
 const upcomingEvents = await sanityClient.fetch(
   `*[
         _type == "event"
         && date > now()
-        ]{_id, name, date, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}|order(date desc)`
+        ]{_id, name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}|order(date desc)`
 );
-
 ---
 
 <Layout title="events">
@@ -33,7 +32,7 @@ const upcomingEvents = await sanityClient.fetch(
                   width="800"
                   classNames="mx-auto mb-16"
                 />
-                  {event?.tickets && (
+                {event?.tickets && (
                   <a href={event.tickets} aria-label="Ticket Link">
                     <button
                       type="button"
@@ -46,19 +45,22 @@ const upcomingEvents = await sanityClient.fetch(
                 )}
                 <h2 class="font-semibold text-2xl">{event.name}</h2>
                 <h2 class="font-semibold text-2xl mb-12 italic">
-                  {new Date(event?.date).toLocaleDateString()} @{" "}
-                  {event.venue?.name}
+                  {new Date(event?.date).toLocaleDateString()}{" "}
+                  {event.endDate &&
+                    "- " + new Date(event.endDate).toLocaleDateString()}{" "}
+                  @ {event.venue?.name}
                 </h2>
                 <div class="text-left">
                   <PortableText value={event.eventCopy} />
                 </div>
-                {event.youtubeEmbeds && event.youtubeEmbeds.map(emb => {
-  if (typeof emb !== 'string') {
-    console.warn(`Invalid YouTube ID: ${emb}`);
-    return null;
-  }
-  return <YouTube class='w-full mx-auto mt-8' id={emb}/>;
-})}
+                {event.youtubeEmbeds &&
+                  event.youtubeEmbeds.map((emb: string) => {
+                    if (typeof emb !== "string") {
+                      console.warn(`Invalid YouTube ID: ${emb}`);
+                      return null;
+                    }
+                    return <YouTube class="w-full mx-auto mt-8" id={emb} />;
+                  })}
                 {event?.tickets && (
                   <a href={event.tickets} aria-label="Ticket Link">
                     <button
@@ -70,7 +72,6 @@ const upcomingEvents = await sanityClient.fetch(
                     </button>
                   </a>
                 )}
-              
               </div>
             );
           })
@@ -79,11 +80,11 @@ const upcomingEvents = await sanityClient.fetch(
         pastEvents.map((event: any) => {
           return (
             <div class="items-center mt-6 mb-12">
-        <h1
-          class={`font-semibold text-2xl text-skin-accent mb-16 text-center  ${upcomingEvents.length > 0 && "mt-16"}`}
-        >
-          Past event:
-        </h1>
+              <h1
+                class={`font-semibold text-2xl text-skin-accent mb-16 text-center  ${upcomingEvents.length > 0 && "mt-16"}`}
+              >
+                Past event:
+              </h1>
               <SanityImage
                 node={event.image}
                 width="800"
@@ -92,23 +93,25 @@ const upcomingEvents = await sanityClient.fetch(
               <h2 class="font-semibold text-2xl">{event.name}</h2>
               <h2 class="font-semibold text-2xl mb-12 italic">
                 {new Date(event?.date).toLocaleDateString()} @{" "}
+                {event.endDate &&
+                  "- " + new Date(event.endDate).toLocaleDateString()}{" "}
                 {event.venue.name}
               </h2>
               <div class="text-left">
                 <PortableText value={event.eventCopy} />
               </div>
-              {event.youtubeEmbeds && event.youtubeEmbeds.map(emb => {
-  if (typeof emb !== 'string') {
-    console.warn(`Invalid YouTube ID: ${emb}`);
-    return null;
-  }
-  return <YouTube class='w-full mx-auto mt-8' id={emb}/>;
-})}
+              {event.youtubeEmbeds &&
+                event.youtubeEmbeds.map((emb: string) => {
+                  if (typeof emb !== "string") {
+                    console.warn(`Invalid YouTube ID: ${emb}`);
+                    return null;
+                  }
+                  return <YouTube class="w-full mx-auto mt-8" id={emb} />;
+                })}
             </div>
           );
         })
       }
-
     </section>
 
     <!-- </div> -->
