@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 // Import all images from the afwAssets directory
 import afwGeneralPost1 from "../assets/afwAssets/AFW_002_General-Post_1.0.png";
 import afwGeneralPost2 from "../assets/afwAssets/AFW_002_General-Post_2.0.png";
@@ -23,17 +25,17 @@ import afwSchedule6 from "../assets/afwAssets/AFW_002_Schedule_6.0.png";
 const images = [
   afwProfileMeredith,
   afwGeneralPost1,
+  afwManifesto1,
+  afwProfileMatt,
+  afwManifesto2,
+  afwProfileConnie,
   afwProfileChris,
   afwGeneralPost2,
-  afwProfileMatt,
-  afwManifesto1,
-  afwProfileConnie,
-  afwManifesto2,
+  afwProfileRave,
   afwProfileAndrew,
   afwManifesto3,
   afwProfileDavid,
   afwSchedule5,
-  afwProfileRave,
   afwSchedule1,
   afwSchedule2,
   afwSchedule3,
@@ -43,6 +45,10 @@ const images = [
 
 // Height parameter with default value
 const { height = "500px" } = Astro.props;
+
+// Define common image props
+const imageWidth = 500;
+const format = "webp"; // Changed from formats array to single format
 ---
 
 <div class="image-banner-container" style={`height: ${height};`}>
@@ -50,9 +56,12 @@ const { height = "500px" } = Astro.props;
     {
       images.map((image, index) => (
         <div class="image-wrapper">
-          <img
-            src={image.src}
+          <Image
+            src={image}
             alt={`A Friendly Wave promotional image ${index + 1}`}
+            width={imageWidth}
+            height={500}
+            format={format}
           />
         </div>
       ))
@@ -62,9 +71,12 @@ const { height = "500px" } = Astro.props;
     {
       images.map((image, index) => (
         <div class="image-wrapper">
-          <img
-            src={image.src}
+          <Image
+            src={image}
             alt={`A Friendly Wave promotional image ${index + 1}`}
+            width={imageWidth}
+            height={500}
+            format={format}
           />
         </div>
       ))
