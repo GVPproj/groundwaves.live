@@ -15,7 +15,7 @@ const upcomingEvents = await sanityClient.fetch(
   `*[
         _type == "event"
         && date > now()
-        ]{_id, name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}|order(date desc)`
+        ]{_id,  name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}|order(date desc)`
 );
 ---
 
@@ -27,23 +27,25 @@ const upcomingEvents = await sanityClient.fetch(
           upcomingEvents.map((event: any) => {
             return (
               <div class="items-center my-6">
-                <SanityImage
-                  node={event.image}
-                  width="800"
-                  classNames="mx-auto mb-16"
-                />
+                <a href="/afw">
+                  <SanityImage
+                    node={event.image}
+                    width="800"
+                    classNames="mx-auto mb-16"
+                  />
+                </a>
                 {event?.tickets && (
-                  <a href={event.tickets} aria-label="Ticket Link">
+                  <a href="/afw" aria-label="Ticket Link">
                     <button
                       type="button"
                       class="cta-button mb-16"
                       value="Get Tickets"
                     >
-                      Get Tickets
+                      Info & Tickets Here
                     </button>
                   </a>
                 )}
-                <h2 class="font-semibold text-2xl">{event.name}</h2>
+                {/* <h2 class="font-semibold text-2xl">{event.name}</h2>
                 <h2 class="font-semibold text-2xl mb-12 italic">
                   {new Date(event?.date).toLocaleDateString("en-US", {
                     timeZone: "America/Los_Angeles",
@@ -82,7 +84,7 @@ const upcomingEvents = await sanityClient.fetch(
                       Get Tickets
                     </button>
                   </a>
-                )}
+                )} */}
               </div>
             );
           })
