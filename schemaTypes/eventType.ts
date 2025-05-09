@@ -58,6 +58,11 @@ export const eventType = defineType({
       group: "details",
     }),
     defineField({
+      name: "endDate",
+      type: "datetime",
+      group: "details",
+    }),
+    defineField({
       name: "doorsOpen",
       type: "number",
       description:
