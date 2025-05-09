@@ -84,7 +84,7 @@ const { title } = Astro.props;
     <script is:inline src="/toggle-theme.js"></script>
   </head>
   <body>
-    <ReactSiteHeader client:load />
+    <ReactSiteHeader client:load transition:persist />
     <slot />
     <Footer />
   </body>

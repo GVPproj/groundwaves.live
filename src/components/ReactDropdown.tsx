@@ -1,12 +1,7 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useAnimationControls,
-  //   useReducedMotion,
-} from "framer-motion";
+import { motion, AnimatePresence, useAnimationControls } from "framer-motion";
 
 const sleep = (s: number) =>
   new Promise((resolve) => setTimeout(resolve, s * 1000));
@@ -28,14 +23,14 @@ export default function ReactDropdown() {
     }
 
     // Close menu on page transition
-    // const handleAstroPageLoad = () => {
-    //   setShowNav(false);
-    // };
+    const handleAstroPageLoad = () => {
+      setShowNav(false);
+    };
 
-    // document.addEventListener("astro:page-load", handleAstroPageLoad);
-    // return () => {
-    //   document.removeEventListener("astro:page-load", handleAstroPageLoad);
-    // };
+    document.addEventListener("astro:page-load", handleAstroPageLoad);
+    return () => {
+      document.removeEventListener("astro:page-load", handleAstroPageLoad);
+    };
   }, [controls, showNav]);
 
   return (
