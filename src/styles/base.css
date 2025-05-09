@@ -24,7 +24,8 @@
     --color-card-muted: 27, 96%, 71%; /* scrollbar hover */
     --color-border: 142.1, 76.2%, 36.3%; /* hr */
   }
-  html, body {
+  html,
+  body {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
@@ -93,7 +94,7 @@
 }
 
 .cta-button {
-  @apply cursor-pointer bg-skin-accent text-skin-fill rounded-full text-xl px-5 py-2.5 
+  @apply cursor-pointer bg-skin-accent text-skin-fill rounded-full text-sm md:text-xl px-5 py-2.5 
   uppercase transition duration-150 ease-in-out hover:bg-skin-inverted 
    hover:shadow-[0_2px_2px_-2px_rgba(21,128,61,0.3),0_2px_2px_0_rgba(21,128,61,0.2)] 
     focus:shadow-[0_2px_2px_-2px_rgba(21,128,61,0.3),0_4px_18px_0_rgba(21,128,61,0.2)] 
