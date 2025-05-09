@@ -17,25 +17,15 @@ const event = events[0];
     <SanityImage node={event.image} width="400" classNames="mx-auto " />
 
     <AfwCopy />
-    <!-- {
-      event?.tickets && (
-        <a href={event.tickets} aria-label="Ticket Link">
-          <button type="button" class="cta-button mt-16" value="Get Tickets">
-            Get Tickets
-          </button>
-        </a>
-      )
-    } -->
-    <!-- </div> -->
-    <section class="flex text-center flex-col mx-auto pb-16">
-      <div class="cta">
-        <p>Join our mailing list for early access to our next event...</p>
 
-        <button
-          type="button"
-          class="cta-button"
-          onclick="location.href='https://rkbce3s6n3o.typeform.com/to/FMhtniXO';"
-          value="Join Mailing List">Join</button
+    <section class="flex text-center flex-col mx-auto mb-16">
+      <div class="cta grid place-content-center">
+        <span class="text-center italic font-light">
+          <strong>For updates and announcements:</strong> Follow us on Instagram
+        </span>
+
+        <a href="https://instagram.com/a.friendly.wave" class="afw-link mt-4"
+          >@a.friendly.wave</a
         >
       </div>
     </section>
