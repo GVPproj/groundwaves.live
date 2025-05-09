@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { sanityClient } from "sanity:client";
 import SanityImage from "../components/SanityImage.astro";
 import AfwCopy from "../components/AfwCopy.astro";
+import ImageBanner from "../components/ImageBanner.astro";
 
 const events = await sanityClient.fetch(
   `*[_type == 'event' && slug.current == 'afw']{_id, name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}`
@@ -13,8 +14,7 @@ const event = events[0];
 
 <Layout title="groundwaves">
   <main>
-    <!-- <div class="items-center my-6"> -->
-    <SanityImage node={event.image} width="400" classNames="mx-auto " />
+    <ImageBanner height="800px" />
 
     <AfwCopy />
 

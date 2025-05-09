@@ -1,0 +1,156 @@
+---
+// Import all images from the afwAssets directory
+import afwGeneralPost1 from "../assets/afwAssets/AFW_002_General-Post_1.0.png";
+import afwGeneralPost2 from "../assets/afwAssets/AFW_002_General-Post_2.0.png";
+import afwManifesto1 from "../assets/afwAssets/AFW_002_Manifesto_1.2.png";
+import afwManifesto2 from "../assets/afwAssets/AFW_002_Manifesto_2.1.png";
+import afwManifesto3 from "../assets/afwAssets/AFW_002_Manifesto_3.1.png";
+import afwProfileAndrew from "../assets/afwAssets/AFW_002_Profile_Andrew-Ross-Collins_1.0.png";
+import afwProfileChris from "../assets/afwAssets/AFW_002_Profile_Chris_Arnett_1.0.png";
+import afwProfileConnie from "../assets/afwAssets/AFW_002_Profile_Connie-Kuhns_1.0.png";
+import afwProfileDavid from "../assets/afwAssets/AFW_002_Profile_David-Wilson_1.0.png";
+import afwProfileMatt from "../assets/afwAssets/AFW_002_Profile_Matt-Robertson_1.0.png";
+import afwProfileMeredith from "../assets/afwAssets/AFW_002_Profile_Meredith-Bates_1.0.png";
+import afwProfileRave from "../assets/afwAssets/AFW_002_Profile_Rave-Coach_1.0.png";
+import afwSchedule1 from "../assets/afwAssets/AFW_002_Schedule_1.0.png";
+import afwSchedule2 from "../assets/afwAssets/AFW_002_Schedule_2.0.png";
+import afwSchedule3 from "../assets/afwAssets/AFW_002_Schedule_3.0.png";
+import afwSchedule4 from "../assets/afwAssets/AFW_002_Schedule_4.0.png";
+import afwSchedule5 from "../assets/afwAssets/AFW_002_Schedule_5.0.png";
+import afwSchedule6 from "../assets/afwAssets/AFW_002_Schedule_6.0.png";
+
+// Create an array of all images
+const images = [
+  afwProfileMeredith,
+  afwGeneralPost1,
+  afwProfileChris,
+  afwGeneralPost2,
+  afwProfileMatt,
+  afwManifesto1,
+  afwProfileConnie,
+  afwManifesto2,
+  afwProfileAndrew,
+  afwManifesto3,
+  afwProfileDavid,
+  afwSchedule5,
+  afwProfileRave,
+  afwSchedule1,
+  afwSchedule2,
+  afwSchedule3,
+  afwSchedule4,
+  afwSchedule6,
+];
+
+// Height parameter with default value
+const { height = "800px" } = Astro.props;
+---
+
+<div class="image-banner-container" style={`height: ${height};`}>
+  <div class="image-scroll primary">
+    {
+      images.map((image, index) => (
+        <div class="image-wrapper">
+          <img
+            src={image.src}
+            alt={`A Friendly Wave promotional image ${index + 1}`}
+          />
+        </div>
+      ))
+    }
+  </div>
+  <div class="image-scroll secondary">
+    {
+      images.map((image, index) => (
+        <div class="image-wrapper">
+          <img
+            src={image.src}
+            alt={`A Friendly Wave promotional image ${index + 1}`}
+          />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .image-banner-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 2rem 0;
+  }
+
+  .image-scroll {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    animation-duration: 120s; /* Longer duration for smoother scrolling */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    font-size: 0; /* Eliminate any whitespace between elements */
+  }
+
+  .image-scroll img {
+    height: 800px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin: 0; /* Remove margin to ensure images butt directly against each other */
+    padding: 0; /* Remove any padding */
+    display: block; /* Prevents any inline spacing issues */
+  }
+
+  /* Image wrapper to ensure consistent sizing and borders */
+  .image-wrapper {
+    height: 800px;
+    display: inline-block;
+    flex-shrink: 0;
+    font-size: 0; /* Eliminate whitespace */
+  }
+
+  .primary {
+    animation-name: scroll;
+    left: 0;
+  }
+
+  .secondary {
+    animation-name: scroll2;
+    left: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .image-wrapper {
+      height: 600px;
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes scroll2 {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Add pause on hover */
+  /* .image-banner-container:hover .image-scroll {
+    animation-play-state: paused;
+  } */
+
+  /* Add responsive adjustments */
+  @media (max-width: 768px) {
+    .image-scroll img {
+      height: 600px;
+    }
+  }
+</style>
