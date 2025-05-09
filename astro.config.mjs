@@ -4,15 +4,14 @@ import sanityIntegration from "@sanity/astro";
 import { loadEnv } from "vite";
 import netlify from "@astrojs/netlify";
 
-const { PUBLIC_SANITY_STUDIO_PROJECT_ID, PUBLIC_SANITY_STUDIO_DATASET } = loadEnv( process.env.NODE_ENV, process.cwd(), '');
-
-
+const { PUBLIC_SANITY_STUDIO_PROJECT_ID, PUBLIC_SANITY_STUDIO_DATASET } =
+  loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
 import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "hybrid",
+  output: "static",
   integrations: [
     tailwind({
       applyBaseStyles: false,
@@ -21,7 +20,7 @@ export default defineConfig({
       projectId: PUBLIC_SANITY_STUDIO_PROJECT_ID,
       dataset: PUBLIC_SANITY_STUDIO_DATASET,
       useCdn: true,
-      studioBasePath: '/admin',
+      studioBasePath: "/admin",
     }),
     react(),
   ],
