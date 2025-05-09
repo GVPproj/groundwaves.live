@@ -1,22 +1,8 @@
-import { motion, useMotionValue, useScroll } from "framer-motion";
-import { useEffect } from "react";
+import { motion } from "framer-motion";
 import ReactDropdown from "./ReactDropdown";
 import "../styles/base.css";
 
 export default function ReactSiteHeader() {
-  //   let { scrollY } = useScroll();
-  //   let height = useMotionValue(60);
-
-  //   useEffect(() => {
-  //     return scrollY.on("change", (current) => {
-  //       // gets previous position on every frame where scrollY changes
-  //       let previous = scrollY.getPrevious();
-  //       let diff = current - previous;
-  //       let newHeight = height.get() - diff;
-  //       // set lower and upper bound of height
-  //       height.set(Math.min(Math.max(newHeight, 30), 60));
-  //     });
-  //   }, [height, scrollY]);
   return (
     <header className="fixed z-40 w-full bg-opacity-30 shadow backdrop-blur ">
       <motion.div className="flex items-baseline justify-between gap-12 px-8 max-w-screen-xl mx-auto my-4  ">
@@ -68,7 +54,7 @@ export default function ReactSiteHeader() {
             </button>
           </a>
         </div>
-        <ReactDropdown />
+        <ReactDropdown key="mobile-nav" />
       </motion.div>
     </header>
   );

@@ -26,6 +26,16 @@ export default function ReactDropdown() {
     if (showNav) {
       controls.start("open");
     }
+
+    // Close menu on page transition
+    const handleAstroPageLoad = () => {
+      setShowNav(false);
+    };
+
+    document.addEventListener("astro:page-load", handleAstroPageLoad);
+    return () => {
+      document.removeEventListener("astro:page-load", handleAstroPageLoad);
+    };
   }, [controls, showNav]);
 
   return (
