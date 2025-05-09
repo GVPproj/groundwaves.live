@@ -36,11 +36,14 @@
 
   <div
     id="dropdown-content"
-    class="hidden font-sans h-screen w-screen flex-col bg
-    items-center gap-16 bg-opacity-30 px-6 py-24 text-2xl font-medium
-    backdrop-blur z-50 fixed top-0 left-0 opacity-0 transition-opacity duration-300"
+    class="hidden font-sans h-screen w-screen flex-col
+    items-center gap-16 px-6 py-24 text-2xl font-medium bg-skin-fill
+    z-50 fixed top-0 left-0 opacity-0 transition-opacity duration-300"
   >
-    <div class="fixed top-4 right-8 z-50">
+    <div class="fixed top-4 left-8 z-50">
+      <a class="text-3xl font-bold" href="/" data-astro-reload>groundwaves</a>
+    </div>
+    <div class="fixed top-6 right-8 z-50">
       <button id="dropdown-close" class="focus:bg-skin-fill-muted">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +60,7 @@
         </svg>
       </button>
     </div>
-    <a href="/afw" class="max-w-max afw-link menu-item">
+    <a href="/afw" class="max-w-max afw-link menu-item mt-8">
       <div>a friendly wave</div>
     </a>
     <a href="/events" class="max-w-max menu-item">
