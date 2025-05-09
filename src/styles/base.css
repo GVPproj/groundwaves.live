@@ -24,9 +24,17 @@
     --color-card-muted: 27, 96%, 71%; /* scrollbar hover */
     --color-border: 142.1, 76.2%, 36.3%; /* hr */
   }
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   body {
-    @apply flex flex-col min-h-screen bg-gradient-to-b from-fill to-gradend font-serif  text-skin-base text-opacity-90 
+    @apply flex flex-col min-h-screen bg-gradient-to-b from-fill to-gradend font-serif text-skin-base text-opacity-90
         antialiased selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted;
+    margin: 0;
+    padding: 0;
   }
   #sun-svg,
   html[data-theme="dark"] #moon-svg {
