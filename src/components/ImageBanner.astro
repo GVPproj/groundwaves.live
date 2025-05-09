@@ -42,7 +42,7 @@ const images = [
 ];
 
 // Height parameter with default value
-const { height = "800px" } = Astro.props;
+const { height = "500px" } = Astro.props;
 ---
 
 <div class="image-banner-container" style={`height: ${height};`}>
@@ -83,15 +83,15 @@ const { height = "800px" } = Astro.props;
   .image-scroll {
     display: flex;
     position: absolute;
-    width: 100%;
-    animation-duration: 120s; /* Longer duration for smoother scrolling */
+    width: fit-content; /* Changed from 100% to fit-content to ensure all images are visible */
+    animation-duration: 60s; /* Reduced duration for faster scrolling */
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     font-size: 0; /* Eliminate any whitespace between elements */
   }
 
   .image-scroll img {
-    height: 800px;
+    height: 500px;
     width: auto;
     object-fit: contain;
     flex-shrink: 0;
@@ -102,7 +102,7 @@ const { height = "800px" } = Astro.props;
 
   /* Image wrapper to ensure consistent sizing and borders */
   .image-wrapper {
-    height: 800px;
+    height: 500px;
     display: inline-block;
     flex-shrink: 0;
     font-size: 0; /* Eliminate whitespace */
@@ -120,7 +120,7 @@ const { height = "800px" } = Astro.props;
 
   @media (max-width: 768px) {
     .image-wrapper {
-      height: 600px;
+      height: 350px;
     }
   }
 
@@ -150,7 +150,7 @@ const { height = "800px" } = Astro.props;
   /* Add responsive adjustments */
   @media (max-width: 768px) {
     .image-scroll img {
-      height: 600px;
+      height: 350px;
     }
   }
 </style>
