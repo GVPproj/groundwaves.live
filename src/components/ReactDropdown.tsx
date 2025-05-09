@@ -28,14 +28,14 @@ export default function ReactDropdown() {
     }
 
     // Close menu on page transition
-    const handleAstroPageLoad = () => {
-      setShowNav(false);
-    };
+    // const handleAstroPageLoad = () => {
+    //   setShowNav(false);
+    // };
 
-    document.addEventListener("astro:page-load", handleAstroPageLoad);
-    return () => {
-      document.removeEventListener("astro:page-load", handleAstroPageLoad);
-    };
+    // document.addEventListener("astro:page-load", handleAstroPageLoad);
+    // return () => {
+    //   document.removeEventListener("astro:page-load", handleAstroPageLoad);
+    // };
   }, [controls, showNav]);
 
   return (
