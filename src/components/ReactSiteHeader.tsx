@@ -1,11 +1,10 @@
-import { motion } from "framer-motion";
 import ReactDropdown from "./ReactDropdown";
 import "../styles/base.css";
 
 export default function ReactSiteHeader() {
   return (
     <header className="fixed z-40 w-full bg-opacity-30 shadow backdrop-blur ">
-      <motion.div className="flex items-baseline justify-between gap-12 px-8 max-w-screen-xl mx-auto my-4  ">
+      <div className="flex items-baseline justify-between gap-12 px-8 max-w-screen-xl mx-auto my-4  ">
         <a
           className="text-3xl md:text-4xl font-bold"
           href="/"
@@ -55,7 +54,7 @@ export default function ReactSiteHeader() {
           </a>
         </div>
         <ReactDropdown key="mobile-nav" />
-      </motion.div>
+      </div>
     </header>
   );
 }
