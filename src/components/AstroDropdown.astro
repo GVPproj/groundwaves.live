@@ -1,0 +1,170 @@
+---
+// Astro Dropdown component to replace ReactDropdown
+---
+
+<div id="astro-dropdown" class="md:hidden">
+  <button id="dropdown-toggle" class="focus:bg-skin-fill-muted">
+    <svg
+      id="menu-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="h-8 w-8"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+    </svg>
+    <svg
+      id="close-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="h-8 w-8 hidden"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+
+  <div
+    id="dropdown-content"
+    class="hidden font-sans h-screen w-screen flex-col bg
+    items-center gap-16 bg-opacity-30 px-6 py-24 text-2xl font-medium
+    backdrop-blur z-50 fixed top-0 left-0 opacity-0 transition-opacity duration-300"
+  >
+    <div class="fixed top-4 right-8 z-50">
+      <button id="dropdown-close" class="focus:bg-skin-fill-muted">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="h-8 w-8"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <a href="/afw" class="max-w-max afw-link menu-item">
+      <div>a friendly wave</div>
+    </a>
+    <a href="/events" class="max-w-max menu-item">
+      <div>events</div>
+    </a>
+    <a href="/about" class="max-w-max menu-item">
+      <div>about us</div>
+    </a>
+    <a href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO">
+      <button
+        type="button"
+        class="cta-button font-bold"
+        value="Join Mailing List"
+      >
+        Join
+      </button>
+    </a>
+  </div>
+</div>
+
+<script>
+  // Initialize dropdown functionality
+  function setupDropdown() {
+    const dropdown = document.getElementById("astro-dropdown");
+    const toggle = document.getElementById("dropdown-toggle");
+    const closeBtn = document.getElementById("dropdown-close");
+    const content = document.getElementById("dropdown-content");
+    const menuIcon = document.getElementById("menu-icon");
+    const closeIcon = document.getElementById("close-icon");
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    let isOpen = false;
+
+    function openMenu() {
+      isOpen = true;
+      toggle.classList.add("hidden"); // Hide the hamburger button entirely
+      content.classList.remove("hidden");
+      // Delay setting opacity to allow the transition to work
+      setTimeout(() => {
+        content.classList.add("flex");
+        content.style.opacity = "1";
+      }, 10);
+    }
+
+    function closeMenu() {
+      isOpen = false;
+      toggle.classList.remove("hidden"); // Show the hamburger button again
+      content.style.opacity = "0";
+
+      // Wait for transition to complete before hiding
+      setTimeout(() => {
+        content.classList.remove("flex");
+        content.classList.add("hidden");
+      }, 300); // Match transition duration
+    }
+
+    // Toggle dropdown when button is clicked
+    toggle.addEventListener("click", () => {
+      openMenu();
+    });
+
+    // Close dropdown when close button is clicked
+    closeBtn.addEventListener("click", () => {
+      closeMenu();
+    });
+
+    // Add click event to menu items for animation and closing
+    menuItems.forEach((item) => {
+      item.addEventListener("click", async (e) => {
+        // Add brief highlight effect
+        const originalBg = item.style.backgroundColor;
+        const originalColor = item.style.color;
+
+        item.style.backgroundColor = "var(--color-text-muted)";
+        item.style.color = "var(--color-fill-muted)";
+
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
+        item.style.backgroundColor = originalBg;
+        item.style.color = originalColor;
+
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        closeMenu();
+      });
+    });
+
+    // Close menu on page navigation
+    document.addEventListener("astro:page-load", () => {
+      if (isOpen) {
+        closeMenu();
+      }
+    });
+  }
+
+  // Run setup once DOM is loaded
+  document.addEventListener("astro:page-load", setupDropdown);
+  // Also run on initial page load
+  document.addEventListener("DOMContentLoaded", setupDropdown);
+</script>
+
+<style>
+  #dropdown-content {
+    display: none;
+  }
+
+  #dropdown-content.flex {
+    display: flex;
+  }
+</style>
