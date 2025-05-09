@@ -45,9 +45,20 @@ const upcomingEvents = await sanityClient.fetch(
                 )}
                 <h2 class="font-semibold text-2xl">{event.name}</h2>
                 <h2 class="font-semibold text-2xl mb-12 italic">
-                  {new Date(event?.date).toLocaleDateString()}{" "}
+                  {new Date(event?.date).toLocaleDateString("en-US", {
+                    timeZone: "America/Los_Angeles",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}{" "}
                   {event.endDate &&
-                    "- " + new Date(event.endDate).toLocaleDateString()}{" "}
+                    "- " +
+                      new Date(event.endDate).toLocaleDateString("en-US", {
+                        timeZone: "America/Los_Angeles",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}{" "}
                   @ {event.venue?.name}
                 </h2>
                 <div class="text-left">
@@ -92,9 +103,21 @@ const upcomingEvents = await sanityClient.fetch(
               />
               <h2 class="font-semibold text-2xl">{event.name}</h2>
               <h2 class="font-semibold text-2xl mb-12 italic">
-                {new Date(event?.date).toLocaleDateString()} @{" "}
+                {new Date(event?.date).toLocaleDateString("en-US", {
+                  timeZone: "America/Los_Angeles",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}{" "}
+                @{" "}
                 {event.endDate &&
-                  "- " + new Date(event.endDate).toLocaleDateString()}{" "}
+                  "- " +
+                    new Date(event.endDate).toLocaleDateString("en-US", {
+                      timeZone: "America/Los_Angeles",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}{" "}
                 {event.venue.name}
               </h2>
               <div class="text-left">
