@@ -1,0 +1,21 @@
+---
+interface Props {
+  ticketLink: string;
+  buttonText?: string;
+}
+
+const { ticketLink, buttonText = "Get Tickets" } = Astro.props;
+---
+
+<a
+  href={ticketLink}
+  aria-label="Ticket Link"
+>
+  <button
+    type="button"
+    class="cta-button self-center"
+    value={buttonText}
+  >
+    {buttonText}
+  </button>
+</a>

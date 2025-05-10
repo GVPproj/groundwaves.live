@@ -4,6 +4,7 @@ import { sanityClient } from "sanity:client";
 import SanityImage from "../components/SanityImage.astro";
 import AfwCopy from "../components/AfwCopy.astro";
 import ImageBanner from "../components/ImageBanner.astro";
+import AfwCopyRefactored from "../components/AfwCopyRefactored.astro";
 
 const events = await sanityClient.fetch(
   `*[_type == 'event' && slug.current == 'afw']{_id, name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}`
@@ -42,7 +43,7 @@ const event = events[0];
     </div>
     <ImageBanner height="500px" />
 
-    <AfwCopy />
+    <AfwCopyRefactored />
 
     <section class="flex text-center flex-col mx-auto mb-16">
       <div class="cta grid place-content-center">

@@ -1,0 +1,22 @@
+---
+interface Props {
+  time?: string;
+  host: string;
+  description?: string;
+}
+
+const { time, host, description } = Astro.props;
+---
+
+<div class="mb-2">
+  {time && (
+    <span>{time}: </span>
+  )}
+  <strong>{host}</strong>
+  {description && (
+    <>
+      <br />
+      {description}
+    </>
+  )}
+</div>

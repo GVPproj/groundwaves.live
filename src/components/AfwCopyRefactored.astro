@@ -1,0 +1,111 @@
+---
+import { afwContent } from "../data/afwContent.js";
+import CardSection from "./CardSection.astro";
+import SectionTitle from "./SectionTitle.astro";
+import DateHeader from "./DateHeader.astro";
+import EventSession from "./EventSession.astro";
+import EventType from "./EventType.astro";
+import AlbumList from "./AlbumList.astro";
+import WeekendHeader from "./WeekendHeader.astro";
+import DarkModeEvent from "./DarkModeEvent.astro";
+import TicketButton from "./TicketButton.astro";
+---
+
+<div class="text-left">
+  <div class="flex flex-col font-serif text-skin-base text-opacity-90">
+    <div class="max-w-screen-lg mx-auto mt-8 md:mt-12">
+      <!-- Introduction -->
+      <section class="mb-10">
+        <p>{afwContent.intro.text}</p>
+      </section>
+
+      <!-- Listening Experiences -->
+      <section class="mb-16">
+        <SectionTitle title={afwContent.listeningExperiences.title} />
+
+        {
+          afwContent.listeningExperiences.experiences.map((experience) => (
+            <CardSection
+              title={experience.title}
+              content={experience.description}
+            />
+          ))
+        }
+      </section>
+
+      <!-- Event Schedule -->
+      <section class="mb-16">
+        <SectionTitle title={afwContent.eventSchedule.title} />
+
+        {
+          afwContent.eventSchedule.weekends.map((weekend) => (
+            <div class="mb-10">
+              <WeekendHeader title={weekend.title} />
+
+              {weekend.days.map((day) => (
+                <div class="mb-8">
+                  <DateHeader date={day.date} />
+
+                  {day.events.map((event) => {
+                    if (event.type === "Dark Mode") {
+                      return event.sessions.map((session) => (
+                        <DarkModeEvent
+                          host={session.host}
+                          ticketLink={session.ticketLink}
+                        />
+                      ));
+                    } else if (event.type.includes("Deep Listening")) {
+                      return (
+                        <div>
+                          <div class="font-bold mb-2">{event.type}</div>
+                          <div class="ml-6">
+                            {event.sessions.map((session) => (
+                              <>
+                                <div class="mb-2">
+                                  Host: <strong>{session.host}</strong>
+                                </div>
+                                <AlbumList albums={session.albums} />
+                              </>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <EventType title={event.type}>
+                          {event.sessions.map((session) => (
+                            <EventSession
+                              time={session.time}
+                              host={session.host}
+                              description={session.description}
+                            />
+                          ))}
+                        </EventType>
+                      );
+                    }
+                  })}
+                </div>
+              ))}
+            </div>
+          ))
+        }
+
+        <CardSection
+          title={afwContent.eventDetails.title}
+          content={`
+            <p><strong>Location</strong>: ${afwContent.eventDetails.location}</p>
+            <p><strong>Duration</strong>: ${afwContent.eventDetails.duration}</p>
+            <p><strong>Admission</strong>: ${afwContent.eventDetails.admission}</p>
+          `}
+          isHtml={true}
+        />
+      </section>
+
+      <!-- Conclusion -->
+      <section>
+        <p>{afwContent.conclusion.text}</p>
+        <p class="italic">{afwContent.conclusion.note}</p>
+      </section>
+    </div>
+  </div>
+</div>

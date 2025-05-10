@@ -1,0 +1,26 @@
+---
+interface Props {
+  host: string;
+  ticketLink?: string;
+}
+
+const { host, ticketLink } = Astro.props;
+---
+
+<div class="font-bold mb-2">Dark Mode:</div>
+<div class="flex gap-6 items-center">
+  <div class="ml-6 font-bold">{host}</div>
+  {
+    ticketLink && (
+      <a href={ticketLink} aria-label="Ticket Link">
+        <button
+          type="button"
+          class="cta-button self-center"
+          value="Get Tickets"
+        >
+          Get Tickets
+        </button>
+      </a>
+    )
+  }
+</div>

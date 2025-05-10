@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  content: string;
+  isHtml?: boolean;
+}
+
+const { title, content, isHtml = false } = Astro.props;
+---
+
+<div class="bg-skin-card rounded-lg p-6 shadow-md mb-8 text-skin-inverted">
+  <h3 class="text-xl font-semibold border-b border-skin-line pb-3 mb-4">
+    {title}
+  </h3>
+  {isHtml ? <div class="content" set:html={content} /> : <p>{content}</p>}
+</div>
+
+<style>
+  .content :global(p) {
+    margin-bottom: 0.5rem;
+  }
+</style>
