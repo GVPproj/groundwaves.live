@@ -23,11 +23,12 @@ const images = [
   afwManifesto1,
   afwProfileConnie,
   afwManifesto2,
-  afwGeneralPost2,
   afwProfileChris,
   afwManifesto3,
   afwProfileDavid,
+  afwGeneralPost2,
   afwProfileRave,
+  afwManifesto1,
   afwProfileAndrew,
 ];
 
@@ -40,7 +41,7 @@ const format = "webp"; // Changed from formats array to single format
 ---
 
 <div class="image-banner-container" style={`height: ${height};`}>
-  <div class="image-scroll primary">
+  <div class="image-scroll">
     {
       images.map((image, index) => (
         <div class="image-wrapper">
@@ -54,8 +55,7 @@ const format = "webp"; // Changed from formats array to single format
         </div>
       ))
     }
-  </div>
-  <div class="image-scroll secondary">
+    {/* Duplicate the images to create a seamless loop */}
     {
       images.map((image, index) => (
         <div class="image-wrapper">
@@ -72,10 +72,81 @@ const format = "webp"; // Changed from formats array to single format
   </div>
 </div>
 
+<script>
+  // This client-side script controls the scrolling behavior
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".image-banner-container");
+    const scroller = document.querySelector(".image-scroll");
+    const imageCount = document.querySelectorAll(".image-wrapper").length / 2; // Divide by 2 because we duplicated images
+
+    // Create a simple animation controller
+    let direction = 1; // 1 = right to left, -1 = left to right
+    let animationId;
+    let position = 0;
+    const speed = 0.5; // pixels per frame - slower for better visibility of all images
+
+    // Get the full width of all images (first set only)
+    const totalWidth = scroller.scrollWidth / 2;
+
+    // Function to animate the scroll
+    function animate() {
+      // Move in current direction
+      position += speed * direction;
+
+      // Check if we need to change direction
+      if (position >= totalWidth) {
+        // We've gone too far right, change direction
+        position = totalWidth;
+        // Add pause before changing direction
+        cancelAnimationFrame(animationId);
+        setTimeout(() => {
+          direction = -1; // Start going left to right
+          animationId = requestAnimationFrame(animate);
+        }, 2000);
+        return;
+      } else if (position <= 0 && direction === -1) {
+        // We've gone too far left, change direction
+        position = 0;
+        // Add pause before changing direction
+        cancelAnimationFrame(animationId);
+        setTimeout(() => {
+          direction = 1; // Start going right to left
+          animationId = requestAnimationFrame(animate);
+        }, 2000);
+        return;
+      }
+
+      // Apply the new position
+      scroller.style.transform = `translateX(${-position}px)`;
+
+      // Schedule the next frame
+      animationId = requestAnimationFrame(animate);
+    }
+
+    // Start the animation
+    animationId = requestAnimationFrame(animate);
+
+    // Pause animation on hover
+    container.addEventListener("mouseenter", () => {
+      cancelAnimationFrame(animationId);
+    });
+
+    // Resume animation on mouseleave
+    container.addEventListener("mouseleave", () => {
+      animationId = requestAnimationFrame(animate);
+    });
+
+    // Reverse direction when clicked
+    container.addEventListener("click", () => {
+      direction *= -1;
+    });
+  });
+</script>
+
 <style>
   .image-banner-container {
     width: 100%;
-    overflow: visible;
+    overflow: hidden;
     position: relative;
     margin: 2rem 0;
   }
@@ -83,11 +154,9 @@ const format = "webp"; // Changed from formats array to single format
   .image-scroll {
     display: flex;
     position: absolute;
-    width: fit-content; /* Changed from 100% to fit-content to ensure all images are visible */
-    animation-duration: 60s; /* Reduced duration for faster scrolling */
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    width: fit-content;
     font-size: 0; /* Eliminate any whitespace between elements */
+    transition: transform 0.1s linear; /* Smooth the animation */
   }
 
   .image-scroll img {
@@ -108,47 +177,12 @@ const format = "webp"; // Changed from formats array to single format
     font-size: 0; /* Eliminate whitespace */
   }
 
-  .primary {
-    animation-name: scroll;
-    left: 0;
-  }
-
-  .secondary {
-    animation-name: scroll2;
-    left: 100%;
-  }
-
+  /* Add responsive adjustments */
   @media (max-width: 768px) {
     .image-wrapper {
       height: 350px;
     }
-  }
 
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-
-  @keyframes scroll2 {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-
-  /* Add pause on hover */
-  /* .image-banner-container:hover .image-scroll {
-    animation-play-state: paused;
-  } */
-
-  /* Add responsive adjustments */
-  @media (max-width: 768px) {
     .image-scroll img {
       height: 450px;
     }
