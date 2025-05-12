@@ -1,5 +1,5 @@
-// MODIFIED: Force dark mode only
-const primaryColorScheme = "dark"; // "light" | "dark"
+// MODIFIED: Force light mode only
+const primaryColorScheme = "light"; // "light" | "dark"
 
 // Get theme data from local storage
 const currentTheme = localStorage.getItem("theme");
@@ -71,7 +71,7 @@ window.onload = () => {
   document.addEventListener("astro:after-swap", setThemeFeature);
 };
 
-// MODIFIED: Commented out system theme sync to force dark mode only
+// MODIFIED: Commented out system theme sync to force light mode only
 /*
 window
   .matchMedia("(prefers-color-scheme: dark)")

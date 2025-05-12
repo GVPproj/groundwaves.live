@@ -5,14 +5,14 @@
 @layer base {
   :root,
   html[data-theme="light"] {
-    --color-fill: 33.3, 100%, 96.5%; /* main bg color */
-    --color-fill-gradient-end: 34.3, 100%, 91.8%; /* grad end bg color */
-    --color-text-base: 143.8, 61.2%, 20.2%; /* main text */
-    --color-accent: 142.4, 71.8%, 29.2%; /* Link color, hover color etc. */
-    --color-accent-inverted: 32.1, 97.7%, 83.1%; /* Link color, hover color etc. */
-    --color-card: 27, 96%, 61%; /* card, scrollbar, code etc */
-    --color-card-muted: 27, 96%, 71%; /* scrollbar hover */
-    --color-border: 142.1, 76.2%, 36.3%; /* hr */
+    --color-fill: 60, 14.29%, 93.14%; /* neutral gray */
+    --color-fill-gradient-end: 60, 14.29%, 91.14%; /* neutral gray */
+    --color-text-base: 226.32, 100%, 22.35%; /* main blue */
+    --color-accent: 160.75, 100%, 31.18%; /* green */
+    --color-accent-inverted: 30.83, 100%, 49.61%; /* orange */
+    --color-card: 226.32, 100%, 22.35%; /* orange */
+    --color-card-muted: 53.11, 100%, 64.12%; /* yellow */
+    --color-border: 160.75, 100%, 31.18%; /* yellow */
   }
   html[data-theme="dark"] {
     --color-fill: 143.8, 61.2%, 20.2%; /* main bg color */
@@ -65,9 +65,9 @@
     -webkit-text-fill-color: transparent;
     background-image: linear-gradient(
       90deg,
-      hsl(var(--color-accent)) 0%,
-      hsl(var(--color-card)) 50%,
-      hsl(var(--color-accent)) 100%
+      hsl(226.32, 100%, 22.35%) 0%,
+      hsl(180.61, 79.2%, 75.49%) 50%,
+      hsl(226.32, 100%, 22.35%) 100%
     );
     background-size: 200% 100%;
     animation: gradientMove 3s linear infinite;
@@ -95,7 +95,7 @@
 
 .cta-button {
   @apply cursor-pointer bg-skin-accent text-skin-fill rounded-full text-sm md:text-xl px-5 py-2.5 
-  uppercase transition duration-150 ease-in-out hover:bg-skin-inverted 
+  uppercase transition duration-150 ease-in-out hover:bg-[#Fd8200] hover:text-[#001a72]
    hover:shadow-[0_2px_2px_-2px_rgba(21,128,61,0.3),0_2px_2px_0_rgba(21,128,61,0.2)] 
     focus:shadow-[0_2px_2px_-2px_rgba(21,128,61,0.3),0_4px_18px_0_rgba(21,128,61,0.2)] 
   
