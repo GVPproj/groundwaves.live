@@ -127,14 +127,14 @@ const format = "webp"; // Changed from formats array to single format
     animationId = requestAnimationFrame(animate);
 
     // Pause animation on hover
-    container.addEventListener("mouseenter", () => {
-      cancelAnimationFrame(animationId);
-    });
+    // container.addEventListener("mouseenter", () => {
+    //   cancelAnimationFrame(animationId);
+    // });
 
-    // Resume animation on mouseleave
-    container.addEventListener("mouseleave", () => {
-      animationId = requestAnimationFrame(animate);
-    });
+    // // Resume animation on mouseleave
+    // container.addEventListener("mouseleave", () => {
+    //   animationId = requestAnimationFrame(animate);
+    // });
 
     // Reverse direction when clicked
     container.addEventListener("click", () => {
