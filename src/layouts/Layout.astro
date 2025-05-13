@@ -2,15 +2,13 @@
 import "../styles/base.css";
 import Footer from "../components/Footer.astro";
 import AstroSiteHeader from "../components/AstroSiteHeader.astro";
-import { Image } from "astro:assets";
-import ogImage from "../assets/afwAssets/new/AFW_002_General-Post_1.0.png";
 
 export interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
-const ogImageUrl = new URL(ogImage.src, Astro.url.origin).href;
+const ogImageUrl = new URL("/AFW_002_General-Post_1.0.png", Astro.url.origin).href;
 ---
 
 <!doctype html>
