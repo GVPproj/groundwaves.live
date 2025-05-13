@@ -5,11 +5,12 @@ import AstroSiteHeader from "../components/AstroSiteHeader.astro";
 
 export interface Props {
   title: string;
+  ogImage?: string;
 }
 
-const { title } = Astro.props;
-const ogImageUrl = new URL("/AFW_002_General-Post_1.0.png", Astro.url.origin)
-  .href;
+const { title, ogImage = "/AFW_002_General-Post_1.0.png" } = Astro.props;
+// Ensure we have absolute URLs for social media
+const ogImageUrl = new URL(ogImage, Astro.site || Astro.url.origin).href;
 ---
 
 <!doctype html>
@@ -29,16 +30,18 @@ const ogImageUrl = new URL("/AFW_002_General-Post_1.0.png", Astro.url.origin)
     <meta property="og:title" content={title} />
     <meta property="og:description" content="Groundwaves - A Friendly Wave" />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={Astro.url} />
+    <meta name="twitter:title" content={title} />
     <meta
-      property="twitter:description"
+      name="twitter:description"
       content="Groundwaves - A Friendly Wave"
     />
-    <meta property="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <title>{title}</title>
     <!-- Preload Fonts -->
     <link
