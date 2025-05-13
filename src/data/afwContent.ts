@@ -90,7 +90,7 @@ export const afwContent: AfwContent = {
                     time: "4:00-5:00 PM",
                     host: "Andrew Ross Collins",
                     hostLinks: {
-                      web: "www.interchill.bandcamp.com",
+                      web: "https://interchill.bandcamp.com",
                     },
                     description:
                       "Music that takes you somewhere, with a number of stops being in Africa.",
@@ -101,7 +101,7 @@ export const afwContent: AfwContent = {
                     hostLinks: {
                       instagram: "https://www.instagram.com/ravecoach",
                       facebook: "https://www.facebook.com/ravecoach5/",
-                      web: "www.honestfarms.ca",
+                      web: "https://www.honestfarms.ca",
                     },
 
                     description:
@@ -186,7 +186,7 @@ export const afwContent: AfwContent = {
                     time: "4:00-5:00 PM",
                     host: "Matt Robertson",
                     hostLinks: {
-                      web: "www.mattrobertsonmusic.com",
+                      web: "https://www.mattrobertsonmusic.com",
                     },
                     description:
                       "A selection of music that has been inspirational, and loosely demonstrates how changing technology has shaped the creation of music and production.",
