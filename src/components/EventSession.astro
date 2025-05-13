@@ -1,22 +1,70 @@
 ---
+import type { HostLinks } from "../types/afw";
+import { House, Youtube, Instagram, Facebook } from "lucide-astro";
+
 interface Props {
   time?: string;
   host: string;
+  hostLinks?: HostLinks;
   description?: string;
 }
 
-const { time, host, description } = Astro.props;
+const { time, host, hostLinks, description } = Astro.props;
 ---
 
 <div class="mb-2">
-  {time && (
-    <span>{time}: </span>
-  )}
-  <strong>{host}</strong>
-  {description && (
-    <>
-      <br />
-      {description}
-    </>
-  )}
+  <!-- <p class="my-2"> -->
+  {time && <span>{time}: </span>}
+  <strong class="min-w-max">{host}</strong>
+  <!-- </p> -->
+
+  {
+    hostLinks && (
+      <span class=" ml-0 sm:ml-2 inline-flex gap-2">
+        {hostLinks.web && (
+          <a href={hostLinks.web} target="_blank" rel="noopener noreferrer">
+            <House style={{ fill: "transparent" }} />
+            <span class="sr-only">Website</span>
+          </a>
+        )}
+
+        {hostLinks.instagram && (
+          <a
+            href={hostLinks.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Instagram style={{ fill: "transparent" }} />
+            <span class="sr-only">Instagram</span>
+          </a>
+        )}
+
+        {hostLinks.facebook && (
+          <a
+            href={hostLinks.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Facebook style={{ fill: "transparent" }} />
+            <span class="sr-only">Facebook</span>
+          </a>
+        )}
+
+        {hostLinks.youtube && (
+          <a href={hostLinks.youtube} target="_blank" rel="noopener noreferrer">
+            <Youtube style={{ fill: "transparent" }} />
+            <span class="sr-only">YouTube</span>
+          </a>
+        )}
+      </span>
+    )
+  }
+
+  {
+    description && (
+      <>
+        <p class="mt-4">{description}</p>
+      </>
+    )
+  }
 </div>
