@@ -8,17 +8,15 @@ export interface Props {
 }
 
 const { title } = Astro.props;
-const ogImageUrl = new URL("/AFW_002_General-Post_1.0.png", Astro.url.origin).href;
+const ogImageUrl = new URL("/AFW_002_General-Post_1.0.png", Astro.url.origin)
+  .href;
 ---
 
 <!doctype html>
 <html lang="en" class="overflow-x-hidden" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Groundwaves - Music Events on Salt Spring Island"
-    />
+    <meta name="description" content="Groundwaves - A Friendly Wave" />
     <meta name="viewport" content="width=device-width" />
     <link
       rel="icon"
@@ -29,17 +27,17 @@ const ogImageUrl = new URL("/AFW_002_General-Post_1.0.png", Astro.url.origin).hr
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
-    <meta
-      property="og:description"
-      content="Groundwaves - Music Events on Salt Spring Island"
-    />
+    <meta property="og:description" content="Groundwaves - A Friendly Wave" />
     <meta property="og:image" content={ogImageUrl} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content="Astro description" />
+    <meta
+      property="twitter:description"
+      content="Groundwaves - A Friendly Wave"
+    />
     <meta property="twitter:image" content={ogImageUrl} />
     <title>{title}</title>
     <!-- Preload Fonts -->
