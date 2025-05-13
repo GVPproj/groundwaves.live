@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { sanityClient } from "sanity:client";
-import SanityImage from "../components/SanityImage.astro";
-import AfwCopy from "../components/AfwCopy.astro";
 import ImageBanner from "../components/ImageBanner.astro";
 import AfwCopyRefactored from "../components/AfwCopyRefactored.astro";
 
@@ -13,7 +11,7 @@ const events = await sanityClient.fetch(
 const event = events[0];
 ---
 
-<Layout title="groundwaves">
+<Layout title="A Friendly Wave">
   <main>
     <div class="max-w-screen-lg mx-auto">
       <header
