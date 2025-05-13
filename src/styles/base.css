@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Force light theme and disable dark mode */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light !important;
+  }
+}
+
 @layer base {
   :root,
   html[data-theme="light"] {
@@ -14,15 +21,16 @@
     --color-card-muted: 53.11, 100%, 64.12%; /* yellow */
     --color-border: 160.75, 100%, 31.18%; /* yellow */
   }
+  /* Override dark theme to use light theme values */
   html[data-theme="dark"] {
-    --color-fill: 143.8, 61.2%, 20.2%; /* main bg color */
-    --color-fill-gradient-end: 142.8, 64.2%, 24.1%; /* grad end bg color */
-    --color-text-base: 33.3, 100%, 96.5%; /* main text */
-    --color-accent: 32.1, 97.7%, 83.1%; /* Link color, hover color etc. */
-    --color-accent-inverted: 142.4, 71.8%, 29.2%; /* Link color, hover color etc.
-    --color-card: 27, 96%, 61%; /* card, scrollbar, code etc */
-    --color-card-muted: 27, 96%, 71%; /* scrollbar hover */
-    --color-border: 142.1, 76.2%, 36.3%; /* hr */
+    --color-fill: 60, 14.29%, 93.14%; /* neutral gray */
+    --color-fill-gradient-end: 60, 14.29%, 91.14%; /* neutral gray */
+    --color-text-base: 226.32, 100%, 22.35%; /* main blue */
+    --color-accent: 160.75, 100%, 31.18%; /* green */
+    --color-accent-inverted: 30.83, 100%, 49.61%; /* orange */
+    --color-card: 226.32, 100%, 22.35%; /* orange */
+    --color-card-muted: 53.11, 100%, 64.12%; /* yellow */
+    --color-border: 160.75, 100%, 31.18%; /* yellow */
   }
   html,
   body {
@@ -37,13 +45,18 @@
     margin: 0;
     padding: 0;
   }
-  #sun-svg,
-  html[data-theme="dark"] #moon-svg {
-    display: none;
+  /* Always show sun icon, never show moon icon */
+  #sun-svg {
+    display: block !important;
   }
-  #moon-svg,
+  #moon-svg {
+    display: none !important;
+  }
+  html[data-theme="dark"] #moon-svg {
+    display: none !important;
+  }
   html[data-theme="dark"] #sun-svg {
-    display: block;
+    display: block !important;
   }
   main {
     @apply mt-32 md:mt-40;

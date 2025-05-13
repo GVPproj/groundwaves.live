@@ -1,33 +1,30 @@
-// MODIFIED: Force light mode only
-const primaryColorScheme = "light"; // "light" | "dark"
+// FORCE LIGHT THEME ONLY
+const primaryColorScheme = "light";
 
-// Get theme data from local storage
-const currentTheme = localStorage.getItem("theme");
-
-function getPreferTheme() {
-  // return theme value in local storage if it is set
-  if (currentTheme) return currentTheme;
-
-  // return primary color scheme if it is set
-  if (primaryColorScheme) return primaryColorScheme;
-
-  // return user device's prefer color scheme
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+// Clear any stored theme preference
+if (localStorage.getItem("theme")) {
+  localStorage.removeItem("theme");
 }
 
-let themeValue = getPreferTheme();
+function getPreferTheme() {
+  // Always return light theme regardless of any preferences
+  return "light";
+}
+
+let themeValue = "light";
 
 function setPreference() {
-  localStorage.setItem("theme", themeValue);
+  // Always set to light theme in localStorage
+  localStorage.setItem("theme", "light");
   reflectPreference();
 }
 
 function reflectPreference() {
-  document.firstElementChild.setAttribute("data-theme", themeValue);
+  // Always set data-theme to light
+  document.firstElementChild.setAttribute("data-theme", "light");
 
-  document.querySelector("#theme-btn")?.setAttribute("aria-label", themeValue);
+  // Update theme button if it exists
+  document.querySelector("#theme-btn")?.setAttribute("aria-label", "light");
 
   // Get a reference to the body element
   const body = document.body;
@@ -52,17 +49,21 @@ reflectPreference();
 
 window.onload = () => {
   function setThemeFeature() {
-    // set on load so screen readers can get the latest value on the button
+    // Force light theme on load
+    themeValue = "light";
     reflectPreference();
-
-    // MODIFIED: Commented out theme toggle button functionality
-    /*
-    // now this script can find and listen for clicks on the control
-    document.querySelector("#theme-btn")?.addEventListener("click", () => {
-      themeValue = themeValue === "light" ? "dark" : "light";
-      setPreference();
-    });
-    */
+    
+    // Clear any dark theme that might have been set
+    if (document.firstElementChild.getAttribute("data-theme") !== "light") {
+      document.firstElementChild.setAttribute("data-theme", "light");
+    }
+    
+    // Disable any theme toggle functionality
+    const themeBtn = document.querySelector("#theme-btn");
+    if (themeBtn) {
+      themeBtn.removeEventListener("click", () => {});
+      themeBtn.style.display = "none"; // Optionally hide the button
+    }
   }
 
   setThemeFeature();
