@@ -20,7 +20,7 @@ const { time, host, hostLinks, description } = Astro.props;
 
   {
     hostLinks && (
-      <span class=" ml-0 sm:ml-2 inline-flex gap-2">
+      <span class="ml-2 pt-2 sm:pt-0  inline-flex gap-2">
         {hostLinks.web && (
           <a href={hostLinks.web} target="_blank" rel="noopener noreferrer">
             <House style={{ fill: "transparent" }} />
