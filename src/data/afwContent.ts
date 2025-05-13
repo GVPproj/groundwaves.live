@@ -206,7 +206,7 @@ export const afwContent: AfwContent = {
                 type: "Dark Mode",
                 sessions: [
                   {
-                    host: "Pacific Coliseum (Teen Daze) + Wolfgang",
+                    host: "Pacific Coliseum (Teen Daze) + DJ Dampfnudel",
                     ticketLink:
                       "https://www.eventbrite.ca/e/a-friendly-wave-presents-dark-mode-tickets-1359709270029?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile",
                   },
