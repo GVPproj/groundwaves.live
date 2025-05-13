@@ -9,8 +9,20 @@ export interface Props {
 }
 
 const { title, ogImage = "/AFW_002_General-Post_1.0.png" } = Astro.props;
+
+// Make sure we have the site domain
+const domain = Astro.site
+  ? Astro.site.toString().trim().replace(/\/$/, "")
+  : Astro.url.origin;
+
 // Ensure we have absolute URLs for social media
-const ogImageUrl = new URL(ogImage, Astro.site || Astro.url.origin).href;
+// This handles both relative paths and already absolute URLs
+const ogImageUrl = ogImage.startsWith("http")
+  ? ogImage
+  : `${domain}${ogImage.startsWith("/") ? "" : "/"}${ogImage}`;
+
+// Optional: Log the URL for debugging
+console.log("Generated OG image URL:", ogImageUrl);
 ---
 
 <!doctype html>
@@ -37,10 +49,7 @@ const ogImageUrl = new URL(ogImage, Astro.site || Astro.url.origin).href;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={Astro.url} />
     <meta name="twitter:title" content={title} />
-    <meta
-      name="twitter:description"
-      content="Groundwaves - A Friendly Wave"
-    />
+    <meta name="twitter:description" content="Groundwaves - A Friendly Wave" />
     <meta name="twitter:image" content={ogImageUrl} />
     <title>{title}</title>
     <!-- Preload Fonts -->
