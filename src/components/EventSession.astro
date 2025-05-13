@@ -1,6 +1,6 @@
 ---
 import type { HostLinks } from "../types/afw";
-import { House, Youtube, Instagram, Facebook } from "lucide-astro";
+import { ExternalLink, Youtube, Instagram, Facebook } from "lucide-astro";
 
 interface Props {
   time?: string;
@@ -23,7 +23,7 @@ const { time, host, hostLinks, description } = Astro.props;
       <span class="ml-2 pt-2 sm:pt-0  inline-flex gap-2">
         {hostLinks.web && (
           <a href={hostLinks.web} target="_blank" rel="noopener noreferrer">
-            <House style={{ fill: "transparent" }} />
+            <ExternalLink style={{ fill: "transparent" }} />
             <span class="sr-only">Website</span>
           </a>
         )}
