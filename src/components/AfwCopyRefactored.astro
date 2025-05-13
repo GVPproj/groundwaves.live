@@ -1,4 +1,5 @@
 ---
+import type { Event, Session } from "../types/afw";
 import { afwContent } from "../data/afwContent.js";
 import CardSection from "./CardSection.astro";
 import SectionTitle from "./SectionTitle.astro";
@@ -9,6 +10,11 @@ import AlbumList from "./AlbumList.astro";
 import WeekendHeader from "./WeekendHeader.astro";
 import DarkModeEvent from "./DarkModeEvent.astro";
 import TicketButton from "./TicketButton.astro";
+
+// Type guard function
+const isDarkModeEvent = (event: Event): boolean => event.type === "Dark Mode";
+const isDeepListeningEvent = (event: Event): boolean =>
+  event.type.includes("Deep Listening");
 ---
 
 <div class="text-left">
@@ -47,14 +53,14 @@ import TicketButton from "./TicketButton.astro";
                   <DateHeader date={day.date} />
 
                   {day.events.map((event) => {
-                    if (event.type === "Dark Mode") {
+                    if (isDarkModeEvent(event)) {
                       return event.sessions.map((session) => (
                         <DarkModeEvent
                           host={session.host}
                           ticketLink={session.ticketLink}
                         />
                       ));
-                    } else if (event.type.includes("Deep Listening")) {
+                    } else if (isDeepListeningEvent(event)) {
                       return (
                         <div>
                           <div class="font-bold mb-2">{event.type}</div>

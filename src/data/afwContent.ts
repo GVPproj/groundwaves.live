@@ -1,4 +1,6 @@
-export const afwContent = {
+import type { AfwContent } from "../types/afw";
+
+export const afwContent: AfwContent = {
   intro: {
     text: "In a world increasingly filled with passive consumption, we invite you to rediscover the art of active listening. This isn't just about appreciating sound—it's about creating moments of collective resonance, fostering connections between island communities, and elevating the everyday through intentional sonic environments.",
   },

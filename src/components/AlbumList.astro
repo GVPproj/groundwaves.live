@@ -1,6 +1,6 @@
 ---
 interface Props {
-  albums: string[];
+  albums?: string[];
 }
 
 const { albums } = Astro.props;
@@ -8,7 +8,5 @@ const { albums } = Astro.props;
 
 <div class="mb-2">Featured Albums:</div>
 <ul class="list-disc ml-8">
-  {albums.map(album => (
-    <li>{album}</li>
-  ))}
+  {albums?.map((album) => <li>{album}</li>)}
 </ul>
