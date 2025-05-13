@@ -39,6 +39,11 @@ export const afwContent: AfwContent = {
         days: [
           {
             date: "Friday, May 23",
+            images: [
+              "src/assets/afwAssets/new/AFW_002_Profile_Meredith-Bates_1.0.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_Sophia-Danai_1.1.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_ContinentalBreakfast_1.1.png",
+            ],
             events: [
               {
                 type: "Community Curation",
@@ -82,6 +87,11 @@ export const afwContent: AfwContent = {
           },
           {
             date: "Saturday, May 24",
+            images: [
+              "src/assets/afwAssets/new/AFW_002_Profile_Andrew-Ross-Collins_1.1.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_Rave-Coach_1.0.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_Kozue_1.3.png",
+            ],
             events: [
               {
                 type: "Community Curation",
@@ -123,6 +133,9 @@ export const afwContent: AfwContent = {
           },
           {
             date: "Sunday, May 25",
+            // images: [
+            //   "src/assets/afwAssets/new/AFW_002_Profile_Wolfgang_1.1.png",
+            // ],
             events: [
               {
                 type: "Deep Listening (3:00-5:00 PM)",
@@ -145,6 +158,10 @@ export const afwContent: AfwContent = {
         days: [
           {
             date: "Friday, May 30",
+            images: [
+              "src/assets/afwAssets/new/AFW_002_Profile_Connie-Kuhns_1.0.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_David-Wilson_1.1.png",
+            ],
             events: [
               {
                 type: "Community Curation",
@@ -178,6 +195,11 @@ export const afwContent: AfwContent = {
           },
           {
             date: "Saturday, May 31",
+            images: [
+              "src/assets/afwAssets/new/AFW_002_Profile_Matt-Robertson_1.0.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_Chris_Arnett_1.1.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_Teen-Daze_1.2.png",
+            ],
             events: [
               {
                 type: "Community Curation",
@@ -216,6 +238,9 @@ export const afwContent: AfwContent = {
           },
           {
             date: "Sunday, June 1",
+            // images: [
+            //   "src/assets/afwAssets/new/AFW_002_Profile_Wolfgang_1.1.png",
+            // ],
             events: [
               {
                 type: "Deep Listening (3:00-5:00 PM)",

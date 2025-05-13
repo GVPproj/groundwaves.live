@@ -1,3 +1,5 @@
+import type { ImagePath } from "../components/WeekendImages.astro";
+
 export interface HostLinks {
   web?: string;
   instagram?: string;
@@ -22,6 +24,7 @@ export interface Event {
 export interface Day {
   date: string;
   events: Event[];
+  images?: ImagePath[];
 }
 
 export interface Weekend {

@@ -10,6 +10,7 @@ import AlbumList from "./AlbumList.astro";
 import WeekendHeader from "./WeekendHeader.astro";
 import DarkModeEvent from "./DarkModeEvent.astro";
 import TicketButton from "./TicketButton.astro";
+import WeekendImages from "./WeekendImages.astro";
 
 // Type guard function
 const isDarkModeEvent = (event: Event): boolean => event.type === "Dark Mode";
@@ -51,6 +52,7 @@ const isDeepListeningEvent = (event: Event): boolean =>
               {weekend.days.map((day) => (
                 <div class="mb-8">
                   <DateHeader date={day.date} />
+                  {day.images && <WeekendImages images={day.images} />}
 
                   {day.events.map((event) => {
                     if (isDarkModeEvent(event)) {

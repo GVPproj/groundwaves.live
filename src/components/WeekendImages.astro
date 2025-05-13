@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+
+// Import all the images we need
+import meredithImage from "../assets/afwAssets/new/AFW_002_Profile_Meredith-Bates_1.0.png";
+import sophiaImage from "../assets/afwAssets/new/AFW_002_Profile_Sophia-Danai_1.1.png";
+import continentalBreakfastImage from "../assets/afwAssets/new/AFW_002_Profile_ContinentalBreakfast_1.1.png";
+import andrewImage from "../assets/afwAssets/new/AFW_002_Profile_Andrew-Ross-Collins_1.1.png";
+import raveCoachImage from "../assets/afwAssets/new/AFW_002_Profile_Rave-Coach_1.0.png";
+import kozueImage from "../assets/afwAssets/new/AFW_002_Profile_Kozue_1.3.png";
+import connieImage from "../assets/afwAssets/new/AFW_002_Profile_Connie-Kuhns_1.0.png";
+import davidImage from "../assets/afwAssets/new/AFW_002_Profile_David-Wilson_1.1.png";
+import mattImage from "../assets/afwAssets/new/AFW_002_Profile_Matt-Robertson_1.0.png";
+import chrisImage from "../assets/afwAssets/new/AFW_002_Profile_Chris_Arnett_1.1.png";
+import teenDazeImage from "../assets/afwAssets/new/AFW_002_Profile_Teen-Daze_1.2.png";
+import wolfgangImage from "../assets/afwAssets/new/AFW_002_Profile_Wolfgang_1.1.png";
+
+// Map of image paths to imported images
+const imageMap = {
+  "src/assets/afwAssets/new/AFW_002_Profile_Meredith-Bates_1.0.png":
+    meredithImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_Sophia-Danai_1.1.png": sophiaImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_ContinentalBreakfast_1.1.png":
+    continentalBreakfastImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_Andrew-Ross-Collins_1.1.png":
+    andrewImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_Rave-Coach_1.0.png": raveCoachImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_Kozue_1.3.png": kozueImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_Connie-Kuhns_1.0.png": connieImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_David-Wilson_1.1.png": davidImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_Matt-Robertson_1.0.png": mattImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_Chris_Arnett_1.1.png": chrisImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_Teen-Daze_1.2.png": teenDazeImage,
+  "src/assets/afwAssets/new/AFW_002_Profile_Wolfgang_1.1.png": wolfgangImage,
+};
+
+export type ImagePath = keyof typeof imageMap;
+
+interface Props {
+  images: ImagePath[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 my-4 w-full">
+  {
+    images.map((imagePath, index) => (
+      <div class="flex justify-center">
+        <Image
+          src={imageMap[imagePath]}
+          alt={`A Friendly Wave promotional image ${index + 1}`}
+          class="rounded-sm max-w-full h-auto"
+          width={300}
+          height={500}
+          format="webp"
+        />
+      </div>
+    ))
+  }
+</div>
