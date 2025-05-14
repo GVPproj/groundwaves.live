@@ -39,18 +39,24 @@ console.log("Generated OG image URL:", ogImageUrl);
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content="Groundwaves - A Friendly Wave" />
     <meta property="og:description" content="Groundwaves - A Friendly Wave" />
-    <meta property="og:image" content={ogImageUrl} />
+    <meta
+      property="og:image"
+      content="https://res.cloudinary.com/dngvurpdw/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1747231904/AFW_Illustration_12_sci8jw.jpg"
+    />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={Astro.url} />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content="Groundwaves - A Friendly Wave" />
     <meta name="twitter:description" content="Groundwaves - A Friendly Wave" />
-    <meta name="twitter:image" content={ogImageUrl} />
+    <meta
+      name="twitter:image"
+      content="https://res.cloudinary.com/dngvurpdw/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1747231904/AFW_Illustration_12_sci8jw.jpg"
+    />
     <title>{title}</title>
     <!-- Preload Fonts -->
     <link
