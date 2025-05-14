@@ -15,14 +15,18 @@ const domain = Astro.site
   ? Astro.site.toString().trim().replace(/\/$/, "")
   : Astro.url.origin;
 
-// Ensure we have absolute URLs for social media
-// This handles both relative paths and already absolute URLs
-const ogImageUrl = ogImage.startsWith("http")
-  ? ogImage
-  : `${domain}${ogImage.startsWith("/") ? "" : "/"}${ogImage}`;
+// Tell the browser to always check the freshness of the cache
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=0, must-revalidate"
+);
 
-// Optional: Log the URL for debugging
-console.log("Generated OG image URL:", ogImageUrl);
+// Tell Netlify's CDN to treat it as fresh for 5 minutes, then for up to a week return a stale version
+// while it revalidates. Use Durable Cache to minimize the need for serverless function calls.
+Astro.response.headers.set(
+  "Netlify-CDN-Cache-Control",
+  "public, durable, s-maxage=300, stale-while-revalidate=604800"
+);
 ---
 
 <!doctype html>
