@@ -143,8 +143,8 @@ export const afwContent: AfwContent = {
                   {
                     host: "Graham Van Pelt",
                     albums: [
-                      "Aphex Twin - Selected Ambient Works Volume 2",
-                      "Yu Su - Roll With the Punches",
+                      "Alice Coltrane - Journey in Satchidananda",
+                      "Nala Sinephro - Space 1.8",
                     ],
                   },
                 ],
