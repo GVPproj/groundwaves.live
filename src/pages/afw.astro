@@ -3,6 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import { sanityClient } from "sanity:client";
 import ImageBanner from "../components/ImageBanner.astro";
 import AfwCopyRefactored from "../components/AfwCopyRefactored.astro";
+import { Image } from "astro:assets";
+
+import Logo from "../assets/afwAssets/Logo-Type_01.png";
 
 const events = await sanityClient.fetch(
   `*[_type == 'event' && slug.current == 'afw']{_id, name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}`
@@ -17,9 +20,17 @@ const event = events[0];
       <header
         class="text-center mb-10 flex flex-col items-center justify-center px-8 max-w-screen-lg mx-auto"
       >
-        <h1 class="text-4xl font-bold text-skin-base afw-link mb-8">
+        <Image
+          src={Logo}
+          alt="A Friendly Wave Logo"
+          width={1200}
+          height={300}
+          class="mb-4"
+          format="webp"
+        />
+        <!-- <h1 class="text-4xl font-bold text-skin-base afw-link mb-8">
           A Friendly Wave
-        </h1>
+        </h1> -->
         <h2 class="text-xl mt-2 font-semibold text-skin-base">
           A Pop-Up Listening Experience | May 23 - June 1, 2025
         </h2>
