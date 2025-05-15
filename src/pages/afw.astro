@@ -1,20 +1,14 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { sanityClient } from "sanity:client";
+import AfwLayout from "../layouts/AfwLayout.astro";
 import ImageBanner from "../components/ImageBanner.astro";
 import AfwCopyRefactored from "../components/AfwCopyRefactored.astro";
 import { Image } from "astro:assets";
 
 import Logo from "../assets/afwAssets/Logo-Type_01.png";
-
-const events = await sanityClient.fetch(
-  `*[_type == 'event' && slug.current == 'afw']{_id, name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}`
-);
-
-const event = events[0];
+import Dude from "../assets/afwAssets/AFW_Dude_7.0.png";
 ---
 
-<Layout title="A Friendly Wave">
+<AfwLayout title="A Friendly Wave">
   <main>
     <div class="max-w-screen-lg mx-auto">
       <header
@@ -55,6 +49,12 @@ const event = events[0];
     <ImageBanner height="500px" />
 
     <AfwCopyRefactored />
+    <div
+      id="hide-until-after-break"
+      class="fixed hidden bottom-24 right-24 z-10 opacity-25"
+    >
+      <Image src={Dude} alt="A Friendly Wave Dude" width={200} height={200} />
+    </div>
 
     <section class="flex text-center flex-col mx-auto mb-16 text-lg">
       <div class="cta grid place-content-center">
@@ -69,4 +69,18 @@ const event = events[0];
       </div>
     </section>
   </main>
-</Layout>
+</AfwLayout>
+
+<script>
+  window.addEventListener("scroll", () => {
+    if (window.innerWidth >= 1024) {
+      const element = document.getElementById("hide-until-after-break");
+      if (!element) return;
+      if (window.scrollY > 400) {
+        element.classList.remove("hidden");
+      } else {
+        element.classList.add("hidden");
+      }
+    }
+  });
+</script>
