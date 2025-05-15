@@ -161,6 +161,7 @@ export const afwContent: AfwContent = {
             images: [
               "src/assets/afwAssets/new/AFW_002_Profile_Connie-Kuhns_1.0.png",
               "src/assets/afwAssets/new/AFW_002_Profile_David-Wilson_1.1.png",
+              "src/assets/afwAssets/new/SE.png",
             ],
             events: [
               {
