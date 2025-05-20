@@ -263,10 +263,11 @@ export const afwContent: AfwContent = {
   },
 
   eventDetails: {
-    title: "Experience Details",
+    title: "Location & Admission",
     location: "Cassette Cafe, 106 Lower Ganges Rd, Salt Spring Island",
     duration: "May 23 - June 1, 2025",
-    admission: "Details coming soon",
+    admission:
+      "Community Curation and Deep Listening sessions are by donation and first come, first served (space limited).  For Dark Mode events (evening dance parties) follow GET TICKETS links.",
   },
 
   conclusion: {
