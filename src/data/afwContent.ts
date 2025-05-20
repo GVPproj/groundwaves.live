@@ -133,9 +133,9 @@ export const afwContent: AfwContent = {
           },
           {
             date: "Sunday, May 25",
-            // images: [
-            //   "src/assets/afwAssets/new/AFW_002_Profile_Wolfgang_1.1.png",
-            // ],
+            images: [
+              "src/assets/afwAssets/AFW_002_Profile_Graham-Van-Pelt_1.0.png",
+            ],
             events: [
               {
                 type: "Deep Listening (3:00-5:00 PM)",
