@@ -16,6 +16,11 @@ import WeekendImages from "./WeekendImages.astro";
 const isDarkModeEvent = (event: Event): boolean => event.type === "Dark Mode";
 const isDeepListeningEvent = (event: Event): boolean =>
   event.type.includes("Deep Listening");
+
+function formatDate(dateString: string) {
+  // Remove spaces and commas, and convert to lowercase
+  return dateString.replace(/[\s,]+/g, "").toLowerCase();
+}
 ---
 
 <div class="text-left">
@@ -50,7 +55,7 @@ const isDeepListeningEvent = (event: Event): boolean =>
               <WeekendHeader title={weekend.title} />
 
               {weekend.days.map((day) => (
-                <div class="mb-8">
+                <div class="mb-8" id={formatDate(day.date)}>
                   <DateHeader date={day.date} />
                   {day.images && <WeekendImages images={day.images} />}
 
