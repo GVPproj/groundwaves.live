@@ -78,8 +78,6 @@ export const afwContent: AfwContent = {
                 sessions: [
                   {
                     host: "Continental Breakfast (The Mole + Anja)",
-                    ticketLink:
-                      "https://www.eventbrite.ca/e/a-friendly-wave-presents-dark-mode-tickets-1359709270029?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile",
                   },
                 ],
               },
@@ -124,8 +122,6 @@ export const afwContent: AfwContent = {
                 sessions: [
                   {
                     host: "Kozue & Guest",
-                    ticketLink:
-                      "https://www.eventbrite.ca/e/a-friendly-wave-presents-dark-mode-tickets-1359709270029?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile",
                   },
                 ],
               },
@@ -231,7 +227,7 @@ export const afwContent: AfwContent = {
                   {
                     host: "Pacific Coliseum (Teen Daze) + DJ Dampfnudel",
                     ticketLink:
-                      "https://www.eventbrite.ca/e/a-friendly-wave-presents-dark-mode-tickets-1359709270029?aff=ebdsshcopyurl&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=organizer-profile&utm-share-source=organizer-profile",
+                      "https://www.eventbrite.ca/e/dark-mode-pacific-coliseum-dj-dampfnudel-tickets-1380844686629?aff=oddtdtcreator&discount=Community",
                   },
                 ],
               },
@@ -239,9 +235,7 @@ export const afwContent: AfwContent = {
           },
           {
             date: "Sunday, June 1",
-            // images: [
-            //   "src/assets/afwAssets/new/AFW_002_Profile_Wolfgang_1.1.png",
-            // ],
+            images: ["src/assets/afwAssets/AFW_002_Profile_Ben-Frey_1.0.png"],
             events: [
               {
                 type: "Deep Listening (3:00-5:00 PM)",
