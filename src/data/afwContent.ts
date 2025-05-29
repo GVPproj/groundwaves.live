@@ -227,7 +227,7 @@ export const afwContent: AfwContent = {
                   {
                     host: "Pacific Coliseum (Teen Daze) + DJ Dampfnudel",
                     ticketLink:
-                      "https://www.eventbrite.ca/e/dark-mode-pacific-coliseum-dj-dampfnudel-tickets-1380844686629?aff=oddtdtcreator&discount=Community",
+                      "https://www.eventbrite.ca/e/dark-mode-pacific-coliseum-dj-dampfnudel-tickets-1380844686629?aff=erelexpmlt",
                   },
                 ],
               },
