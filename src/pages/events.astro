@@ -27,7 +27,7 @@ const upcomingEvents = await sanityClient.fetch(
           upcomingEvents.map((event: any) => {
             return (
               <div class="items-center my-6">
-                <a href="/afw">
+                <a href={event.tickets}>
                   <SanityImage
                     node={event.image}
                     width="800"
@@ -35,7 +35,7 @@ const upcomingEvents = await sanityClient.fetch(
                   />
                 </a>
                 {event?.tickets && (
-                  <a href="/afw" aria-label="Ticket Link">
+                  <a href={event.tickets} aria-label="Ticket Link">
                     <button
                       type="button"
                       class="cta-button mb-16"
