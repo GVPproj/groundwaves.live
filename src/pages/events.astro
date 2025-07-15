@@ -9,19 +9,21 @@ const pastEvents = await sanityClient.fetch(
   `*[
         _type == "event"
         && date < now()
-        ]{_id, name, date, endDate, eventCopy, image, youtubeEmbeds, headline->, venue->}|order(date desc)`
+        ]{_id, name, date, endDate, eventCopy, image, youtubeEmbeds, headline->, venue->}|order(date desc)`,
 );
 const upcomingEvents = await sanityClient.fetch(
   `*[
         _type == "event"
         && date > now()
-        ]{_id,  name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}|order(date desc)`
+        ]{_id,  name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}|order(date desc)`,
 );
 ---
 
 <Layout title="events">
   <main>
-    <section class="flex text-center flex-col mx-auto items-center pb-16">
+    <section
+      class="flex text-center flex-col mx-auto items-center pb-16 max-w-[97%]"
+    >
       {
         upcomingEvents.length > 0 &&
           upcomingEvents.map((event: any) => {
@@ -92,7 +94,7 @@ const upcomingEvents = await sanityClient.fetch(
       {
         pastEvents.map((event: any) => {
           return (
-            <div class="items-center mt-6 mb-12">
+            <div class="items-center mt-6 mb-12 max-w-[97%]">
               <h1
                 class={`font-semibold text-2xl text-skin-accent mb-16 text-center  ${upcomingEvents.length > 0 && "mt-16"}`}
               >
