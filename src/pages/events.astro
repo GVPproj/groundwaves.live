@@ -22,7 +22,7 @@ const upcomingEvents = await sanityClient.fetch(
 <Layout title="events">
   <main>
     <section
-      class="flex text-center flex-col mx-auto items-center pb-16 max-w-[97%]"
+      class="flex text-center flex-col mx-auto items-center pb-16 max-w-[100%]"
     >
       {
         upcomingEvents.length > 0 &&
@@ -94,7 +94,7 @@ const upcomingEvents = await sanityClient.fetch(
       {
         pastEvents.map((event: any) => {
           return (
-            <div class="items-center mt-6 mb-12 max-w-[97%]">
+            <div class="items-center mt-6 mb-12 max-w-[100%]">
               <h1
                 class={`font-semibold text-2xl text-skin-accent mb-16 text-center  ${upcomingEvents.length > 0 && "mt-16"}`}
               >
