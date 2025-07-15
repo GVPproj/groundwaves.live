@@ -69,30 +69,10 @@ Astro.response.headers.set(
     />
     <title>{title}</title>
     <!-- Preload Fonts -->
-    <link
-      rel="preload"
-      href="/fonts/fraunces-v30-latin-300.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <!-- Preload only essential fonts for performance -->
     <link
       rel="preload"
       href="/fonts/fraunces-v30-latin-regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/fraunces-v30-latin-italic.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/fraunces-v30-latin-500.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -107,20 +87,6 @@ Astro.response.headers.set(
     <link
       rel="preload"
       href="/fonts/fraunces-v30-latin-700.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/fraunces-v30-latin-800.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/fraunces-v30-latin-900.woff2"
       as="font"
       type="font/woff2"
       crossorigin

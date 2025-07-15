@@ -119,16 +119,16 @@
 
 /* fraunces-300 - latin */
 @font-face {
-  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
   font-family: "Fraunces";
   font-style: normal;
   font-weight: 300;
-  src: url("/fonts/fraunces-v30-latin-300.woff2");
+  src: url("/fonts/fraunces-v30-latin-300.woff2") format("woff2");
 }
 
 /* fraunces-regular - latin */
 @font-face {
-  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
   font-family: "Fraunces";
   font-style: normal;
   font-weight: 400;
@@ -137,7 +137,7 @@
 
 /* fraunces-italic - latin */
 @font-face {
-  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
   font-family: "Fraunces";
   font-style: italic;
   font-weight: 400;
@@ -146,7 +146,7 @@
 
 /* fraunces-500 - latin */
 @font-face {
-  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
   font-family: "Fraunces";
   font-style: normal;
   font-weight: 500;
@@ -155,7 +155,7 @@
 
 /* fraunces-700 - latin */
 @font-face {
-  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
   font-family: "Fraunces";
   font-style: normal;
   font-weight: 700;
@@ -164,7 +164,7 @@
 
 /* fraunces-800 - latin */
 @font-face {
-  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
   font-family: "Fraunces";
   font-style: normal;
   font-weight: 800;
@@ -173,7 +173,7 @@
 
 /* fraunces-900 - latin */
 @font-face {
-  font-display: block; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
   font-family: "Fraunces";
   font-style: normal;
   font-weight: 900;
