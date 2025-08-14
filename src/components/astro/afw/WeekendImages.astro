@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+
+// Dynamically import all images from the afwAssets directories
+const newImageModules = import.meta.glob('../../../assets/afwAssets/new/*.png', { eager: true });
+const oldImageModules = import.meta.glob('../../../assets/afwAssets/*.png', { eager: true });
+
+// Combine all images
+const allImageModules = { ...newImageModules, ...oldImageModules };
+
+// Create the image map with absolute src paths as keys
+const imageMap: Record<string, any> = {};
+
+Object.entries(allImageModules).forEach(([path, module]) => {
+  // Convert relative path to the expected absolute format used in data
+  const absolutePath = path.replace('../../../assets/', 'src/assets/');
+  imageMap[absolutePath] = (module as any).default;
+});
+
+export type ImagePath = keyof typeof imageMap;
+
+interface Props {
+  images: ImagePath[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class="grid grid-cols-3 gap-3 my-4 w-full">
+  {
+    images.map((imagePath, index) => (
+      <div class="flex justify-center">
+        <Image
+          src={imageMap[imagePath]}
+          alt={`A Friendly Wave promotional image ${index + 1}`}
+          class="rounded-sm max-w-full h-auto"
+          width={300}
+          height={500}
+          format="webp"
+        />
+      </div>
+    ))
+  }
+</div>

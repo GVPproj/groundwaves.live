@@ -1,39 +1,28 @@
 ---
 import { Image } from "astro:assets";
 
-// Import all images from the afwAssets/new directory
-import afwGeneralPost1 from "../assets/afwAssets/new/AFW_002_General-Post_1.0.png";
-import afwGeneralPost2 from "../assets/afwAssets/new/AFW_002_General-Post_2.0.png";
-import afwManifesto1 from "../assets/afwAssets/new/AFW_002_Manifesto_1.2.png";
-import afwManifesto2 from "../assets/afwAssets/new/AFW_002_Manifesto_2.1.png";
-import afwManifesto3 from "../assets/afwAssets/new/AFW_002_Manifesto_3.1.png";
-import afwProfileAndrew from "../assets/afwAssets/new/AFW_002_Profile_Andrew-Ross-Collins_1.1.png";
-import afwProfileChris from "../assets/afwAssets/new/AFW_002_Profile_Chris_Arnett_1.1.png";
-import afwProfileConnie from "../assets/afwAssets/new/AFW_002_Profile_Connie-Kuhns_1.0.png";
-import afwProfileDavid from "../assets/afwAssets/new/AFW_002_Profile_David-Wilson_1.1.png";
-import afwProfileMatt from "../assets/afwAssets/new/AFW_002_Profile_Matt-Robertson_1.0.png";
-import afwProfileMeredith from "../assets/afwAssets/new/AFW_002_Profile_Meredith-Bates_1.0.png";
-import afwProfileRave from "../assets/afwAssets/new/AFW_002_Profile_Rave-Coach_1.0.png";
-import afwProfileWolfgang from "../assets/afwAssets/new/AFW_002_Profile_Wolfgang_1.1.png";
+// Dynamically import all images from the afwAssets/new directory
+const imageModules = import.meta.glob('../../../assets/afwAssets/new/*.png', { eager: true });
+const allImages = Object.values(imageModules).map(module => module.default);
 
-// Create an array of all images
+// Create an array using the imported images in the desired order
 const images = [
-  afwProfileMeredith,
-  afwGeneralPost1,
-  afwProfileMatt,
-  afwManifesto1,
-  afwProfileConnie,
-  afwManifesto2,
-  afwProfileWolfgang,
-  afwManifesto3,
-  afwProfileDavid,
-  afwGeneralPost2,
-  afwProfileRave,
-  afwManifesto1,
-  afwProfileAndrew,
-  afwManifesto1,
-  afwProfileChris,
-];
+  allImages.find(img => img.src.includes('Meredith-Bates')),
+  allImages.find(img => img.src.includes('General-Post_1.0')),
+  allImages.find(img => img.src.includes('Matt-Robertson')),
+  allImages.find(img => img.src.includes('Manifesto_1.2')),
+  allImages.find(img => img.src.includes('Connie-Kuhns')),
+  allImages.find(img => img.src.includes('Manifesto_2.1')),
+  allImages.find(img => img.src.includes('Wolfgang')),
+  allImages.find(img => img.src.includes('Manifesto_3.1')),
+  allImages.find(img => img.src.includes('David-Wilson')),
+  allImages.find(img => img.src.includes('General-Post_2.0')),
+  allImages.find(img => img.src.includes('Rave-Coach')),
+  allImages.find(img => img.src.includes('Manifesto_1.2')),
+  allImages.find(img => img.src.includes('Andrew-Ross-Collins')),
+  allImages.find(img => img.src.includes('Manifesto_1.2')),
+  allImages.find(img => img.src.includes('Chris_Arnett')),
+].filter(Boolean);
 
 // Height parameter with default value
 const { height = "500px" } = Astro.props;

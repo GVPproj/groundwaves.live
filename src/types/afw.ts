@@ -1,4 +1,4 @@
-import type { ImagePath } from "../components/WeekendImages.astro";
+import type { ImagePath } from "../components/astro/afw/WeekendImages.astro";
 
 export interface HostLinks {
   web?: string;

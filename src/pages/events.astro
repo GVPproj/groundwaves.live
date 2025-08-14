@@ -3,7 +3,7 @@ import { sanityClient } from "sanity:client";
 import { PortableText } from "astro-portabletext";
 import { YouTube } from "astro-embed";
 import Layout from "../layouts/Layout.astro";
-import SanityImage from "../components/SanityImage.astro";
+import SanityImage from "../components/fragments/SanityImage.astro";
 
 const pastEvents = await sanityClient.fetch(
   `*[
