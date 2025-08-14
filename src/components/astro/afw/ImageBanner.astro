@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 
 // Dynamically import all images from the afwAssets/new directory
 const imageModules = import.meta.glob('../../../assets/afwAssets/new/*.png', { eager: true });
-const allImages = Object.values(imageModules).map(module => module.default);
+const allImages = Object.values(imageModules).map((module: any) => module.default);
 
 // Create an array using the imported images in the desired order
 const images = [
@@ -71,7 +71,6 @@ const format = "webp"; // Changed from formats array to single format
       ".image-banner-container"
     ) as HTMLElement;
     const scroller = document.querySelector(".image-scroll") as HTMLElement;
-    const imageCount = document.querySelectorAll(".image-wrapper").length / 2; // Divide by 2 because we duplicated images
 
     // Create a simple animation controller
     let direction = 1; // 1 = right to left, -1 = left to right
