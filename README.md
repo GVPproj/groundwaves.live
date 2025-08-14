@@ -2,6 +2,8 @@
 
 A modern website for a music event organization built with Astro, featuring content management through Sanity CMS, interactive React components, and responsive design with Tailwind CSS.
 
+![Groundwaves Preview](public/previewGH.png)
+
 ## Technologies
 
 - **Astro** - Static site generator with component islands architecture
