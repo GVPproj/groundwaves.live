@@ -22,7 +22,7 @@ const upcomingEvents = await sanityClient.fetch(
 <Layout title="events">
   <main>
     <section
-      class="flex text-center flex-col mx-auto items-center pb-16 max-w-[100%]"
+      class="flex text-center flex-col mx-auto items-center pb-16 max-w-prose w-[100%]"
     >
       {
         upcomingEvents.length > 0 &&
@@ -65,7 +65,7 @@ const upcomingEvents = await sanityClient.fetch(
                       })}{" "}
                   @ {event.venue?.name}
                 </h2>
-                <div class="text-left">
+                <div class="text-left prose-base">
                   <PortableText value={event.eventCopy} />
                 </div>
                 {event.youtubeEmbeds &&
@@ -124,7 +124,7 @@ const upcomingEvents = await sanityClient.fetch(
                     })}{" "}
                 {event.venue.name}
               </h2>
-              <div class="text-left">
+              <div class="text-left prose-base">
                 <PortableText value={event.eventCopy} />
               </div>
               {event.youtubeEmbeds &&
