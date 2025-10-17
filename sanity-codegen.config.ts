@@ -1,6 +1,6 @@
-import { SanityCodegenConfig } from "@sanity/codegen";
+import { CodegenConfig } from "@sanity/codegen";
 
-const config: SanityCodegenConfig = {
+const config: CodegenConfig = {
   schemaPath: "./sanity.config.ts",
   outputPath: "./src/types/sanity.ts",
   generateTypedQueries: true,

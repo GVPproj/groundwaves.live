@@ -12,8 +12,8 @@ import { defaultDocumentNode } from "./structure/defaultDocumentNode";
 export default defineConfig({
   name: "default",
   title: "Groundwaves CMS",
-  projectId: process.env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
-  dataset: process.env.PUBLIC_SANITY_STUDIO_DATASET,
+  projectId: process.env.PUBLIC_SANITY_STUDIO_PROJECT_ID!,
+  dataset: process.env.PUBLIC_SANITY_STUDIO_DATASET!,
   plugins: [structureTool({ structure, defaultDocumentNode }), visionTool()],
   schema: {
     types: schemaTypes,

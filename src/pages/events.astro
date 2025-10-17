@@ -5,10 +5,12 @@ import { YouTube } from "astro-embed";
 import Layout from "../layouts/Layout.astro";
 import SanityImage from "../components/fragments/SanityImage.astro";
 import EventCard from "../components/astro/EventCard.astro";
-import type { Event, Venue, Artist } from "../sanity.types";
+import type { Event, Venue, Artist } from "../../sanity.types";
 
-// Event type with expanded references (from GROQ queries with ->)
-type EventWithRefs = Event & {
+// The base Event type has venue/headline as reference objects ({ _ref: string, _type: "reference" })
+// but our GROQ queries use the -> operator to dereference them into actual Venue/Artist objects.
+// This type represents what we actually get at runtime after dereferencing.
+type EventWithRefs = Omit<Event, 'venue' | 'headline' | 'slug'> & {
   slug: { current: string };
   venue?: Venue;
   headline?: Artist;
@@ -58,7 +60,7 @@ const upcomingEvents = await sanityClient.fetch<EventWithRefs[]>(
                 )}
                 <h2 class="font-semibold text-2xl">{event.name}</h2>
                 <h2 class="font-semibold text-2xl mb-12 italic">
-                  {new Date(event?.date).toLocaleDateString("en-US", {
+                  {event.date && new Date(event.date).toLocaleDateString("en-US", {
                     timeZone: "America/Los_Angeles",
                     year: "numeric",
                     month: "long",
@@ -74,9 +76,11 @@ const upcomingEvents = await sanityClient.fetch<EventWithRefs[]>(
                       })}{" "}
                   @ {event.venue?.name}
                 </h2>
-                <div class="text-left prose-base">
-                  <PortableText value={event.eventCopy} />
-                </div>
+                {event.eventCopy && (
+                  <div class="text-left prose-base">
+                    <PortableText value={event.eventCopy} />
+                  </div>
+                )}
                 {event.youtubeEmbeds &&
                   event.youtubeEmbeds.map((emb: string) => {
                     if (typeof emb !== "string") {
@@ -100,21 +104,23 @@ const upcomingEvents = await sanityClient.fetch<EventWithRefs[]>(
             );
           })
       }
-      {
-        pastEvents.length > 0 && (
-          <div class="w-full">
-            <h1
-              class={`font-semibold text-2xl text-skin-accent mb-8 text-center ${upcomingEvents.length > 0 && "mt-16"}`}
-            >
-              Past Events:
-            </h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-              {pastEvents.map((event) => <EventCard event={event} />)}
-            </div>
-          </div>
-        )
-      }
     </section>
+    {
+      pastEvents.length > 0 && (
+        <section class="pb-16">
+          <h1
+            class={`font-semibold text-2xl text-skin-accent mb-8 text-center ${upcomingEvents.length > 0 && "mt-16"}`}
+          >
+            Past Events:
+          </h1>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pastEvents.map((event) => (
+              <EventCard event={event} />
+            ))}
+          </div>
+        </section>
+      )
+    }
 
     <!-- </div> -->
   </main>
