@@ -119,6 +119,8 @@ $RECYCLE.BIN/
 
 # Sanity
 .sanity
+sanity.types.ts
+schema.json
 
 # Local Netlify folder
 .netlify

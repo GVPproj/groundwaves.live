@@ -1,0 +1,126 @@
+---
+import { sanityClient } from "sanity:client";
+import { PortableText } from "astro-portabletext";
+import { YouTube } from "astro-embed";
+import Layout from "../../layouts/Layout.astro";
+import SanityImage from "../../components/fragments/SanityImage.astro";
+import type { Event, Venue, Artist } from "../../sanity.types";
+
+// Event type with expanded references (from GROQ queries with ->)
+type EventWithRefs = Event & {
+  slug: string;
+  venue?: Venue;
+  headline?: Artist;
+};
+
+export async function getStaticPaths() {
+  const events = await sanityClient.fetch<EventWithRefs[]>(
+    `*[_type == "event" && defined(slug.current)]{
+      "slug": slug.current,
+      _id,
+      name,
+      date,
+      endDate,
+      eventCopy,
+      image,
+      youtubeEmbeds,
+      tickets,
+      headline->,
+      venue->
+    }`,
+  );
+
+  return events.map((event) => ({
+    params: { slug: event.slug },
+    props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+const isPastEvent = new Date(event.date) < new Date();
+---
+
+<Layout title={event.name}>
+  <main>
+    <section
+      class="flex text-center flex-col mx-auto items-center pb-16 max-w-prose w-[100%]"
+    >
+      <div class="items-center my-6">
+        {
+          !isPastEvent && event.tickets ? (
+            <a href={event.tickets}>
+              <SanityImage
+                node={event.image}
+                width="800"
+                classNames="mx-auto mb-16"
+              />
+            </a>
+          ) : (
+            <SanityImage
+              node={event.image}
+              width="800"
+              classNames="mx-auto mb-16"
+            />
+          )
+        }
+        {
+          !isPastEvent && event?.tickets && (
+            <a href={event.tickets} aria-label="Ticket Link">
+              <button
+                type="button"
+                class="cta-button mb-16"
+                value="Get Tickets"
+              >
+                Get Tickets
+              </button>
+            </a>
+          )
+        }
+        <h1 class="font-semibold text-2xl">{event.name}</h1>
+        <h2 class="font-semibold text-2xl mb-12 italic">
+          {
+            new Date(event?.date).toLocaleDateString("en-US", {
+              timeZone: "America/Los_Angeles",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }{" "}
+          {
+            event.endDate &&
+              "- " +
+                new Date(event.endDate).toLocaleDateString("en-US", {
+                  timeZone: "America/Los_Angeles",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+          }{" "}
+          @ {event.venue?.name}
+        </h2>
+        <div class="text-left prose-base">
+          <PortableText value={event.eventCopy} />
+        </div>
+        {
+          event.youtubeEmbeds &&
+            event.youtubeEmbeds.map((emb: string) => {
+              if (typeof emb !== "string") {
+                console.warn(`Invalid YouTube ID: ${emb}`);
+                return null;
+              }
+              return <YouTube class="w-full mx-auto mt-8" id={emb} />;
+            })
+        }
+        {
+          !isPastEvent && event?.tickets && (
+            <a href={event.tickets} aria-label="Ticket Link">
+              <button type="button" class="cta-button mt-16" value="Get Tickets">
+                Get Tickets
+              </button>
+            </a>
+          )
+        }
+      </div>
+    </section>
+  </main>
+</Layout>

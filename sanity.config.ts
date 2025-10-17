@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
@@ -11,8 +12,8 @@ import { defaultDocumentNode } from "./structure/defaultDocumentNode";
 export default defineConfig({
   name: "default",
   title: "Groundwaves CMS",
-  projectId: import.meta.env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
-  dataset: import.meta.env.PUBLIC_SANITY_STUDIO_DATASET,
+  projectId: process.env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
+  dataset: process.env.PUBLIC_SANITY_STUDIO_DATASET,
   plugins: [structureTool({ structure, defaultDocumentNode }), visionTool()],
   schema: {
     types: schemaTypes,

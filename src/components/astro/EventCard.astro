@@ -1,0 +1,41 @@
+---
+import SanityImage from "../fragments/SanityImage.astro";
+import type { Event, Venue } from "../../sanity.types";
+
+// Event type with expanded references (from GROQ queries with ->)
+type EventWithRefs = Event & {
+  slug: { current: string };
+  venue?: Venue;
+};
+
+interface Props {
+  event: EventWithRefs;
+}
+
+const { event } = Astro.props;
+---
+
+<a
+  href={`/events/${event.slug.current}`}
+  class="block hover:opacity-80 transition-opacity"
+>
+  <div class="border border-skin-accent p-4 rounded-lg h-full flex flex-col">
+    <SanityImage
+      node={event.image}
+      width="400"
+      classNames="w-full mb-4 rounded"
+    />
+    <h3 class="font-semibold text-lg mb-2">{event.name}</h3>
+    <p class="text-sm italic mb-1">
+      {
+        new Date(event?.date).toLocaleDateString("en-US", {
+          timeZone: "America/Los_Angeles",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      }
+    </p>
+    <p class="text-sm">{event.venue?.name}</p>
+  </div>
+</a>

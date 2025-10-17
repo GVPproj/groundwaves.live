@@ -4,14 +4,23 @@ import { PortableText } from "astro-portabletext";
 import { YouTube } from "astro-embed";
 import Layout from "../layouts/Layout.astro";
 import SanityImage from "../components/fragments/SanityImage.astro";
+import EventCard from "../components/astro/EventCard.astro";
+import type { Event, Venue, Artist } from "../sanity.types";
 
-const pastEvents = await sanityClient.fetch(
+// Event type with expanded references (from GROQ queries with ->)
+type EventWithRefs = Event & {
+  slug: { current: string };
+  venue?: Venue;
+  headline?: Artist;
+};
+
+const pastEvents = await sanityClient.fetch<EventWithRefs[]>(
   `*[
         _type == "event"
         && date < now()
-        ]{_id, name, date, endDate, eventCopy, image, youtubeEmbeds, headline->, venue->}|order(date desc)`,
+        ]{_id, name, slug, date, endDate, eventCopy, image, youtubeEmbeds, headline->, venue->}|order(date desc)`,
 );
-const upcomingEvents = await sanityClient.fetch(
+const upcomingEvents = await sanityClient.fetch<EventWithRefs[]>(
   `*[
         _type == "event"
         && date > now()
@@ -26,7 +35,7 @@ const upcomingEvents = await sanityClient.fetch(
     >
       {
         upcomingEvents.length > 0 &&
-          upcomingEvents.map((event: any) => {
+          upcomingEvents.map((event) => {
             return (
               <div class="items-center my-6">
                 <a href={event.tickets}>
@@ -92,52 +101,18 @@ const upcomingEvents = await sanityClient.fetch(
           })
       }
       {
-        pastEvents.map((event: any) => {
-          return (
-            <div class="items-center mt-6 mb-12 max-w-[100%]">
-              <h1
-                class={`font-semibold text-2xl text-skin-accent mb-16 text-center  ${upcomingEvents.length > 0 && "mt-16"}`}
-              >
-                Past event:
-              </h1>
-              <SanityImage
-                node={event.image}
-                width="800"
-                classNames="mx-auto mb-16"
-              />
-              <h2 class="font-semibold text-2xl">{event.name}</h2>
-              <h2 class="font-semibold text-2xl mb-12 italic">
-                {new Date(event?.date).toLocaleDateString("en-US", {
-                  timeZone: "America/Los_Angeles",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}{" "}
-                @{" "}
-                {event.endDate &&
-                  "- " +
-                    new Date(event.endDate).toLocaleDateString("en-US", {
-                      timeZone: "America/Los_Angeles",
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}{" "}
-                {event.venue.name}
-              </h2>
-              <div class="text-left prose-base">
-                <PortableText value={event.eventCopy} />
-              </div>
-              {event.youtubeEmbeds &&
-                event.youtubeEmbeds.map((emb: string) => {
-                  if (typeof emb !== "string") {
-                    console.warn(`Invalid YouTube ID: ${emb}`);
-                    return null;
-                  }
-                  return <YouTube class="w-full mx-auto mt-8" id={emb} />;
-                })}
+        pastEvents.length > 0 && (
+          <div class="w-full">
+            <h1
+              class={`font-semibold text-2xl text-skin-accent mb-8 text-center ${upcomingEvents.length > 0 && "mt-16"}`}
+            >
+              Past Events:
+            </h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+              {pastEvents.map((event) => <EventCard event={event} />)}
             </div>
-          );
-        })
+          </div>
+        )
       }
     </section>
 

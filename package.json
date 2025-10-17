@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "codegen": "sanity schema extract && sanity typegen generate"
   },
   "dependencies": {
     "@astrojs/netlify": "^6.3.2",
@@ -35,6 +36,8 @@
     "vite": "^5.3.3"
   },
   "devDependencies": {
+    "@sanity/codegen": "^4.10.3",
+    "dotenv": "^17.2.3",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.0"
   }

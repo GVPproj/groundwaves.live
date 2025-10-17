@@ -12,13 +12,22 @@ A modern website for a music event organization built with Astro, featuring cont
 - **Tailwind CSS** - Utility-first CSS framework
 - **TypeScript** - Type-safe development
 
-## Development
+## Setup
 
 ```bash
 npm install        # Install dependencies
+npm run codegen    # Generate TypeScript types from Sanity schemas
+```
+
+The `codegen` command extracts your Sanity schema and generates TypeScript types in `sanity.types.ts`. Run this after cloning the repo or whenever you modify Sanity schema definitions.
+
+## Development
+
+```bash
 npm run dev        # Start development server at localhost:4321
 npm run build      # Build production site
 npm run preview    # Preview production build
+npm run codegen    # Regenerate Sanity types after schema changes
 ```
 
 ## Deployment
