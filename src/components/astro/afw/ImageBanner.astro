@@ -12,7 +12,6 @@ const allImages = Object.values(imageModules).map(
 // Create an array using the imported images in the desired order
 const images = [
   // New images front-loaded
-  allImages.find((img) => img.src.includes("Schedule-Social")),
   allImages.find((img) => img.src.includes("Eddie-C")),
   allImages.find((img) => img.src.includes("S02_1.1")),
   allImages.find((img) => img.src.includes("Jian")),
@@ -20,19 +19,19 @@ const images = [
   // Existing images
   // allImages.find(img => img.src.includes('Meredith-Bates')),
   // allImages.find(img => img.src.includes('General-Post_1.0')),
-  // allImages.find(img => img.src.includes('Matt-Robertson')),
+  allImages.find((img) => img.src.includes("Matt-Robertson")),
   // allImages.find(img => img.src.includes('Manifesto_1.2')),
   // allImages.find(img => img.src.includes('Connie-Kuhns')),
   // allImages.find(img => img.src.includes('Manifesto_2.1')),
   // allImages.find(img => img.src.includes('Wolfgang')),
   // allImages.find(img => img.src.includes('Manifesto_3.1')),
   // allImages.find(img => img.src.includes('David-Wilson')),
-  // allImages.find(img => img.src.includes('General-Post_2.0')),
+  allImages.find((img) => img.src.includes("General-Post_2.0")),
   // allImages.find(img => img.src.includes('Rave-Coach')),
+  allImages.find((img) => img.src.includes("Manifesto_1.2")),
+  allImages.find((img) => img.src.includes("Andrew-Ross-Collins")),
   // allImages.find(img => img.src.includes('Manifesto_1.2')),
-  // allImages.find(img => img.src.includes('Andrew-Ross-Collins')),
-  // allImages.find(img => img.src.includes('Manifesto_1.2')),
-  // allImages.find(img => img.src.includes('Chris_Arnett')),
+  allImages.find((img) => img.src.includes("Chris_Arnett")),
 ].filter(Boolean);
 
 // Height parameter with default value

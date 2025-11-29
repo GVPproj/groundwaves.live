@@ -2,7 +2,7 @@ import type { AfwContent } from "../types/afw";
 
 export const afwContent: AfwContent = {
   intro: {
-    text: "In a world increasingly filled with passive consumption, we invite you to rediscover the art of active listening. This isn't just about appreciating sound—it's about creating moments of collective resonance, fostering connections between island communities, and elevating the everyday through intentional sonic environments.",
+    text: "A Friendly Wave returns to Salt Spring Island for three days of intentional listening, community connection, and shared sonic experiences. Once again, musicians, DJs, collectors, and music lovers unite around a simple idea: there is transformative power in the act of listening together.",
   },
 
   listeningExperiences: {
@@ -65,34 +65,45 @@ export const afwContent: AfwContent = {
           {
             date: "Saturday, Dec 6",
             images: [
-              "src/assets/afwAssets/new/AFW_002_Profile_Andrew-Ross-Collins_1.1.png",
-              "src/assets/afwAssets/new/AFW_002_Profile_Rave-Coach_1.0.png",
-              "src/assets/afwAssets/new/AFW_002_Profile_Kozue_1.3.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_Eddie-C_1.0.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_Chris_Arnett_1.1.png",
+              // "src/assets/afwAssets/new/AFW_002_Profile_Rave-Coach_1.0.png",
+              // "src/assets/afwAssets/new/AFW_002_Profile_Kozue_1.3.png",
             ],
+            intro:
+              "Our Saturday morning unfolds with three local voices sharing their collections and perspectives.",
             events: [
+              {
+                type: "Café Mode",
+                sessions: [
+                  {
+                    time: "9:00-10:30 AM",
+                    host: "Chris Arnett",
+                    description:
+                      "Chris Arnett is a historian, archaeologist, musician, and artist who has called Salt Spring Island home for over 34 years. A founding member of Vancouver's pioneering punk band The Furies, his musical journey spans from garage rock to deep vinyl collecting. His books on Coast Salish history—including The Terror of the Coast and Two Houses Half-Buried in Sand—reflect the same passion for storytelling that shapes his approach to music. This morning, he shares selections from a life lived between records and research.",
+                  },
+                  {
+                    time: "10:30-11:45 AM",
+                    host: "Tea Mistress",
+                    description:
+                      "Jen Maksymetz has been studying tea and practicing Gongfu ceremony since 2000. While living in Taiwan, she was introduced to tea culture through her Taiwanese 'family.' Now based on Salt Spring in her cliffside teahouse overlooking Ruckle Park and the Pacific, she brings the same intentionality to her musical selections as she does to her tea practice—curating sonic experiences that invite presence and reflection.",
+                  },
+                  {
+                    time: "11:45 AM-1:00 PM",
+                    host: "Stephen Corwin",
+                    description:
+                      "A recent transplant to Salt Spring, Stephen closes out Café Mode with his own collection, rounding out a morning of island voices and vinyl discoveries.",
+                  },
+                ],
+              },
               {
                 type: "Community Curation",
                 sessions: [
                   {
                     time: "4:00-5:00 PM",
-                    host: "Andrew Ross Collins",
-                    hostLinks: {
-                      web: "https://interchill.bandcamp.com",
-                    },
+                    host: "Chris Gestrin",
                     description:
-                      "Music that takes you somewhere, with a number of stops being in Africa.",
-                  },
-                  {
-                    time: "5:30-6:30 PM",
-                    host: "Rave Coach",
-                    hostLinks: {
-                      instagram: "https://www.instagram.com/ravecoach",
-                      facebook: "https://www.facebook.com/ravecoach5/",
-                      web: "https://www.honestfarms.ca",
-                    },
-
-                    description:
-                      "My set will feature an hour of 90s-inspired house music. A genre that sparked my passion for DJing. These sounds have shaped my style and continue to echo through many of my performances.",
+                      "Since graduating from Boston's Berklee College of Music in 1995, Vancouver native Chris Gestrin has become an integral part of the Canadian music scene. As a pianist, multi-keyboardist, composer, engineer, and producer, he has contributed to over 500 albums spanning experimental electronic improvisations, greasy soul organ, introspective piano jazz, and chart-topping pop and hip-hop. His recording Stillpoint was listed as one of the best albums of 2003 in Downbeat magazine, and his production work on Pugs & Crows' Fantastic Pictures earned a 2013 JUNO Award for Best Instrumental Album. Chris brings his encyclopedic musical knowledge and deep listening sensibility to an afternoon of sonic exploration.",
                   },
                 ],
               },
@@ -100,7 +111,12 @@ export const afwContent: AfwContent = {
                 type: "Dark Mode",
                 sessions: [
                   {
-                    host: "Eddie C w/ Somethin' Else",
+                    time: "7:00 PM-12:00 AM",
+                    host: "Eddie C with Somethin' Else DJs",
+                    description:
+                      "Raised in Southern Ontario somewhere between Detroit and Montreal, Eddie C began his experiments in music in the late 80s, inspired by hip-hop and the burgeoning acid house scene. What started as tape edits of late night radio evolved into a lifelong passion for record collecting—one that led him through a decade-long sabbatical in the Rocky Mountains of Canada and eventually to Berlin, where he reconnected with the electronic music community.\n\nHis raw yet sophisticated approach to production has yielded countless releases on labels like Endless Flight, Crue-L, and his own Red Motorbike imprint. But it's his DJ sets—freewheeling journeys through disco, dubby house, and everything that puts a smile on your dial—that have garnered him a devoted following worldwide.\n\nEddie C is joined by local selectors Somethin' Else DJs for an evening that balances listening and movement on our custom sound system.",
+                    ticketLink:
+                      "https://www.eventbrite.ca/e/dark-mode-eddie-c-somethin-else-djs-tickets-1976232427389?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=ebdsshcopyurl",
                   },
                 ],
               },
@@ -110,6 +126,7 @@ export const afwContent: AfwContent = {
             date: "Sunday, May 25",
             images: [
               "src/assets/afwAssets/AFW_002_Profile_Matt-Robertson_1.0.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_Jian_1.1.png",
             ],
             events: [
               {
@@ -118,6 +135,17 @@ export const afwContent: AfwContent = {
                   {
                     host: "Matt Roberson & Tea Mistress",
                     albums: ["Matt Robertson - Aequora"],
+                  },
+                ],
+              },
+              {
+                type: "Special Food / Music Pop-Up",
+                sessions: [
+                  {
+                    time: "5:00 and 7:30",
+                    host: "Chef Jian Cheng with music by Andrew Ross Collins (Interchill Records)",
+                    description:
+                      "We close the weekend with an intimate dinner pairing Chef Jian's cooking with selections from Interchill Records founder Andrew Ross Collins.\n\nJian trained at London's Michelin-starred Chez Bruce and Vancouver's Bao Bei before co-founding Nancy Go Yaya, the Singaporean café that had lineups down the block. Now based on Salt Spring at Francis Bread, he brings his signature style to this special evening: Southeast Asian soul food—satay, rojak, chili crab, pandan, Milo—elevated with fine dining technique and local ingredients. Think Singapore chili crab mac and cheese with Dungeness, and a Lamborghini burger featuring SSI lamb with smoked oyster mayo.\n\nAndrew Ross Collins founded Interchill Records in 1995, emerging from the multi-sensory chill rooms of Montreal's early rave scene. Now based here on Salt Spring, he's spent three decades as the ears behind a label known for \"organic electronica for expanding minds\"—releasing music from artists around the world while curating soundscapes that balance the electronic and the organic, the global and the local. This evening, his selections provide the sonic thread connecting each course.\n\nTwo seatings. Space is limited.",
                   },
                 ],
               },

@@ -24,14 +24,14 @@ function formatDate(dateString: string) {
 
 <div class="text-left">
   <div class="flex flex-col font-serif text-skin-base text-opacity-90">
-    <div class="max-w-screen-lg mx-auto mt-8 md:mt-12">
+    <div class="max-w-screen-lg mx-auto mt-6 md:mt-12">
       <!-- Introduction -->
       <section class="mb-10">
         <p class="text-lg">{afwContent.intro.text}</p>
       </section>
 
       <!-- Listening Experiences -->
-      <section class="mb-16">
+      <section class="mb-10">
         <SectionTitle title={afwContent.listeningExperiences.title} />
 
         {
@@ -46,7 +46,7 @@ function formatDate(dateString: string) {
 
       <!-- Event Schedule -->
       <section class="mb-16">
-        <SectionTitle title={afwContent.eventSchedule.title} />
+        <!-- <SectionTitle title={afwContent.eventSchedule.title} /> -->
 
         {
           afwContent.eventSchedule.weekends.map((weekend) => (
@@ -69,8 +69,8 @@ function formatDate(dateString: string) {
                     } else if (isDeepListeningEvent(event)) {
                       return (
                         <div>
-                          <div class="font-bold mb-2">{event.type}</div>
-                          <div class="ml-6">
+                          <div class="font-bold my-6">{event.type}</div>
+                          <div>
                             {event.sessions.map((session) => (
                               <>
                                 <div class="mb-2">

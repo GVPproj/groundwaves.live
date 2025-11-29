@@ -7,9 +7,9 @@ interface Props {
 const { host, ticketLink } = Astro.props;
 ---
 
-<div class="font-bold mb-2">Dark Mode:</div>
+<div class="font-bold mb-4">Dark Mode:</div>
 <div class="flex gap-6 items-center">
-  <div class="ml-6 font-bold">{host}</div>
+  <div class="font-bold">{host}</div>
   {
     ticketLink && (
       <a href={ticketLink} aria-label="Ticket Link">
