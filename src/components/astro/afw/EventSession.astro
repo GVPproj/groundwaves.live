@@ -62,9 +62,11 @@ const { time, host, hostLinks, description } = Astro.props;
 
   {
     description && (
-      <>
-        <p class="mt-4">{description}</p>
-      </>
+      <div class="mt-4 space-y-3">
+        {description.split("\n\n").map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
     )
   }
 </div>

@@ -35,22 +35,20 @@ export const afwContent: AfwContent = {
     title: "Event Schedule",
     weekends: [
       {
-        title: "Weekend 1",
+        title: "Dec 5 - 7",
         days: [
           {
-            date: "Friday, May 23",
-            images: [
-              "src/assets/afwAssets/new/AFW_002_Profile_Meredith-Bates_1.0.png",
-              "src/assets/afwAssets/new/AFW_002_Profile_Sophia-Danai_1.1.png",
-              "src/assets/afwAssets/new/AFW_002_Profile_ContinentalBreakfast_1.1.png",
-            ],
+            date: "Friday, Dec 5",
+            // images: [
+            //   "src/assets/afwAssets/new/AFW_002_Profile_Meredith-Bates_1.0.png",
+            // ],
             events: [
               {
                 type: "Community Curation",
                 sessions: [
                   {
-                    time: "4:00-5:00 PM",
-                    host: "Meredith Bates",
+                    time: "5:30 PM",
+                    host: "Robert Kraft",
                     hostLinks: {
                       web: "https://www.meredithbates.com/",
                       instagram:
@@ -58,33 +56,14 @@ export const afwContent: AfwContent = {
                       facebook: "https://www.facebook.com/meredithbates79",
                     },
                     description:
-                      "Meredith will be sharing a selection of her own compositions and improvisations, the music of bands that she's played in over the last twenty years, and music by other great artists that have affected her profoundly along the way.",
-                  },
-                  {
-                    time: "5:30-6:30 PM",
-                    host: "Sophia Danai",
-                    hostLinks: {
-                      web: "https://SOPHIADANAI.com",
-                      instagram: "https://www.instagram.com/sophiadanai",
-                      youtube: "https://youtube.com/@sophiadanaimusic",
-                    },
-                    description:
-                      "An intimate, empowering and sensual collection of songs that dive into the relationship to self and others, from Sophia Danai’s unreleased album 'Let’s talk about it'.",
-                  },
-                ],
-              },
-              {
-                type: "Dark Mode",
-                sessions: [
-                  {
-                    host: "Continental Breakfast (The Mole + Anja)",
+                      "Robert Kraft is an Academy Award, Grammy, and Golden Globe nominated songwriter, film composer, recording artist, and record producer. As President of Music at 20th Century Fox Studios from 1994-2012, he oversaw scores and soundtracks for over 300 feature films—including Titanic, Avatar, Moulin Rouge!, Walk the Line, Once, Slumdog Millionaire, and Life of Pi.\n\nAs a record producer, Robert co-produced The Little Mermaid soundtrack, including 'Under The Sea,' which won both the Oscar and Grammy for Best Song. As a songwriter, he earned nominations for an Academy Award and two Golden Globes for 'Beautiful Maria of My Soul' from The Mambo Kings and 'How Can I Not Love You' co-written with Babyface for Anna and the King.\n\nMore recently, Robert produced the award-winning SCORE: A Film Music Documentary and hosts the premiere film music podcast SCORE: The Podcast. He currently serves as SOCAN's Ambassador to Hollywood, supporting Canadian film and TV composers.\n\nThis evening, Robert steps away from the industry to share something more personal: the records that have shaped his own listening life. A rare invitation into the collection of someone who has spent decades at the intersection of music and storytelling.",
                   },
                 ],
               },
             ],
           },
           {
-            date: "Saturday, May 24",
+            date: "Saturday, Dec 6",
             images: [
               "src/assets/afwAssets/new/AFW_002_Profile_Andrew-Ross-Collins_1.1.png",
               "src/assets/afwAssets/new/AFW_002_Profile_Rave-Coach_1.0.png",
@@ -121,7 +100,7 @@ export const afwContent: AfwContent = {
                 type: "Dark Mode",
                 sessions: [
                   {
-                    host: "Kozue & Guest",
+                    host: "Eddie C w/ Somethin' Else",
                   },
                 ],
               },
@@ -130,122 +109,15 @@ export const afwContent: AfwContent = {
           {
             date: "Sunday, May 25",
             images: [
-              "src/assets/afwAssets/AFW_002_Profile_Graham-Van-Pelt_1.0.png",
+              "src/assets/afwAssets/AFW_002_Profile_Matt-Robertson_1.0.png",
             ],
             events: [
               {
                 type: "Deep Listening (3:00-5:00 PM)",
                 sessions: [
                   {
-                    host: "Graham Van Pelt",
-                    albums: [
-                      "Alice Coltrane - Journey in Satchidananda",
-                      "Nala Sinephro - Space 1.8",
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        title: "Weekend 2",
-        days: [
-          {
-            date: "Friday, May 30",
-            images: [
-              "src/assets/afwAssets/new/AFW_002_Profile_Connie-Kuhns_1.0.png",
-              "src/assets/afwAssets/new/AFW_002_Profile_David-Wilson_1.1.png",
-              "src/assets/afwAssets/new/SE.png",
-            ],
-            events: [
-              {
-                type: "Community Curation",
-                sessions: [
-                  {
-                    time: "4:00-5:00 PM",
-                    host: "Connie Kuhns",
-                    hostLinks: {
-                      instagram: "https://www.instagram.com/rubymusicradio",
-                    },
-                    description:
-                      "May the Bridges I Burn Light the Way: a subjective selection of women artists from RubymusicRadio who burned bright.",
-                  },
-                  {
-                    time: "5:30-6:30 PM",
-                    host: "David Wisdom",
-                    description:
-                      "Music For Art Galleries -1,000 Recordings In Alphabetical Order (For Enhanced Viewing) (Excerpt)",
-                  },
-                ],
-              },
-              {
-                type: "Dark Mode",
-                sessions: [
-                  {
-                    host: "SOMETHIN' ELSE",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            date: "Saturday, May 31",
-            images: [
-              "src/assets/afwAssets/new/AFW_002_Profile_Matt-Robertson_1.0.png",
-              "src/assets/afwAssets/new/AFW_002_Profile_Chris_Arnett_1.1.png",
-              "src/assets/afwAssets/new/AFW_002_Profile_Teen-Daze_1.2.png",
-            ],
-            events: [
-              {
-                type: "Community Curation",
-                sessions: [
-                  {
-                    time: "4:00-5:00 PM",
-                    host: "Matt Robertson",
-                    hostLinks: {
-                      web: "https://www.mattrobertsonmusic.com",
-                    },
-                    description:
-                      "A selection of music that has been inspirational, and loosely demonstrates how changing technology has shaped the creation of music and production.",
-                  },
-                  {
-                    time: "5:30-6:30 PM",
-                    host: "Chris Arnett",
-                    hostLinks: {
-                      youtube: "https://www.youtube.com/watch?v=P1PDHh0E0XI",
-                    },
-                    description:
-                      '" I\'LL BE PLAYING THE GREATEST HITS YOU NEVER HEARD OF ... "',
-                  },
-                ],
-              },
-              {
-                type: "Dark Mode",
-                sessions: [
-                  {
-                    host: "Pacific Coliseum (Teen Daze) + DJ Dampfnudel",
-                    ticketLink:
-                      "https://www.eventbrite.ca/e/dark-mode-pacific-coliseum-dj-dampfnudel-tickets-1380844686629?aff=erelexpmlt",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            date: "Sunday, June 1",
-            images: ["src/assets/afwAssets/AFW_002_Profile_Ben-Frey_1.0.png"],
-            events: [
-              {
-                type: "Deep Listening (3:00-5:00 PM)",
-                sessions: [
-                  {
-                    host: "Ben Frey",
-                    albums: [
-                      "Steely Dan - Aja",
-                      "Stevie Wonder - Talking Book",
-                    ],
+                    host: "Matt Roberson & Tea Mistress",
+                    albums: ["Matt Robertson - Aequora"],
                   },
                 ],
               },
