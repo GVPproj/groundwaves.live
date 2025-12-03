@@ -24,7 +24,7 @@ function formatDate(dateString: string) {
 
 <div class="text-left">
   <div class="flex flex-col font-serif text-skin-base text-opacity-90">
-    <div class="max-w-screen-lg mx-auto mt-6 md:mt-12">
+    <div class="mx-auto mt-6 max-w-screen-lg md:mt-12">
       <!-- Introduction -->
       <section class="mb-10">
         <p class="text-lg">{afwContent.intro.text}</p>
@@ -48,69 +48,69 @@ function formatDate(dateString: string) {
       <section class="mb-16">
         <!-- <SectionTitle title={afwContent.eventSchedule.title} /> -->
 
-       {
-  afwContent.eventSchedule.weekends.map((weekend) => (
-    <div class="mb-10">
-      <WeekendHeader title={weekend.title} />
+        {
+          afwContent.eventSchedule.weekends.map((weekend) => (
+            <div class="mb-10">
+              <WeekendHeader title={weekend.title} />
 
-      {weekend.days.map((day) => (
-        <div class="mb-8" id={formatDate(day.date)}>
-          <DateHeader date={day.date} />
-          {day.images && <WeekendImages images={day.images} />}
+              {weekend.days.map((day) => (
+                <div class="mb-8" id={formatDate(day.date)}>
+                  <DateHeader date={day.date} />
+                  {day.images && <WeekendImages images={day.images} />}
 
-          {day.events.map((event) => {
-            if (isDarkModeEvent(event)) {
-              return event.sessions.map((session) => (
-                <DarkModeEvent
-                  host={session.host}
-                  ticketLink={session.ticketLink}
-                />
-              ));
-            } else if (isDeepListeningEvent(event)) {
-              return (
-                <div>
-                  <div class="font-bold my-6">{event.type}</div>
-                  <div>
-                    {event.sessions.map((session) => (
-                      <>
-                        <div class="mb-2">
-                          Host: <strong>{session.host}</strong>
-                        </div>
-                        <AlbumList albums={session.albums} />
-                        {session.description && (
-                          <div class="mt-4 space-y-3">
-                            {session.description
-                              .split("\n\n")
-                              .map((paragraph) => (
-                                <p>{paragraph}</p>
-                              ))}
+                  {day.events.map((event) => {
+                    if (isDarkModeEvent(event)) {
+                      return event.sessions.map((session) => (
+                        <DarkModeEvent
+                          host={session.host}
+                          ticketLink={session.ticketLink}
+                        />
+                      ));
+                    } else if (isDeepListeningEvent(event)) {
+                      return (
+                        <div>
+                          <div class="my-6 font-bold">{event.type}</div>
+                          <div>
+                            {event.sessions.map((session) => (
+                              <>
+                                <div class="mb-2">
+                                  Host: <strong>{session.host}</strong>
+                                </div>
+                                <AlbumList albums={session.albums} />
+                                {session.description && (
+                                  <div class="mt-4 space-y-3">
+                                    {session.description
+                                      .split("\n\n")
+                                      .map((paragraph) => (
+                                        <p>{paragraph}</p>
+                                      ))}
+                                  </div>
+                                )}
+                              </>
+                            ))}
                           </div>
-                        )}
-                      </>
-                    ))}
-                  </div>
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <EventType title={event.type}>
+                          {event.sessions.map((session) => (
+                            <EventSession
+                              time={session.time}
+                              host={session.host}
+                              description={session.description}
+                              hostLinks={session.hostLinks}
+                            />
+                          ))}
+                        </EventType>
+                      );
+                    }
+                  })}
                 </div>
-              );
-            } else {
-              return (
-                <EventType title={event.type}>
-                  {event.sessions.map((session) => (
-                    <EventSession
-                      time={session.time}
-                      host={session.host}
-                      description={session.description}
-                      hostLinks={session.hostLinks}
-                    />
-                  ))}
-                </EventType>
-              );
-            }
-          })}
-        </div>
-      ))}
-    </div>
-  ));
-}
+              ))}
+            </div>
+          ))
+        }
 
         <CardSection
           title={afwContent.eventDetails.title}
