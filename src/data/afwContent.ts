@@ -24,7 +24,7 @@ export const afwContent: AfwContent = {
           "As night falls, the space evolves into a sophisticated listening environment. Guest selectors and renowned DJs guide sonic journeys that balance deep listening with movement. This isn't loud, generic nightlife—it's an immersive, quality-focused musical experience featuring high-fidelity sound and carefully curated sets.",
       },
       {
-        title: "Deep Listening Sessions | Sundays, 3:00-5:00 PM",
+        title: "Deep Listening Sessions | Sundays, 1:30-3:00 PM",
         description:
           "Dedicated sessions where complete albums are experienced without interruption. In our age of shuffled playlists and fragmented attention, rediscover the meditative power of hearing a musical work in its entirety, surrounded by fellow listeners in shared contemplation.",
       },
