@@ -1,20 +1,11 @@
 ---
-import type { Event } from "../../../types/afw";
 import { afwContent } from "../../../data/afwContent.ts";
 import CardSection from "./CardSection.astro";
 import SectionTitle from "./SectionTitle.astro";
 import DateHeader from "./DateHeader.astro";
-import EventSession from "./EventSession.astro";
-import EventType from "./EventType.astro";
-import AlbumList from "./AlbumList.astro";
 import WeekendHeader from "./WeekendHeader.astro";
-import DarkModeEvent from "./DarkModeEvent.astro";
 import WeekendImages from "./WeekendImages.astro";
-
-// Type guard function
-const isDarkModeEvent = (event: Event): boolean => event.type === "Dark Mode";
-const isDeepListeningEvent = (event: Event): boolean =>
-  event.type.includes("Deep Listening");
+import AfwEvent from "./AfwEvent.astro";
 
 function formatDate(dateString: string) {
   // Remove spaces and commas, and convert to lowercase
@@ -58,54 +49,9 @@ function formatDate(dateString: string) {
                   <DateHeader date={day.date} />
                   {day.images && <WeekendImages images={day.images} />}
 
-                  {day.events.map((event) => {
-                    if (isDarkModeEvent(event)) {
-                      return event.sessions.map((session) => (
-                        <DarkModeEvent
-                          host={session.host}
-                          ticketLink={session.ticketLink}
-                        />
-                      ));
-                    } else if (isDeepListeningEvent(event)) {
-                      return (
-                        <div>
-                          <div class="my-6 font-bold">{event.type}</div>
-                          <div>
-                            {event.sessions.map((session) => (
-                              <>
-                                <div class="mb-2">
-                                  Host: <strong>{session.host}</strong>
-                                </div>
-                                <AlbumList albums={session.albums} />
-                                {session.description && (
-                                  <div class="mt-4 space-y-3">
-                                    {session.description
-                                      .split("\n\n")
-                                      .map((paragraph) => (
-                                        <p>{paragraph}</p>
-                                      ))}
-                                  </div>
-                                )}
-                              </>
-                            ))}
-                          </div>
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <EventType title={event.type}>
-                          {event.sessions.map((session) => (
-                            <EventSession
-                              time={session.time}
-                              host={session.host}
-                              description={session.description}
-                              hostLinks={session.hostLinks}
-                            />
-                          ))}
-                        </EventType>
-                      );
-                    }
-                  })}
+                  {day.events.map((event) => (
+                    <AfwEvent event={event} />
+                  ))}
                 </div>
               ))}
             </div>

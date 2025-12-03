@@ -1,0 +1,26 @@
+---
+import type { Event } from "../../../types/afw";
+import EventSession from "./EventSession.astro";
+
+interface Props {
+  event: Event;
+}
+
+const { event } = Astro.props;
+---
+
+<div>
+  <div class="font-bold my-6">{event.type}:</div>
+  <div class="mb-4">
+    {event.sessions.map((session) => (
+      <EventSession
+        time={session.time}
+        host={session.host}
+        description={session.description}
+        hostLinks={session.hostLinks}
+        ticketLink={session.ticketLink}
+        albums={session.albums}
+      />
+    ))}
+  </div>
+</div>

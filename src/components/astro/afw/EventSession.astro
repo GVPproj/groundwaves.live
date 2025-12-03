@@ -1,22 +1,33 @@
 ---
-import type { HostLinks } from "../types/afw";
+import type { HostLinks } from "../../../types/afw";
 import { ExternalLink, Youtube, Instagram, Facebook } from "lucide-astro";
+import AlbumList from "./AlbumList.astro";
 
 interface Props {
   time?: string;
   host: string;
   hostLinks?: HostLinks;
   description?: string;
+  ticketLink?: string;
+  albums?: string[];
 }
 
-const { time, host, hostLinks, description } = Astro.props;
+const { time, host, hostLinks, description, ticketLink, albums } = Astro.props;
 ---
 
 <div>
-  <!-- <p class="my-2"> -->
-  {time && <span>{time}: </span>}
-  <strong class="min-w-max">{host}</strong>
-  <!-- </p> -->
+  <div class="flex gap-6 items-center flex-wrap">
+    {time && <span>{time}: </span>}
+    <strong class="min-w-max">{host}</strong>
+
+    {ticketLink && (
+      <a href={ticketLink} aria-label="Ticket Link">
+        <button type="button" class="cta-button" value="Get Tickets">
+          Get Tickets
+        </button>
+      </a>
+    )}
+  </div>
 
   {
     hostLinks && (
@@ -59,6 +70,8 @@ const { time, host, hostLinks, description } = Astro.props;
       </span>
     )
   }
+
+  {albums && albums.length > 0 && <AlbumList albums={albums} />}
 
   {
     description && (
