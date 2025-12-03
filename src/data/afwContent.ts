@@ -123,18 +123,19 @@ export const afwContent: AfwContent = {
             ],
           },
           {
-            date: "Sunday, May 25",
+            date: "Sunday, Dec 7",
             images: [
               "src/assets/afwAssets/AFW_002_Profile_Matt-Robertson_1.0.png",
               "src/assets/afwAssets/new/AFW_002_Profile_Jian_1.1.png",
             ],
             events: [
               {
-                type: "Deep Listening (3:00-5:00 PM)",
+                type: "Deep Listening (1:30-3:00 PM)",
                 sessions: [
                   {
                     host: "Matt Roberson & Tea Mistress",
                     albums: ["Matt Robertson - Aequora"],
+                    description: "This Sunday, we invite you into a meditative journey through Aequora (a calm sea), an album painstakingly crafted from hundreds of hand-layered sine waves. What began as an exploration of additive synthesis—shaping music entirely from pure frequencies—evolved into something quietly extraordinary: seven tracks woven into one continuous sonic experience, designed to be heard exactly as you'll experience it here.\n\nThese soundscapes are calm, patient, and quietly alive. \n\nTea Mistress @teamistress will guide you through a flight of exquisite artisan teas, each one chosen to complement and elevate your journey through sound.\n\nBring pillows, blankets, whatever you need to settle in. The lights will be low. Together, we'll dedicate this time to the practice of listening—deeply and collectively.",
                   },
                 ],
               },
@@ -159,7 +160,7 @@ export const afwContent: AfwContent = {
   eventDetails: {
     title: "Location & Admission",
     location: "Cassette Cafe, 106 Lower Ganges Rd, Salt Spring Island",
-    duration: "May 23 - June 1, 2025",
+    duration: "Dec 5 - 7, 2025",
     admission:
       "Community Curation and Deep Listening sessions are free and first come, first served (space limited).  For Dark Mode events (evening dance parties) follow GET TICKETS links.",
   },
