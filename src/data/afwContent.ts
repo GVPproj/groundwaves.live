@@ -49,12 +49,6 @@ export const afwContent: AfwContent = {
                   {
                     time: "5:30 PM",
                     host: "Robert Kraft",
-                    hostLinks: {
-                      web: "https://www.meredithbates.com/",
-                      instagram:
-                        "https://www.instagram.com/meredith_bates_music",
-                      facebook: "https://www.facebook.com/meredithbates79",
-                    },
                     description:
                       "Robert Kraft is an Academy Award, Grammy, and Golden Globe nominated songwriter, film composer, recording artist, and record producer. As President of Music at 20th Century Fox Studios from 1994-2012, he oversaw scores and soundtracks for over 300 feature films—including Titanic, Avatar, Moulin Rouge!, Walk the Line, Once, Slumdog Millionaire, and Life of Pi.\n\nAs a record producer, Robert co-produced The Little Mermaid soundtrack, including 'Under The Sea,' which won both the Oscar and Grammy for Best Song. As a songwriter, he earned nominations for an Academy Award and two Golden Globes for 'Beautiful Maria of My Soul' from The Mambo Kings and 'How Can I Not Love You' co-written with Babyface for Anna and the King.\n\nMore recently, Robert produced the award-winning SCORE: A Film Music Documentary and hosts the premiere film music podcast SCORE: The Podcast. He currently serves as SOCAN's Ambassador to Hollywood, supporting Canadian film and TV composers.\n\nThis evening, Robert steps away from the industry to share something more personal: the records that have shaped his own listening life. A rare invitation into the collection of someone who has spent decades at the intersection of music and storytelling.",
                   },
