@@ -62,7 +62,7 @@ export const afwContent: AfwContent = {
               "src/assets/afwAssets/new/AFW_002_Profile_Chris-Gestrin_1.0.png",
               "src/assets/afwAssets/new/AFW_002_Profile_Eddie-C_1.0.png",
               "src/assets/afwAssets/new/AFW_002_Profile_Chris_Arnett_1.1.png",
-              // "src/assets/afwAssets/new/AFW_002_Profile_Kozue_1.3.png",
+              "src/assets/afwAssets/new/SE.png",
             ],
             intro:
               "Our Saturday morning unfolds with three local voices sharing their collections and perspectives.",
@@ -121,6 +121,7 @@ export const afwContent: AfwContent = {
             images: [
               "src/assets/afwAssets/AFW_002_Profile_Matt-Robertson_1.0.png",
               "src/assets/afwAssets/new/AFW_002_Profile_Jian_1.1.png",
+              "src/assets/afwAssets/new/AFW_002_Profile_Andrew-Ross-Collins_1.1.png",
             ],
             events: [
               {
