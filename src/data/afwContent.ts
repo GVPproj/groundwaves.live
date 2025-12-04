@@ -19,7 +19,7 @@ export const afwContent: AfwContent = {
           "Early evenings transform into platforms for local collectors and musical storytellers. Experience Salt Spring's diverse musical culture as community members share their collections and personal journeys through sound. Each curator brings their unique perspective, creating intimate connections between music and memory.",
       },
       {
-        title: "Dark Mode | 9:00 PM - 12:00 AM",
+        title: "Dark Mode | 7:00 PM - 12:00 AM",
         description:
           "As night falls, the space evolves into a sophisticated listening environment. Guest selectors and renowned DJs guide sonic journeys that balance deep listening with movement. This isn't loud, generic nightlife—it's an immersive, quality-focused musical experience featuring high-fidelity sound and carefully curated sets.",
       },
@@ -135,7 +135,7 @@ export const afwContent: AfwContent = {
                 ],
               },
               {
-                type: "Special Food / Music Pop-Up",
+                type: "Special Food / Music Pop-Up **SOLD OUT**",
                 sessions: [
                   {
                     time: "5:00 and 7:30",

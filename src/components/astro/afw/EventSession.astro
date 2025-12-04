@@ -20,13 +20,15 @@ const { time, host, hostLinks, description, ticketLink, albums } = Astro.props;
     {time && <span>{time}: </span>}
     <strong>{host}</strong>
 
-    {ticketLink && (
-      <a href={ticketLink} aria-label="Ticket Link">
-        <button type="button" class="cta-button" value="Get Tickets">
-          Get Tickets
-        </button>
-      </a>
-    )}
+    {
+      ticketLink && (
+        <a href={ticketLink} aria-label="Ticket Link">
+          <button type="button" class="cta-button" value="Get Tickets">
+            Get Tickets
+          </button>
+        </a>
+      )
+    }
   </div>
 
   {
@@ -75,9 +77,9 @@ const { time, host, hostLinks, description, ticketLink, albums } = Astro.props;
 
   {
     description && (
-      <div class="mt-4 space-y-3">
+      <div class="mt-4 flex flex-col gap-3 mb-4">
         {description.split("\n\n").map((paragraph) => (
-          <p>{paragraph}</p>
+          <p class="m-0">{paragraph}</p>
         ))}
       </div>
     )
