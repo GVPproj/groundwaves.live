@@ -109,8 +109,6 @@ export const afwContent: AfwContent = {
                     host: "Eddie C with Somethin' Else DJs",
                     description:
                       "Raised in Southern Ontario somewhere between Detroit and Montreal, Eddie C began his experiments in music in the late 80s, inspired by hip-hop and the burgeoning acid house scene. What started as tape edits of late night radio evolved into a lifelong passion for record collecting—one that led him through a decade-long sabbatical in the Rocky Mountains of Canada and eventually to Berlin, where he reconnected with the electronic music community.\n\nHis raw yet sophisticated approach to production has yielded countless releases on labels like Endless Flight, Crue-L, and his own Red Motorbike imprint. But it's his DJ sets—freewheeling journeys through disco, dubby house, and everything that puts a smile on your dial—that have garnered him a devoted following worldwide.\n\nEddie C is joined by local selectors Somethin' Else DJs for an evening that balances listening and movement on our custom sound system.",
-                    ticketLink:
-                      "https://www.eventbrite.ca/e/dark-mode-eddie-c-somethin-else-djs-tickets-1976232427389?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=ebdsshcopyurl",
                   },
                 ],
               },
