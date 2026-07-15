@@ -7,19 +7,17 @@ import netlify from "@astrojs/netlify";
 const { PUBLIC_SANITY_STUDIO_PROJECT_ID, PUBLIC_SANITY_STUDIO_DATASET } =
   loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
-import tailwind from "@astrojs/tailwind";
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://groundwaves.live",
   output: "static",
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
     sanityIntegration({
-      projectId: PUBLIC_SANITY_STUDIO_PROJECT_ID,
-      dataset: PUBLIC_SANITY_STUDIO_DATASET,
+      // Fall back to placeholders so the client can be constructed without
+      // real credentials (e.g. local dev without a .env). Fetches are guarded
+      // by `safeFetch` in src/lib/sanity.ts and simply return empty data.
+      projectId: PUBLIC_SANITY_STUDIO_PROJECT_ID || "placeholder",
+      dataset: PUBLIC_SANITY_STUDIO_DATASET || "production",
       useCdn: true,
       studioBasePath: "/admin",
     }),

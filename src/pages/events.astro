@@ -1,5 +1,5 @@
 ---
-import { sanityClient } from "sanity:client";
+import { safeFetch } from "../lib/sanity";
 import { PortableText } from "astro-portabletext";
 import { YouTube } from "astro-embed";
 import Layout from "../layouts/Layout.astro";
@@ -16,17 +16,19 @@ type EventWithRefs = Omit<Event, 'venue' | 'headline' | 'slug'> & {
   headline?: Artist;
 };
 
-const pastEvents = await sanityClient.fetch<EventWithRefs[]>(
+const pastEvents = await safeFetch<EventWithRefs[]>(
   `*[
         _type == "event"
         && date < now()
         ]{_id, name, slug, date, endDate, eventCopy, image, youtubeEmbeds, headline->, venue->}|order(date desc)`,
+  [],
 );
-const upcomingEvents = await sanityClient.fetch<EventWithRefs[]>(
+const upcomingEvents = await safeFetch<EventWithRefs[]>(
   `*[
         _type == "event"
         && date > now()
         ]{_id,  name, date, endDate, eventCopy, image, tickets, youtubeEmbeds, headline->, venue->}|order(date desc)`,
+  [],
 );
 ---
 

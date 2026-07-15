@@ -11,35 +11,40 @@
     "codegen": "sanity schema extract && sanity typegen generate"
   },
   "dependencies": {
-    "@astrojs/netlify": "^6.6.3",
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/tailwind": "^6.0.2",
-    "@heroicons/react": "^2.1.4",
-    "@radix-ui/react-dropdown-menu": "^2.0.6",
-    "@sanity/astro": "^3.2.6",
-    "@sanity/image-url": "^1.1.0",
-    "@sanity/vision": "^3.88.2",
-    "@tailwindcss/typography": "^0.5.16",
-    "@types/react": "^18.2.24",
-    "@types/react-dom": "^18.2.8",
-    "astro": "^5.16.4",
-    "astro-embed": "^0.9.0",
-    "astro-portabletext": "^0.10.0",
+    "@astrojs/netlify": "^8.1.2",
+    "@astrojs/react": "^6.0.1",
+    "@heroicons/react": "^2.2.0",
+    "@lucide/astro": "^1.24.0",
+    "@radix-ui/react-dropdown-menu": "^2.1.18",
+    "@sanity/astro": "^3.4.1",
+    "@sanity/image-url": "^1.2.0",
+    "@sanity/vision": "^3.99.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "astro": "^7.0.9",
+    "astro-embed": "^0.13.0",
+    "astro-portabletext": "^0.13.0",
     "flowbite": "^1.8.1",
-    "framer-motion": "^10.16.4",
-    "@lucide/astro": "^0.510.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sanity": "^3.88.2",
-    "sanity-plugin-documents-pane": "^2.4.0",
-    "tailwindcss": "^3.3.3",
-    "vite": "^5.3.3"
+    "framer-motion": "^10.18.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.99.0",
+    "sanity-plugin-documents-pane": "^2.4.1",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.1.4"
   },
   "devDependencies": {
-    "@sanity/codegen": "^4.10.3",
-    "dotenv": "^17.2.3",
-    "prettier": "^3.0.3",
-    "prettier-plugin-astro": "^0.12.0"
+    "@sanity/codegen": "^4.22.0",
+    "autoprefixer": "^10.4.20",
+    "dotenv": "^17.4.2",
+    "prettier": "^3.8.4",
+    "prettier-plugin-astro": "^0.14.1"
   },
-  "packageManager": "pnpm@10.29.2+sha512.bef43fa759d91fd2da4b319a5a0d13ef7a45bb985a3d7342058470f9d2051a3ba8674e629672654686ef9443ad13a82da2beb9eeb3e0221c87b8154fff9d74b8"
+  "packageManager": "pnpm@10.34.4",
+  "overrides": {
+    "sanity": {
+      "framer-motion": "12.42.2"
+    }
+  }
 }

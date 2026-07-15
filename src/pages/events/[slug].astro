@@ -1,5 +1,5 @@
 ---
-import { sanityClient } from "sanity:client";
+import { safeFetch } from "../../lib/sanity";
 import { PortableText } from "astro-portabletext";
 import { YouTube } from "astro-embed";
 import Layout from "../../layouts/Layout.astro";
@@ -14,7 +14,7 @@ type EventWithRefs = Event & {
 };
 
 export async function getStaticPaths() {
-  const events = await sanityClient.fetch<EventWithRefs[]>(
+  const events = await safeFetch<EventWithRefs[]>(
     `*[_type == "event" && defined(slug.current)]{
       "slug": slug.current,
       _id,
@@ -28,6 +28,7 @@ export async function getStaticPaths() {
       headline->,
       venue->
     }`,
+    [],
   );
 
   return events.map((event) => ({

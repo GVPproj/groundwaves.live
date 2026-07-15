@@ -1,11 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Carousel from "../components/react/Carousel";
-import { sanityClient } from "sanity:client";
+import { safeFetch } from "../lib/sanity";
 import { PortableText } from "astro-portabletext";
 
-const { headline, heroText, imageGallery } = await sanityClient.fetch(
-  `*[_type == "indexContent"]{headline, heroText, imageGallery}[0]`
+const { headline, heroText, imageGallery } = await safeFetch(
+  `*[_type == "indexContent"]{headline, heroText, imageGallery}[0]`,
+  {} as { headline?: any; heroText?: any; imageGallery?: any },
 );
 ---
 

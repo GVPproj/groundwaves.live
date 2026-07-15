@@ -1,11 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-import { sanityClient } from "sanity:client";
+import { safeFetch } from "../lib/sanity";
 import { PortableText } from "astro-portabletext";
 
-const { aboutText } = await sanityClient.fetch(
-  `*[_type == "aboutContent"]{aboutText}[0]`
+const { aboutText } = await safeFetch(
+  `*[_type == "aboutContent"]{aboutText}[0]`,
+  {} as { aboutText?: any },
 );
 ---
 
