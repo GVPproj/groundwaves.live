@@ -12,6 +12,9 @@ export default defineConfig({
   site: "https://groundwaves.live",
   output: "static",
 
+  // /about is gone — the about copy lives in the footer now.
+  redirects: { "/about": "/#about" },
+
   // Dev is exposed over the tailnet via `tailscale serve --https=4323`, which
   // proxies to IPv4 loopback and forwards the ts.net Host header.
   server: { host: "127.0.0.1", port: 4323 },
