@@ -41,22 +41,15 @@
 
   /* selection stays fully opaque — blending it drops the selected text to ~3:1 */
   body {
-    @apply flex flex-col min-h-screen bg-gradient-to-b from-fill to-gradend font-serif text-skin-base text-opacity-90
-        antialiased selection:bg-skin-accent selection:text-skin-inverted;
+    @apply flex flex-col min-h-screen bg-gradient-to-b from-skin-fill to-skin-fill-muted font-serif text-skin-base text-opacity-90
+        antialiased selection:bg-skin-accent selection:text-skin-fill;
     margin: 0;
     padding: 0;
   }
-  main {
-    @apply mt-32 md:mt-40;
-  }
-  section {
-    @apply grid content-center px-8 max-w-screen-lg mx-auto;
-  }
 
-  p {
-    @apply mb-8;
-  }
-  /* Tailwind preflight sets `a { text-decoration: inherit }`, so links were
+  /* The `a` and `svg` element rules style markup we don't author: PortableText
+     renders CMS copy to bare tags with no class to hang a utility on.
+     Tailwind preflight sets `a { text-decoration: inherit }`, so links were
      distinguished by colour alone. The hover is the light-ground orange — the
      dark grounds (homepage main, footer) override it back to the bright one. */
   a {
@@ -91,30 +84,9 @@
     outline-color: hsl(var(--color-accent));
   }
 
-  /* First focusable element on every page, ahead of the logo and the whole
-     header. Off-screen until focused rather than display:none, which would
-     take it out of the tab order and defeat the point. */
-  .skip-link {
-    position: fixed;
-    top: 0.5rem;
-    left: 0.5rem;
-    z-index: 100;
-    transform: translateY(-250%);
-    background: hsl(var(--color-fill));
-    color: hsl(var(--color-text-base));
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    transition: transform 150ms ease;
-  }
-  .skip-link:focus {
-    transform: translateY(0);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .skip-link {
-      transition: none;
-    }
-  }
+  /* .skip-link is styled in Layout.astro; AstroDropdown's script also inerts it
+     by that name when the overlay opens. */
+
   /* the skip target itself — tabindex="-1" makes <main> focusable so focus
      actually lands there, and this keeps it from drawing a ring when it does */
   main:focus {

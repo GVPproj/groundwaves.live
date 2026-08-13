@@ -60,9 +60,10 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
 ---
 
 <Layout title={event.name}>
-  <main id="main" tabindex="-1">
+  <!-- mt-32 clears the fixed header -->
+  <main id="main" tabindex="-1" class="mt-32 md:mt-40">
     <section
-      class="flex text-center flex-col mx-auto items-center pb-16 max-w-prose w-[100%]"
+      class="flex text-center flex-col mx-auto items-center px-8 pb-16 max-w-prose w-[100%]"
     >
       <!-- min-w-0: as a flex item this defaults to min-width:auto, so it can't
            shrink below its min-content width. One event's copy links raw URLs
@@ -93,7 +94,9 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
             </a>
           )
         }
-        <p class="ev-meta font-mono text-[0.7rem] uppercase tracking-[0.3em] mb-4">
+        {/* the accent green rather than the homepage's bright/orange variants —
+            this page sits on the light ground, not the dark hero */}
+        <p class="font-mono text-[0.7rem] uppercase tracking-[0.3em] mb-4 text-skin-accent">
           {meta}
         </p>
         <h1
@@ -130,12 +133,6 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
 </Layout>
 
 <style>
-  /* the accent green rather than the homepage's bright/orange variants — this
-     page sits on the light ground, not the dark hero */
-  .ev-meta {
-    color: hsl(var(--color-accent));
-  }
-
   /* The typography plugin ships its own greys, which would override the site
      palette — point its variables back at our tokens. */
   .ev-copy {

@@ -76,10 +76,16 @@ const fmtDate = (d?: string) =>
 ---
 
 <Layout title="groundwaves">
-  <main id="main" tabindex="-1" class="home-inverted !mt-0 text-skin-fill">
+  <!-- .home-inverted: hook the global block at the foot of this file uses to
+       theme the fixed site header -->
+  <main
+    id="main"
+    tabindex="-1"
+    class="home-inverted bg-skin-accent-deep text-skin-fill"
+  >
     <!-- full-bleed hero -->
     <section
-      class="!flex relative !max-w-none !px-0 !mx-auto min-h-[100svh] flex-col justify-start overflow-hidden"
+      class="relative flex min-h-[100svh] flex-col justify-start overflow-hidden"
     >
       <div class="home-slides absolute inset-0 opacity-70">
         {
@@ -106,7 +112,7 @@ const fmtDate = (d?: string) =>
         class="relative max-w-screen-xl mx-auto w-full px-6 md:px-10 pb-16 pt-40 md:pt-52"
       >
         <p
-          class="home-meta home-meta-hero font-mono text-[0.85rem] md:text-sm uppercase tracking-[0.3em] mb-6 pl-2"
+          class="font-mono text-[0.85rem] md:text-sm uppercase tracking-[0.3em] mb-6 pl-2 text-skin-accent-inverted"
         >
           {
             next
@@ -122,7 +128,9 @@ const fmtDate = (d?: string) =>
               (headlineParts ? (
                 <>
                   {headlineParts.lead}
-                  <span class="home-headline-accent">{headlineParts.last}</span>
+                  <span class="text-skin-accent-inverted">
+                    {headlineParts.last}
+                  </span>
                 </>
               ) : (
                 (headline ?? "groundwaves")
@@ -135,7 +143,9 @@ const fmtDate = (d?: string) =>
               {headlineParts ? (
                 <>
                   {headlineParts.lead}
-                  <span class="home-headline-accent">{headlineParts.last}</span>
+                  <span class="text-skin-accent-inverted">
+                    {headlineParts.last}
+                  </span>
                 </>
               ) : (
                 headline
@@ -161,8 +171,8 @@ const fmtDate = (d?: string) =>
     <!-- statement -->
     {
       heroText && (
-        <section class="!block max-w-screen-md !mx-auto !px-6 md:!px-10 py-24 md:py-32 text-center">
-          <div class="home-statement text-2xl md:text-[2rem] leading-snug [&_p]:mb-6">
+        <section class="max-w-screen-md mx-auto px-6 md:px-10 py-24 md:py-32 text-center">
+          <div class="text-2xl md:text-[2rem] leading-snug [&_p]:mb-6 [&_a]:text-skin-accent-bright [&_a:hover]:text-skin-accent-inverted">
             <PortableText value={heroText} />
           </div>
         </section>
@@ -173,9 +183,9 @@ const fmtDate = (d?: string) =>
     <div id="events" class="scroll-mt-24 md:scroll-mt-28">
       {
         eventGroups.map((bucket) => (
-          <section class="!block max-w-screen-xl !mx-auto !px-6 md:!px-10 pb-24">
-            <div class="home-rule border-b pb-4 mb-10">
-              <h2 class="home-label font-mono text-[0.7rem] uppercase tracking-[0.3em]">
+          <section class="max-w-screen-xl mx-auto px-6 md:px-10 pb-24">
+            <div class="border-b border-skin-fill/25 pb-4 mb-10">
+              <h2 class="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-skin-accent-inverted">
                 {bucket.title}
               </h2>
             </div>
@@ -184,14 +194,14 @@ const fmtDate = (d?: string) =>
               {bucket.events.map((event) => (
                 <a
                   href={eventHref(event, bucket.upcoming)}
-                  class="home-card group block no-underline text-skin-fill"
+                  class="group block no-underline text-skin-fill hover:text-skin-accent-inverted"
                 >
                   <SanityImage
                     node={event.image}
                     width="800"
                     classNames="w-full h-auto mb-5 transition-opacity group-hover:opacity-80"
                   />
-                  <p class="home-meta font-mono text-[0.7rem] uppercase tracking-[0.3em] mb-2">
+                  <p class="font-mono text-[0.7rem] uppercase tracking-[0.3em] mb-2 text-skin-accent-bright">
                     {fmtDate(event.date)}
                   </p>
                   <h3 class="text-2xl font-bold leading-tight mb-1">
@@ -206,9 +216,11 @@ const fmtDate = (d?: string) =>
       }
     </div>
 
-    <!-- closing band -->
-    <div class="home-band text-skin-base">
-      <div class="max-w-screen-xl mx-auto px-6 md:px-10 py-20 text-center">
+    <!-- closing band. .home-band: hook for the focus-ring rule in base.css -->
+    <div class="home-band bg-skin-fill text-skin-base">
+      <div
+        class="max-w-screen-xl mx-auto px-6 md:px-10 py-20 md:py-28 text-center"
+      >
         <h2
           class="font-bold leading-[0.95] text-[clamp(1.75rem,5vw,3.5rem)] mb-8"
         >
@@ -314,32 +326,17 @@ const fmtDate = (d?: string) =>
 </style>
 
 <style>
-  .home-inverted {
-    background: hsl(var(--color-accent-deep));
-  }
-  .home-meta {
-    color: hsl(var(--color-accent-bright));
-  }
-  /* same treatment as .ft-label in the footer */
-  .home-label,
-  .home-headline-accent,
-  .home-meta-hero {
-    color: hsl(var(--color-accent-inverted));
-  }
-  .home-band {
-    background: hsl(var(--color-fill));
-  }
   /* The 35% stop is where the hero copy sits, so it sets the worst-case
      contrast: 0.62 puts the near-white h1 at 4.88:1 over a blown-out photo
      while the image stays clearly readable. The 78% and 100% stops exist to
      keep the ramp monotonic, so it never dips lighter below the text.
      The sub-paragraph under the h1 renders at full opacity for the same
      reason — at text-xl (20px, non-bold) it needs 4.5:1.
-     KNOWN GAP (WCAG 1.4.3): .home-meta-hero and .home-headline-accent are
-     --color-accent-inverted, and orange cannot pass 4.5:1 over an arbitrary
-     photo at any usable scrim — it needs the image ~96% covered. Accepted
-     deliberately to keep the hero's accent colour; revisit by recolouring
-     those two to --color-fill if the gap ever needs closing. */
+     KNOWN GAP (WCAG 1.4.3): the hero's meta line and its headline accent span
+     are text-skin-accent-inverted, and orange cannot pass 4.5:1 over an
+     arbitrary photo at any usable scrim — it needs the image ~96% covered.
+     Accepted deliberately to keep the hero's accent colour; revisit by
+     recolouring those two to text-skin-fill if the gap ever needs closing. */
   .home-scrim {
     background: linear-gradient(
       to bottom,
@@ -348,14 +345,6 @@ const fmtDate = (d?: string) =>
       hsla(var(--color-accent-deep), 0.7) 78%,
       hsla(var(--color-accent-deep), 0.85) 100%
     );
-  }
-  /* the dark ground wants the bright orange; the base a:hover is the deep one,
-     which is 2.36:1 here */
-  .home-card:hover {
-    color: hsl(var(--color-accent-inverted));
-  }
-  .home-statement :global(a:hover) {
-    color: hsl(var(--color-accent-inverted));
   }
   /* Each slide runs the full cycle offset by its index, so the tail of one
      fade-out overlaps the head of the next fade-in. `both` fill keeps a slide
@@ -367,11 +356,5 @@ const fmtDate = (d?: string) =>
   }
   .home-slide:first-child {
     opacity: 1;
-  }
-  .home-rule {
-    border-color: hsla(var(--color-fill), 0.25);
-  }
-  .home-statement :global(a) {
-    color: hsl(var(--color-accent-bright));
   }
 </style>

@@ -105,6 +105,33 @@ Required environment variables:
 3. Update structure configuration if needed
 
 ### Styling
-- Tailwind classes used throughout
-- Custom CSS in `src/styles/base.css`
-- Responsive design patterns established
+
+**Tailwind first.** Colour, spacing, type scale, borders, transitions, and
+state variants (`hover:`, `focus:`, `group-hover:`, `motion-reduce:`) are
+always utilities in the markup. Arbitrary values (`text-[0.7rem]`,
+`border-skin-fill/15`) count as Tailwind — reach for those before a rule.
+
+The palette lives in one `theme.colors.skin` map in `tailwind.config.cjs`, so
+every token works on every utility (`text-skin-*`, `bg-skin-*`,
+`border-skin-*`, `fill-skin-*`, `from-skin-*`) at any opacity via the slash
+modifier. Need a colour with no utility? Add the token to that map rather
+than hand-writing `hsl(var(--…))`.
+
+**Write CSS only for the four things utilities can't reach:**
+1. Token definitions and `@font-face` — `src/styles/base.css`
+2. Multi-stop gradients — e.g. `.home-scrim` in `index.astro`
+3. Cross-subtree theming — the `body:has(.home-inverted) #site-header` block
+   in `index.astro`, where the homepage themes a header it doesn't contain
+4. Runtime-computed CSS — the hero `@keyframes` built from JS constants, the
+   `#dropdown-content` display rules the overlay script toggles, and the
+   `--tw-prose-*` overrides in `events/[slug].astro`
+
+The `a` and `svg` element rules in `base.css` also stay: PortableText renders
+CMS copy to bare tags with no class to hang a utility on. For scoped cases,
+prefer a descendant variant (`[&_a]:text-skin-accent-bright`) over a rule.
+There are deliberately no element rules for `main`, `section`, or `p` —
+layout is a per-call-site decision.
+
+`.home-inverted`, `.home-band`, `.site-footer`, and `.skip-link` carry no
+styles; they're selector hooks for the focus-ring rules in `base.css` and the
+dropdown script. Don't remove them for looking unused.

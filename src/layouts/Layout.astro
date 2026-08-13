@@ -77,7 +77,14 @@ Astro.response.headers.set(
     />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <!-- First focusable element on every page, ahead of the logo and the whole
+         header. Not display:none, which would drop it from the tab order. -->
+    <a
+      class="skip-link fixed top-2 left-2 z-[100] -translate-y-[250%] focus:translate-y-0
+        rounded bg-skin-fill px-5 py-3 text-skin-base no-underline
+        transition-transform motion-reduce:transition-none"
+      href="#main">Skip to content</a
+    >
     <AstroSiteHeader />
     <slot />
     <Footer />
