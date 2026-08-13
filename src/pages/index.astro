@@ -233,6 +233,25 @@ const fmtDate = (d?: string) =>
   body:has(.home-inverted) #site-header svg {
     fill: #f0f0eb;
   }
+  body:has(.home-inverted) #site-header a:hover svg {
+    fill: #00c98a;
+  }
+  /* the open mobile menu is a light full-screen panel inside the header —
+     the inversion above would render it white-on-white, so restore the
+     default palette here (#009f6c / #fd8200 are --color-accent /
+     --color-accent-inverted) */
+  body:has(.home-inverted) #dropdown-content a {
+    color: #009f6c;
+  }
+  body:has(.home-inverted) #dropdown-content a:hover {
+    color: #fd8200;
+  }
+  body:has(.home-inverted) #dropdown-content a svg {
+    fill: #fd8200;
+  }
+  body:has(.home-inverted) #dropdown-content a:hover svg {
+    fill: #009f6c;
+  }
 </style>
 
 <style>

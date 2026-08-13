@@ -63,6 +63,7 @@ module.exports = {
       skin: {
         base: withOpacity("--color-text-base"),
         accent: withOpacity("--color-accent"),
+        "accent-inverted": withOpacity("--color-accent-inverted"),
       },
       transparent: "transparent",
     },

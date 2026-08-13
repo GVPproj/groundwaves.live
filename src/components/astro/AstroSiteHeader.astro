@@ -1,5 +1,6 @@
 ---
 import AstroDropdown from "./AstroDropdown.astro";
+import AfwWordmark from "./AfwWordmark.astro";
 ---
 
 <header
@@ -17,8 +18,15 @@ import AstroDropdown from "./AstroDropdown.astro";
       groundwaves
     </a>
     <div id="desktop" class="hidden md:flex items-center gap-6 w-full">
-      <nav class="flex-initial md:flex-1 flex gap-6">
-        <a class="afw-link font-semibold" href="https://afriendlywave.com" target="_blank" rel="noopener noreferrer"> a friendly wave</a>
+      <nav class="flex-initial md:flex-1 flex items-center gap-6">
+        <a
+          class="flex items-center shrink-0"
+          href="https://afriendlywave.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <AfwWordmark class="h-4" />
+        </a>
         <a href="/#events">events</a>
         <a href="/about">about</a>
       </nav>
