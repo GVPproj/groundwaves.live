@@ -95,7 +95,7 @@ const fmtDate = (d?: string) =>
         class="relative max-w-screen-xl mx-auto w-full px-6 md:px-10 pb-16 pt-40 md:pt-52"
       >
         <p
-          class="home-meta text-[0.7rem] md:text-xs uppercase tracking-[0.35em] opacity-85 mb-6"
+          class="home-meta home-meta-hero text-[0.85rem] md:text-sm uppercase tracking-[0.35em] mb-6 pl-2"
         >
           {
             next
@@ -118,7 +118,7 @@ const fmtDate = (d?: string) =>
         <div class="flex flex-wrap items-center gap-4">
           <a href={next?.tickets ?? "#events"} class="no-underline">
             <button type="button" class="cta-button font-bold">
-              {next?.tickets ? "Tickets" : "See events"}
+              {next?.tickets ? "Tickets" : "events"}
             </button>
           </a>
           <a href={MAILING_LIST} class="no-underline">
@@ -154,12 +154,12 @@ const fmtDate = (d?: string) =>
               {bucket.events.map((event) => (
                 <a
                   href={eventHref(event, bucket.upcoming)}
-                  class="block no-underline text-skin-fill transition-opacity hover:opacity-80"
+                  class="group block no-underline text-skin-fill"
                 >
                   <SanityImage
                     node={event.image}
                     width="800"
-                    classNames="w-full h-auto mb-5"
+                    classNames="w-full h-auto mb-5 transition-opacity group-hover:opacity-80"
                   />
                   <p class="home-meta text-[0.7rem] uppercase tracking-[0.2em] mb-2">
                     {fmtDate(event.date)}
@@ -218,64 +218,62 @@ const fmtDate = (d?: string) =>
 <!-- the site header is fixed and light by default; invert it over this page -->
 <style is:global>
   body:has(.home-inverted) {
-    background: #003d2a;
+    background: hsl(var(--color-accent-deep));
   }
   body:has(.home-inverted) #site-header {
     background: transparent;
     box-shadow: none;
   }
   body:has(.home-inverted) #site-header a {
-    color: #f0f0eb;
+    color: hsl(var(--color-fill));
   }
   body:has(.home-inverted) #site-header a:hover {
-    color: #00c98a;
+    color: hsl(var(--color-accent-bright));
   }
   body:has(.home-inverted) #site-header svg {
-    fill: #f0f0eb;
+    fill: hsl(var(--color-fill));
   }
   body:has(.home-inverted) #site-header a:hover svg {
-    fill: #00c98a;
+    fill: hsl(var(--color-accent-bright));
   }
   /* the open mobile menu is a light full-screen panel inside the header —
      the inversion above would render it white-on-white, so restore the
-     default palette here (#009f6c / #fd8200 are --color-accent /
-     --color-accent-inverted) */
+     default palette here */
   body:has(.home-inverted) #dropdown-content a {
-    color: #009f6c;
+    color: hsl(var(--color-accent));
   }
   body:has(.home-inverted) #dropdown-content a:hover {
-    color: #fd8200;
+    color: hsl(var(--color-accent-inverted));
   }
   body:has(.home-inverted) #dropdown-content a svg {
-    fill: #fd8200;
+    fill: hsl(var(--color-accent-inverted));
   }
   body:has(.home-inverted) #dropdown-content a:hover svg {
-    fill: #009f6c;
+    fill: hsl(var(--color-accent));
   }
 </style>
 
 <style>
-  /* Site palette written literally — scoped blocks here don't survive
-     hsl(var(--token)) processing. #003d2a is --color-accent taken dark for a
-     ground, #00c98a the same green lifted for contrast on it, #f0f0eb is
-     --color-fill. */
   .home-inverted {
-    background: #003d2a;
+    background: hsl(var(--color-accent-deep));
   }
   .home-meta {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    color: #00c98a;
+    color: hsl(var(--color-accent-bright));
+  }
+  .home-meta-hero {
+    color: hsl(var(--color-accent-inverted));
   }
   .home-band {
-    background: #f0f0eb;
+    background: hsl(var(--color-fill));
   }
   .home-scrim {
     background: linear-gradient(
       to bottom,
-      rgba(0, 61, 42, 0.85) 0%,
-      rgba(0, 61, 42, 0.3) 35%,
-      rgba(0, 61, 42, 0.55) 78%,
-      rgba(0, 61, 42, 0.8) 100%
+      hsla(var(--color-accent-deep), 0.85) 0%,
+      hsla(var(--color-accent-deep), 0.3) 35%,
+      hsla(var(--color-accent-deep), 0.55) 78%,
+      hsla(var(--color-accent-deep), 0.8) 100%
     );
   }
   /* Each slide runs the full cycle offset by its index, so the tail of one
@@ -293,9 +291,9 @@ const fmtDate = (d?: string) =>
     }
   }
   .home-rule {
-    border-color: rgba(240, 240, 235, 0.25);
+    border-color: hsla(var(--color-fill), 0.25);
   }
   .home-statement :global(a) {
-    color: #00c98a;
+    color: hsl(var(--color-accent-bright));
   }
 </style>

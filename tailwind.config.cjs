@@ -40,6 +40,7 @@ module.exports = {
     backgroundColor: {
       skin: {
         fill: withOpacity("--color-fill"),
+        "accent-inverted": withOpacity("--color-accent-inverted"),
         "fill-muted": withOpacity("--color-fill-gradient-end"),
         accent: withOpacity("--color-accent"),
         inverted: withOpacity("--color-text-base"),
