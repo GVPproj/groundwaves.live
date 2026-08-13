@@ -62,7 +62,7 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
 ---
 
 <Layout title={event.name}>
-  <main>
+  <main id="main" tabindex="-1">
     <section
       class="flex text-center flex-col mx-auto items-center pb-16 max-w-prose w-[100%]"
     >
@@ -86,14 +86,8 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
         }
         {
           !isPastEvent && event?.tickets && (
-            <a href={event.tickets} aria-label="Ticket Link">
-              <button
-                type="button"
-                class="cta-button mb-16"
-                value="Get Tickets"
-              >
-                Get Tickets
-              </button>
+            <a href={event.tickets} class="cta-button mb-16">
+              Get Tickets
             </a>
           )
         }
@@ -115,15 +109,22 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
                 console.warn(`Invalid YouTube ID: ${emb}`);
                 return null;
               }
-              return <YouTube class="w-full mx-auto mt-8" id={emb} />;
+              // youtubeEmbeds is a flat array of ID strings with no per-video
+              // title to pass, so the event name is the best label available —
+              // it beats astro-embed's default bare "Play".
+              return (
+                <YouTube
+                  class="w-full mx-auto mt-8"
+                  id={emb}
+                  playlabel={`Play: ${event.name}`}
+                />
+              );
             })
         }
         {
           !isPastEvent && event?.tickets && (
-            <a href={event.tickets} aria-label="Ticket Link">
-              <button type="button" class="cta-button mt-16" value="Get Tickets">
-                Get Tickets
-              </button>
+            <a href={event.tickets} class="cta-button mt-16">
+              Get Tickets
             </a>
           )
         }

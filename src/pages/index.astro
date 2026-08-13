@@ -72,7 +72,7 @@ const fmtDate = (d?: string) =>
 ---
 
 <Layout title="groundwaves">
-  <main class="home-inverted !mt-0 text-skin-fill">
+  <main id="main" tabindex="-1" class="home-inverted !mt-0 text-skin-fill">
     <!-- full-bleed hero -->
     <section
       class="!flex relative !max-w-none !px-0 !mx-auto min-h-[100svh] flex-col justify-start overflow-hidden"
@@ -140,13 +140,15 @@ const fmtDate = (d?: string) =>
           )
         }
         <div class="flex flex-wrap items-center gap-4">
-          <a href={next?.tickets ?? "#events"} class="no-underline">
-            <button type="button" class="cta-button font-bold">
-              {next?.tickets ? "Tickets" : "events"}
-            </button>
+          <a href={next?.tickets ?? "#events"} class="cta-button font-bold">
+            {next?.tickets ? "Tickets" : "events"}
           </a>
-          <a href={MAILING_LIST} class="no-underline">
-            <button type="button" class="cta-button font-bold"> Join </button>
+          <a
+            href={MAILING_LIST}
+            class="cta-button font-bold"
+            aria-label="Join Mailing List"
+          >
+            Join
           </a>
         </div>
       </div>
@@ -208,10 +210,12 @@ const fmtDate = (d?: string) =>
         >
           Don't miss<br />the next one!
         </h2>
-        <a href={MAILING_LIST} class="no-underline">
-          <button type="button" class="cta-button cta-button-lg font-bold">
-            Join
-          </button>
+        <a
+          href={MAILING_LIST}
+          class="cta-button cta-button-lg font-bold"
+          aria-label="Join Mailing List"
+        >
+          Join
         </a>
       </div>
     </div>

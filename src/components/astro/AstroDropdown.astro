@@ -91,14 +91,12 @@ import AfwWordmark from "./AfwWordmark.astro";
       <a href="/#about" class="max-w-max menu-item">
         <div>about us</div>
       </a>
-      <a href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO">
-        <button
-          type="button"
-          class="cta-button font-bold"
-          value="Join Mailing List"
-        >
-          Join
-        </button>
+      <a
+        href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO"
+        class="cta-button font-bold"
+        aria-label="Join Mailing List"
+      >
+        Join
       </a>
     </nav>
   </div>
@@ -168,6 +166,9 @@ import AfwWordmark from "./AfwWordmark.astro";
         document.getElementById("site-header"),
         document.querySelector("main"),
         document.querySelector("footer"),
+        // also a direct child of <body>, so the three landmarks above don't
+        // cover it — without this, Tab escapes the overlay to the skip link
+        document.querySelector(".skip-link"),
       ].forEach((el) => {
         if (el) el.inert = state;
       });

@@ -14,6 +14,9 @@ export const indexContentType = defineType({
       type: "array",
       of: [{ type: "block" }],
     }),
+    // Deliberately no `alt` field: this gallery is the hero's decorative
+    // background crossfade, carrying no information the page doesn't already
+    // state in text. These images render alt="" on purpose.
     defineField({
       name: "imageGallery",
       title: "Image gallery",

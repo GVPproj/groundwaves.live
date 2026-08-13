@@ -73,6 +73,18 @@ export const eventType = defineType({
       name: "image",
       type: "image",
       group: "editorial",
+      // Posters carry the lineup, date and pricing, and none of that appears
+      // anywhere else on the event page. Without this field every poster
+      // renders alt="" and is exposed to screen readers as decorative.
+      fields: [
+        defineField({
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
+          description:
+            "Describe the poster for people who can't see it — include any lineup, date or pricing that only appears in the image.",
+        }),
+      ],
     }),
     defineField({
       name: "eventCopy",

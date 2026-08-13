@@ -7,16 +7,16 @@
     --color-fill: 60, 14.29%, 93.14%; /* neutral gray */
     --color-fill-gradient-end: 60, 14.29%, 91.14%; /* neutral gray */
     --color-text-base: 226.32, 100%, 22.35%; /* main blue */
-    /* The two "deep" variants are the light-ground counterparts of the tokens
-       above them, the way --color-accent-bright is the dark-ground counterpart
-       of --color-accent. Lightness on both is set by the *gradient end*
-       (--color-fill-gradient-end), not --color-fill: the body is a gradient, so
-       the bottom of the page is the worst light ground and it is ~0.2 tighter. */
-    --color-accent: 160.75, 100%, 23%; /* green — 4.80:1 on the gradient end, and as button fill under near-white text */
-    --color-accent-deep: 161.31, 100%, 11.96%; /* accent hue as a dark ground (homepage) */
-    --color-accent-bright: 161.19, 100%, 39.41%; /* accent hue lifted for contrast on the dark ground */
-    --color-accent-inverted: 30.83, 100%, 49.61%; /* orange — for dark grounds only (4.92:1 on accent-deep, 6.02:1 on the footer) */
-    --color-accent-inverted-deep: 30.83, 100%, 31%; /* inverted hue deepened for the light ground — 4.85:1 on the gradient end */
+    /* Contrast for the light-ground tokens is set against
+       --color-fill-gradient-end, not --color-fill: the body is a gradient, so
+       the bottom of the page is the real worst case and runs ~0.2 tighter.
+       --color-accent-inverted-deep is to --color-accent-inverted what
+       --color-accent-bright is to --color-accent, in the other direction. */
+    --color-accent: 160.75, 100%, 23%; /* green — 4.80:1 light ground */
+    --color-accent-deep: 161.31, 100%, 11.96%; /* dark ground (homepage) */
+    --color-accent-bright: 161.19, 100%, 39.41%; /* 5.72:1 on accent-deep */
+    --color-accent-inverted: 30.83, 100%, 49.61%; /* orange — dark only */
+    --color-accent-inverted-deep: 30.83, 100%, 31%; /* orange — 4.85:1 light */
   }
   html,
   body {
@@ -82,16 +82,51 @@
   .site-footer :where(a, button):focus-visible {
     outline-color: hsl(var(--color-fill));
   }
-  /* ...except the two light islands on that dark page: the mobile overlay panel
-     and the closing band, where near-white would vanish instead. */
+  /* ...except the light islands on that dark page — the mobile overlay panel,
+     the closing band and the skip link — where near-white would vanish. */
   body:has(.home-inverted)
     :is(#dropdown-content, .home-band)
-    :where(a, button):focus-visible {
+    :where(a, button):focus-visible,
+  body:has(.home-inverted) .skip-link:focus-visible {
     outline-color: hsl(var(--color-accent));
   }
+
+  /* First focusable element on every page, ahead of the logo and the whole
+     header. Off-screen until focused rather than display:none, which would
+     take it out of the tab order and defeat the point. */
+  .skip-link {
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 100;
+    transform: translateY(-250%);
+    background: hsl(var(--color-fill));
+    color: hsl(var(--color-text-base));
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: transform 150ms ease;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .skip-link {
+      transition: none;
+    }
+  }
+  /* the skip target itself — tabindex="-1" makes <main> focusable so focus
+     actually lands there, and this keeps it from drawing a ring when it does */
+  main:focus {
+    outline: none;
+  }
 }
+/* Always an <a>, never an <a> wrapping a <button>. inline-block so the padding
+   builds a real box, and no-underline to opt out of the base `a` rule — both
+   are set here rather than at each call site so they can't be forgotten. */
 .cta-button {
-  @apply cursor-pointer bg-skin-accent text-skin-fill rounded-full text-sm md:text-xl px-5 py-2.5 
+  @apply inline-block text-center no-underline
+  cursor-pointer bg-skin-accent text-skin-fill rounded-full text-sm md:text-xl px-5 py-2.5
   uppercase transition duration-150 ease-in-out hover:bg-skin-accent-inverted hover:text-skin-base
    hover:shadow-[0_2px_2px_-2px_rgba(21,128,61,0.3),0_2px_2px_0_rgba(21,128,61,0.2)] 
     focus:shadow-[0_2px_2px_-2px_rgba(21,128,61,0.3),0_4px_18px_0_rgba(21,128,61,0.2)] 
