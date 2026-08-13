@@ -1,35 +1,230 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Carousel from "../components/react/Carousel";
 import { safeFetch } from "../lib/sanity";
 import { PortableText } from "astro-portabletext";
+import SanityImage from "../components/fragments/SanityImage.astro";
+import type { Event, Venue } from "../../sanity.types";
+
+// The base Event type has venue/slug as reference objects; our GROQ queries
+// dereference them with -> so this is what we actually get at runtime.
+type EventWithRefs = Omit<Event, "venue" | "slug"> & {
+  slug?: { current: string };
+  venue?: Venue;
+};
+
+const MAILING_LIST = "https://rkbce3s6n3o.typeform.com/to/FMhtniXO";
 
 const { headline, heroText, imageGallery } = await safeFetch(
   `*[_type == "indexContent"]{headline, heroText, imageGallery}[0]`,
   {} as { headline?: any; heroText?: any; imageGallery?: any },
 );
+
+const upcomingEvents = await safeFetch<EventWithRefs[]>(
+  `*[_type == "event" && date > now()]{_id, name, slug, date, endDate, image, tickets, venue->}|order(date asc)`,
+  [],
+);
+const pastEvents = await safeFetch<EventWithRefs[]>(
+  `*[_type == "event" && date < now()]{_id, name, slug, date, endDate, image, venue->}|order(date desc)`,
+  [],
+);
+
+const gallery = imageGallery ?? [];
+const next = upcomingEvents[0];
+const cards = [...upcomingEvents, ...pastEvents].slice(0, 6);
+
+const fmtDate = (d?: string) =>
+  d
+    ? new Date(d).toLocaleDateString("en-US", {
+        timeZone: "America/Los_Angeles",
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
+    : "";
 ---
 
 <Layout title="groundwaves">
-  <main>
-    <section class="pb-32">
-      {imageGallery && <Carousel client:load images={imageGallery} />}
-      {
-        headline && (
-          <h1 class="font-bold text-3xl mb-8 mt-16 text-center">{headline}</h1>
-        )
-      }
-      {heroText && <PortableText value={heroText} />}
-      <div class="cta">
-        <p>Join our mailing list for early access to our next event...</p>
+  <main class="home-inverted !mt-0 text-skin-fill">
+    <!-- full-bleed hero -->
+    <section
+      class="!block relative !max-w-none !px-0 !mx-auto min-h-[92svh] flex flex-col justify-end overflow-hidden"
+    >
+      <SanityImage
+        node={gallery[0]}
+        width="2000"
+        classNames="absolute inset-0 w-full h-full object-cover opacity-70"
+      />
+      <div class="home-scrim absolute inset-0"></div>
 
-        <button
-          type="button"
-          class="cta-button"
-          onclick="location.href='https://rkbce3s6n3o.typeform.com/to/FMhtniXO';"
-          value="Join Mailing List">Join</button
+      <div
+        class="relative max-w-screen-xl mx-auto w-full px-6 md:px-10 pb-16 pt-40"
+      >
+        <p
+          class="home-meta text-[0.7rem] md:text-xs uppercase tracking-[0.35em] opacity-85 mb-6"
         >
+          {
+            next
+              ? `${fmtDate(next.date)} · ${next.venue?.name ?? "Salt Spring Island"}`
+              : "Salt Spring Island, BC"
+          }
+        </p>
+        <h1
+          class="font-bold leading-[0.95] tracking-[-0.01em] text-[clamp(2.25rem,8vw,6rem)] max-w-[16ch] mb-8"
+        >
+          {next?.name ?? headline ?? "groundwaves"}
+        </h1>
+        {
+          headline && next && (
+            <p class="text-xl md:text-2xl max-w-2xl mb-10 opacity-80">
+              {headline}
+            </p>
+          )
+        }
+        <div class="flex flex-wrap items-center gap-4">
+          <a href={next?.tickets ?? "/events"} class="no-underline">
+            <button type="button" class="cta-button font-bold">
+              {next?.tickets ? "Tickets" : "See events"}
+            </button>
+          </a>
+          <a href={MAILING_LIST} class="no-underline">
+            <button type="button" class="cta-button font-bold">
+              Mailing list
+            </button>
+          </a>
+        </div>
       </div>
     </section>
+
+    <!-- statement -->
+    {
+      heroText && (
+        <section class="!block max-w-screen-md !mx-auto !px-6 md:!px-10 py-24 md:py-32 text-center">
+          <div class="home-statement text-2xl md:text-[2rem] leading-snug [&_p]:mb-6">
+            <PortableText value={heroText} />
+          </div>
+        </section>
+      )
+    }
+
+    <!-- archive -->
+    <section class="!block max-w-screen-xl !mx-auto !px-6 md:!px-10 pb-24">
+      <div
+        class="home-rule flex items-baseline justify-between border-b pb-4 mb-10"
+      >
+        <h2 class="uppercase tracking-[0.2em] text-sm font-bold">The archive</h2>
+        <a
+          href="/events"
+          class="home-quiet-link text-xs uppercase tracking-[0.2em] no-underline"
+          >all →</a
+        >
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-14">
+        {
+          cards.map((event) => (
+            <a
+              href={event.tickets ?? `/events/${event.slug?.current ?? ""}`}
+              class="group block no-underline text-skin-fill"
+            >
+              <div class="home-frame overflow-hidden mb-5">
+                <SanityImage
+                  node={event.image}
+                  width="800"
+                  classNames="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <p class="home-meta text-[0.7rem] uppercase tracking-[0.2em] mb-2">
+                {fmtDate(event.date)}
+              </p>
+              <h3 class="text-2xl font-semibold leading-tight mb-1">
+                {event.name}
+              </h3>
+              <p class="text-sm opacity-60">{event.venue?.name}</p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- closing band -->
+    <div class="home-band text-skin-base">
+      <div
+        class="max-w-screen-xl mx-auto px-6 md:px-10 py-20 md:py-28 text-center"
+      >
+        <h2
+          class="uppercase font-bold leading-[0.95] text-[clamp(1.75rem,5vw,3.5rem)] mb-8"
+        >
+          Don't miss<br />the next one
+        </h2>
+        <a href={MAILING_LIST} class="no-underline">
+          <button type="button" class="cta-button font-bold">
+            Join the list
+          </button>
+        </a>
+      </div>
+    </div>
   </main>
 </Layout>
+
+<!-- the site header is fixed and light by default; invert it over this page -->
+<style is:global>
+  body:has(.home-inverted) {
+    background: #003d2a;
+  }
+  body:has(.home-inverted) #site-header {
+    background: transparent;
+    box-shadow: none;
+  }
+  body:has(.home-inverted) #site-header a {
+    color: #f0f0eb;
+  }
+  body:has(.home-inverted) #site-header a:hover {
+    color: #00c98a;
+  }
+  body:has(.home-inverted) #site-header svg {
+    fill: #f0f0eb;
+  }
+</style>
+
+<style>
+  /* Site palette written literally — scoped blocks here don't survive
+     hsl(var(--token)) processing. #003d2a is --color-accent taken dark for a
+     ground, #00c98a the same green lifted for contrast on it, #f0f0eb is
+     --color-fill. */
+  .home-inverted {
+    background: #003d2a;
+  }
+  .home-meta {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #00c98a;
+  }
+  .home-quiet-link {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #f0f0eb;
+    border-bottom: 1px solid rgba(240, 240, 235, 0.4);
+  }
+  .home-quiet-link:hover {
+    color: #00c98a;
+    border-color: #00c98a;
+  }
+  .home-band {
+    background: #f0f0eb;
+  }
+  .home-scrim {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 61, 42, 0.85) 0%,
+      rgba(0, 61, 42, 0.3) 35%,
+      rgba(0, 61, 42, 0.95) 100%
+    );
+  }
+  .home-rule {
+    border-color: rgba(240, 240, 235, 0.25);
+  }
+  .home-frame {
+    background: rgba(240, 240, 235, 0.08);
+  }
+  .home-statement :global(a) {
+    color: #00c98a;
+  }
+</style>
