@@ -50,7 +50,7 @@ const eventHref = (event: EventWithRefs, upcoming: boolean) =>
 
 const eventGroups = [
   { title: "Upcoming", events: upcomingEvents, upcoming: true },
-  { title: "The archive", events: pastEvents, upcoming: false },
+  { title: "Past Events", events: pastEvents, upcoming: false },
 ].filter((bucket) => bucket.events.length > 0);
 
 const fmtDate = (d?: string) =>
@@ -74,7 +74,10 @@ const fmtDate = (d?: string) =>
         {
           slides.map((node: any, i: number) => (
             <div
-              class:list={["absolute inset-0", slides.length > 1 && "home-slide"]}
+              class:list={[
+                "absolute inset-0",
+                slides.length > 1 && "home-slide",
+              ]}
               style={`animation-delay:${(i * CYCLE).toFixed(2)}s`}
             >
               <SanityImage
@@ -142,24 +145,22 @@ const fmtDate = (d?: string) =>
         eventGroups.map((bucket) => (
           <section class="!block max-w-screen-xl !mx-auto !px-6 md:!px-10 pb-24">
             <div class="home-rule border-b pb-4 mb-10">
-              <h2 class="uppercase tracking-[0.2em] text-sm font-bold">
+              <h2 class="uppercase tracking-[0.2em] text-sm font-semibold">
                 {bucket.title}
               </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-14">
+            <div class="grid grid-cols-1 md:grid-cols-3 items-start gap-x-6 gap-y-14">
               {bucket.events.map((event) => (
                 <a
                   href={eventHref(event, bucket.upcoming)}
-                  class="group block no-underline text-skin-fill"
+                  class="block no-underline text-skin-fill transition-opacity hover:opacity-80"
                 >
-                  <div class="home-frame overflow-hidden mb-5">
-                    <SanityImage
-                      node={event.image}
-                      width="800"
-                      classNames="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
+                  <SanityImage
+                    node={event.image}
+                    width="800"
+                    classNames="w-full h-auto mb-5"
+                  />
                   <p class="home-meta text-[0.7rem] uppercase tracking-[0.2em] mb-2">
                     {fmtDate(event.date)}
                   </p>
@@ -184,7 +185,9 @@ const fmtDate = (d?: string) =>
           Don't miss<br />the next one!
         </h2>
         <a href={MAILING_LIST} class="no-underline">
-          <button type="button" class="cta-button font-bold"> Join </button>
+          <button type="button" class="cta-button cta-button-lg font-bold">
+            Join
+          </button>
         </a>
       </div>
     </div>
@@ -272,9 +275,6 @@ const fmtDate = (d?: string) =>
   }
   .home-rule {
     border-color: rgba(240, 240, 235, 0.25);
-  }
-  .home-frame {
-    background: rgba(240, 240, 235, 0.08);
   }
   .home-statement :global(a) {
     color: #00c98a;

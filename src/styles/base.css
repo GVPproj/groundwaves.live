@@ -125,6 +125,10 @@
    active:bg-skin-accent active:shadow-[0_8px_9px_-4px_rgba(21,128,61,0.3),0_2px_2px_0_rgba(21,128,61,0.2)];
 }
 
+.cta-button-lg {
+  @apply text-lg md:text-[2.5rem] px-10 py-5;
+}
+
 /* fonts */
 
 /* fraunces-300 - latin */
