@@ -22,7 +22,10 @@ import AfwWordmark from "./AfwWordmark.astro";
            its letter baseline, so aligning baselines drops it onto the same line
            as the events/about links and removes the centered top/bottom gap that
            a tiny h-4 wordmark picked up under items-center. -->
-      <nav class="flex-initial md:flex-1 flex items-baseline gap-6">
+      <nav
+        aria-label="Primary"
+        class="flex-initial md:flex-1 flex items-baseline gap-6"
+      >
         <a
           class="flex items-center shrink-0"
           href="https://afriendlywave.com"

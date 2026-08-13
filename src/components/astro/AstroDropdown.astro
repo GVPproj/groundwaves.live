@@ -4,7 +4,13 @@ import AfwWordmark from "./AfwWordmark.astro";
 ---
 
 <div id="astro-dropdown" class="md:hidden">
-  <button id="dropdown-toggle" class="focus:bg-skin-fill-muted">
+  <button
+    id="dropdown-toggle"
+    class="focus:bg-skin-fill-muted"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="dropdown-content"
+  >
     <svg
       id="menu-icon"
       xmlns="http://www.w3.org/2000/svg"
@@ -13,6 +19,7 @@ import AfwWordmark from "./AfwWordmark.astro";
       stroke-width="1.5"
       stroke="currentColor"
       class="h-8 w-8"
+      aria-hidden="true"
     >
       <path
         stroke-linecap="round"
@@ -27,6 +34,7 @@ import AfwWordmark from "./AfwWordmark.astro";
       stroke-width="1.5"
       stroke="currentColor"
       class="h-8 w-8 hidden"
+      aria-hidden="true"
     >
       <path
         stroke-linecap="round"
@@ -37,6 +45,9 @@ import AfwWordmark from "./AfwWordmark.astro";
 
   <div
     id="dropdown-content"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Site menu"
     class="hidden flex-col overflow-y-auto overscroll-contain
     items-center gap-16 px-6 py-24 text-2xl font-medium bg-skin-fill
     z-50 fixed inset-0 opacity-0 transition-opacity duration-300"
@@ -45,7 +56,11 @@ import AfwWordmark from "./AfwWordmark.astro";
       <a class="text-3xl font-bold" href="/" data-astro-reload>groundwaves</a>
     </div>
     <div class="fixed top-5 right-8 z-50">
-      <button id="dropdown-close" class="focus:bg-skin-fill-muted">
+      <button
+        id="dropdown-close"
+        class="focus:bg-skin-fill-muted"
+        aria-label="Close menu"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -53,6 +68,7 @@ import AfwWordmark from "./AfwWordmark.astro";
           stroke-width="1.5"
           stroke="currentColor"
           class="h-8 w-8"
+          aria-hidden="true"
         >
           <path
             stroke-linecap="round"
@@ -61,24 +77,28 @@ import AfwWordmark from "./AfwWordmark.astro";
         </svg>
       </button>
     </div>
-    <a href="https://afriendlywave.com" target="_blank" rel="noopener noreferrer" class="max-w-max menu-item mt-8 flex items-center">
-      <AfwWordmark class="h-6" />
-    </a>
-    <a href="/#events" class="max-w-max menu-item">
-      <div>events</div>
-    </a>
-    <a href="/#about" class="max-w-max menu-item">
-      <div>about us</div>
-    </a>
-    <a href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO">
-      <button
-        type="button"
-        class="cta-button font-bold"
-        value="Join Mailing List"
-      >
-        Join
-      </button>
-    </a>
+    <!-- the only navigation landmark at mobile widths — the desktop <nav> is
+         display:none here, so without this there is none at all -->
+    <nav aria-label="Site" class="flex flex-col items-center gap-16">
+      <a href="https://afriendlywave.com" target="_blank" rel="noopener noreferrer" class="max-w-max menu-item mt-8 flex items-center">
+        <AfwWordmark class="h-6" />
+      </a>
+      <a href="/#events" class="max-w-max menu-item">
+        <div>events</div>
+      </a>
+      <a href="/#about" class="max-w-max menu-item">
+        <div>about us</div>
+      </a>
+      <a href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO">
+        <button
+          type="button"
+          class="cta-button font-bold"
+          value="Join Mailing List"
+        >
+          Join
+        </button>
+      </a>
+    </nav>
   </div>
 </div>
 
@@ -86,6 +106,9 @@ import AfwWordmark from "./AfwWordmark.astro";
   // Initialize dropdown functionality
   function setupDropdown() {
     const dropdown = document.getElementById("astro-dropdown");
+    if (!dropdown || dropdown.dataset.ready) return;
+    dropdown.dataset.ready = "true";
+
     const toggle = document.getElementById("dropdown-toggle");
     const closeBtn = document.getElementById("dropdown-close");
     const content = document.getElementById("dropdown-content");
@@ -134,23 +157,55 @@ import AfwWordmark from "./AfwWordmark.astro";
       if (restore) window.scrollTo(0, lockedScrollY);
     }
 
+    // The overlay is portaled to <body>, so nothing else on the page is an
+    // ancestor of it — the rest of the document stays in the tab order and the
+    // accessibility tree underneath a full-screen panel unless we inert it.
+    // `inert` covers both the focus trap and the a11y-tree hiding in one go.
+    function setBackgroundInert(state) {
+      [
+        document.getElementById("site-header"),
+        document.querySelector("main"),
+        document.querySelector("footer"),
+      ].forEach((el) => {
+        if (el) el.inert = state;
+      });
+    }
+
+    function onKeydown(e) {
+      if (e.key === "Escape") closeMenu();
+    }
+
     function openMenu() {
+      if (isOpen) return;
       isOpen = true;
       lockScroll();
+      toggle.setAttribute("aria-expanded", "true");
       toggle.classList.add("hidden"); // Hide the hamburger button entirely
       content.classList.remove("hidden");
+      setBackgroundInert(true);
+      document.addEventListener("keydown", onKeydown);
       // Delay setting opacity to allow the transition to work
       setTimeout(() => {
         content.classList.add("flex");
         content.style.opacity = "1";
+        // Only focusable once .flex wins over the `display: none` id rule —
+        // focusing before this paint is a no-op and drops focus to <body>.
+        closeBtn.focus();
       }, 10);
     }
 
     function closeMenu() {
+      if (!isOpen) return;
       isOpen = false;
       unlockScroll();
+      document.removeEventListener("keydown", onKeydown);
+      // Un-inert before focusing: focus() on a node inside an inert subtree is
+      // ignored, and the toggle lives inside the header we just inerted.
+      setBackgroundInert(false);
+      toggle.setAttribute("aria-expanded", "false");
       toggle.classList.remove("hidden"); // Show the hamburger button again
       content.style.opacity = "0";
+      toggle.focus();
 
       // Wait for transition to complete before hiding
       setTimeout(() => {
