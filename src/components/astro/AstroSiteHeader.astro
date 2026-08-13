@@ -18,14 +18,18 @@ import AfwWordmark from "./AfwWordmark.astro";
       groundwaves
     </a>
     <div id="desktop" class="hidden md:flex items-center gap-6 w-full">
-      <nav class="flex-initial md:flex-1 flex items-center gap-6">
+      <!-- items-baseline: wordmark is a tight-cropped SVG whose bottom edge ==
+           its letter baseline, so aligning baselines drops it onto the same line
+           as the events/about links and removes the centered top/bottom gap that
+           a tiny h-4 wordmark picked up under items-center. -->
+      <nav class="flex-initial md:flex-1 flex items-baseline gap-6">
         <a
           class="flex items-center shrink-0"
           href="https://afriendlywave.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <AfwWordmark class="h-4" />
+          <AfwWordmark class="h-[1.375rem] translate-y-[19%]" />
         </a>
         <a href="/#events">events</a>
         <a href="/about">about</a>
