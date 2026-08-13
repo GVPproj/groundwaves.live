@@ -31,7 +31,7 @@ const year = new Date().getFullYear();
         {
           prose.length > 0 && (
             <>
-              <p class="ft-label text-[0.7rem] uppercase tracking-[0.3em] mb-6">
+              <p class="ft-label font-mono text-[0.7rem] uppercase tracking-[0.3em] mb-6">
                 About
               </p>
               <div class="text-[1.05rem] leading-[1.65] [&_p]:mb-5 [&_p:last-child]:mb-0">
@@ -51,21 +51,22 @@ const year = new Date().getFullYear();
 
       <!-- links read as a directory: hairline rows you scan, not inline text -->
       <div class="ft-sidecar md:pl-16 md:border-l">
-        <p class="ft-label text-[0.7rem] uppercase tracking-[0.3em] mb-6">
+        <p class="ft-label font-mono text-[0.7rem] uppercase tracking-[0.3em] mb-6">
           Groundwaves
         </p>
         <ul class="list-none p-0 m-0">
           <li class="ft-row">
             <a class="ft-link" href="/#events">
-              <span>events</span><span class="ft-glyph" aria-hidden="true"
-                >&rarr;</span
+              <span>events</span><span
+                class="ft-glyph font-mono"
+                aria-hidden="true">&rarr;</span
               >
             </a>
           </li>
           <li class="ft-row">
             <a class="ft-link" href={MAILING_LIST}>
               <span>join the mailing list</span><span
-                class="ft-glyph"
+                class="ft-glyph font-mono"
                 aria-hidden="true">&#8599;</span
               >
             </a>
@@ -83,7 +84,9 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <div class="ft-rule border-t mt-32 pt-6 text-xs font-thin">
+    <!-- font-light, not font-thin: 300 is the lightest Fraunces face we ship,
+         so anything lighter silently resolves back up to it anyway. -->
+    <div class="ft-rule border-t mt-32 pt-6 text-xs font-light">
       <p class="mb-0">&copy; {year} Groundworks</p>
       <p class="mb-0">
         Website: <a
@@ -103,7 +106,6 @@ const year = new Date().getFullYear();
     color: hsl(var(--color-fill));
   }
   .ft-label {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     color: hsl(var(--color-accent-inverted));
   }
   .ft-rule,
@@ -140,7 +142,6 @@ const year = new Date().getFullYear();
     opacity: 0.7;
   }
   .ft-glyph {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     opacity: 0.5;
     transition:
       transform 150ms ease,

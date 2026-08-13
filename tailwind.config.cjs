@@ -55,8 +55,12 @@ module.exports = {
       },
     },
 
+    // This replaces Tailwind's defaults rather than extending them, so only the
+    // families listed here exist as utilities — there is deliberately no
+    // `font-sans`, since the site is Fraunces throughout.
     fontFamily: {
       serif: ["Fraunces", "serif"],
+      mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
     },
     extend: {
       colors: {

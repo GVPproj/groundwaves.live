@@ -39,6 +39,26 @@ export async function getStaticPaths() {
 
 const { event } = Astro.props;
 const isPastEvent = new Date(event.date) < new Date();
+
+const fmtDate = (d?: string) =>
+  d
+    ? new Date(d).toLocaleDateString("en-US", {
+        timeZone: "America/Los_Angeles",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "";
+
+// One meta line — date (or range) and venue — in the same mono treatment the
+// homepage cards use for the same facts, so the card and the page it links to
+// read as the same design.
+// Several events carry an endDate on the same day as the start; showing the
+// range verbatim would print the same date twice.
+const start = fmtDate(event.date);
+const end = fmtDate(event.endDate);
+const dateRange = end && end !== start ? `${start} – ${end}` : start;
+const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
 ---
 
 <Layout title={event.name}>
@@ -77,28 +97,14 @@ const isPastEvent = new Date(event.date) < new Date();
             </a>
           )
         }
-        <h1 class="font-semibold text-2xl">{event.name}</h1>
-        <h2 class="font-semibold text-2xl mb-12 italic">
-          {
-            new Date(event?.date).toLocaleDateString("en-US", {
-              timeZone: "America/Los_Angeles",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })
-          }{" "}
-          {
-            event.endDate &&
-              "- " +
-                new Date(event.endDate).toLocaleDateString("en-US", {
-                  timeZone: "America/Los_Angeles",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })
-          }{" "}
-          @ {event.venue?.name}
-        </h2>
+        <p class="ev-meta font-mono text-[0.7rem] uppercase tracking-[0.3em] mb-4">
+          {meta}
+        </p>
+        <h1
+          class="font-bold leading-[1.05] tracking-[-0.01em] text-[clamp(1.75rem,5vw,3rem)] mb-12"
+        >
+          {event.name}
+        </h1>
         <div class="text-left prose-base">
           <PortableText value={event.eventCopy} />
         </div>
@@ -125,3 +131,11 @@ const isPastEvent = new Date(event.date) < new Date();
     </section>
   </main>
 </Layout>
+
+<style>
+  /* the accent green rather than the homepage's bright/orange variants — this
+     page sits on the light ground, not the dark hero */
+  .ev-meta {
+    color: hsl(var(--color-accent));
+  }
+</style>
