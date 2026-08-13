@@ -1,18 +1,163 @@
 ---
-const today = new Date()
+import { PortableText } from "astro-portabletext";
+import { safeFetch } from "../../lib/sanity";
+import AfwWordmark from "./AfwWordmark.astro";
+
+const MAILING_LIST = "https://rkbce3s6n3o.typeform.com/to/FMhtniXO";
+const AFW = "https://afriendlywave.com";
+const GVP = "https://grahamvanpelt.dev";
+
+// The about copy lives here now — there is no /about page, the nav scrolls to
+// this footer instead.
+const { aboutText } = await safeFetch(
+  `*[_type == "aboutContent"]{aboutText}[0]`,
+  {} as { aboutText?: any },
+);
+
+// The last paragraph of aboutContent is the land acknowledgement, which gets
+// its own fine-print treatment. Split by position — if it ever needs to be
+// explicit, it should become its own field on the aboutContent schema.
+const blocks: any[] = aboutText ?? [];
+const prose = blocks.length > 1 ? blocks.slice(0, -1) : blocks;
+const landAck = blocks.length > 1 ? blocks[blocks.length - 1] : null;
+
+const year = new Date().getFullYear();
 ---
 
-<footer
-    class="mt-auto flex flex-col gap-4 bg-skin-inverted px-8 py-8 text-xs font-thin text-skin-inverted w-full max-w-[100vw] box-border"
->
-<div class="max-w-screen-xl mx-auto w-full">
+<footer id="about" class="site-footer mt-auto w-full scroll-mt-24">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-10 py-20 md:py-24">
+    <div class="grid grid-cols-1 md:grid-cols-[1.15fr_1fr] gap-x-16 gap-y-14">
+      <div>
+        {
+          prose.length > 0 && (
+            <>
+              <p class="ft-label text-[0.7rem] uppercase tracking-[0.3em] mb-6">
+                About
+              </p>
+              <div class="text-[1.05rem] leading-[1.65] [&_p]:mb-5 [&_p:last-child]:mb-0">
+                <PortableText value={prose} />
+              </div>
+            </>
+          )
+        }
+        {
+          landAck && (
+            <div class="ft-ack mt-8 pl-5 border-l text-[0.8rem] italic leading-[1.7] opacity-70 [&_p]:mb-0">
+              <PortableText value={[landAck]} />
+            </div>
+          )
+        }
+      </div>
 
-    <p class="mb-0">&copy; {today.getFullYear()} Groundworks</p>
-    <p class="mb-0">
-        Website: <a
-        class="italic text-skin-accent-inverted"
-        href="https://grahamvanpelt.dev">grahamvanpelt.dev</a
+      <!-- links read as a directory: hairline rows you scan, not inline text -->
+      <div class="ft-sidecar md:pl-16 md:border-l">
+        <p class="ft-label text-[0.7rem] uppercase tracking-[0.3em] mb-6">
+          Groundwaves
+        </p>
+        <ul class="list-none p-0 m-0">
+          <li class="ft-row">
+            <a class="ft-link" href="/#events">
+              <span>events</span><span class="ft-glyph" aria-hidden="true"
+                >&rarr;</span
+              >
+            </a>
+          </li>
+          <li class="ft-row">
+            <a class="ft-link" href={MAILING_LIST}>
+              <span>join the mailing list</span><span
+                class="ft-glyph"
+                aria-hidden="true">&#8599;</span
+              >
+            </a>
+          </li>
+        </ul>
+
+        <a
+          class="ft-afw mt-12 inline-flex"
+          href={AFW}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-    </p>
-</div>
+          <AfwWordmark class="h-9 md:h-11" />
+        </a>
+      </div>
+    </div>
+
+    <div class="ft-rule border-t mt-32 pt-6 text-xs font-thin">
+      <p class="mb-0">&copy; {year} Groundworks</p>
+      <p class="mb-0">
+        Website: <a
+          class="italic text-sm text-skin-accent-inverted"
+          href={GVP}
+          target="_blank"
+          rel="noopener noreferrer">grahamvanpelt.dev</a
+        >
+      </p>
+    </div>
+  </div>
 </footer>
+
+<style>
+  .site-footer {
+    background: hsl(var(--color-text-base));
+    color: hsl(var(--color-fill));
+  }
+  .ft-label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: hsl(var(--color-accent-inverted));
+  }
+  .ft-rule,
+  .ft-sidecar {
+    border-color: hsla(var(--color-fill), 0.2);
+  }
+  .ft-ack {
+    border-left-color: hsla(var(--color-accent-inverted), 0.6);
+  }
+  .ft-row {
+    border-top: 1px solid hsla(var(--color-fill), 0.15);
+  }
+  .ft-row:last-child {
+    border-bottom: 1px solid hsla(var(--color-fill), 0.15);
+  }
+  .ft-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 0;
+    font-size: 1.05rem;
+    color: hsl(var(--color-fill));
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+  .ft-link:hover {
+    color: hsl(var(--color-accent-inverted));
+  }
+  .ft-afw {
+    transition: opacity 150ms ease;
+  }
+  .ft-afw:hover {
+    opacity: 0.7;
+  }
+  .ft-glyph {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    opacity: 0.5;
+    transition:
+      transform 150ms ease,
+      opacity 150ms ease;
+  }
+  .ft-link:hover .ft-glyph {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ft-link,
+    .ft-glyph,
+    .ft-afw {
+      transition: none;
+    }
+    .ft-link:hover .ft-glyph {
+      transform: none;
+    }
+  }
+</style>

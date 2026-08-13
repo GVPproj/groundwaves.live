@@ -37,9 +37,9 @@ import AfwWordmark from "./AfwWordmark.astro";
 
   <div
     id="dropdown-content"
-    class="hidden font-sans h-screen w-screen flex-col
+    class="hidden font-sans flex-col overflow-y-auto overscroll-contain
     items-center gap-16 px-6 py-24 text-2xl font-medium bg-skin-fill
-    z-50 fixed top-0 left-0 opacity-0 transition-opacity duration-300"
+    z-50 fixed inset-0 opacity-0 transition-opacity duration-300"
   >
     <div class="fixed top-4 left-8 z-50">
       <a class="text-3xl font-bold" href="/" data-astro-reload>groundwaves</a>
@@ -67,7 +67,7 @@ import AfwWordmark from "./AfwWordmark.astro";
     <a href="/#events" class="max-w-max menu-item">
       <div>events</div>
     </a>
-    <a href="/about" class="max-w-max menu-item">
+    <a href="/#about" class="max-w-max menu-item">
       <div>about us</div>
     </a>
     <a href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO">
@@ -93,10 +93,50 @@ import AfwWordmark from "./AfwWordmark.astro";
     const closeIcon = document.getElementById("close-icon");
     const menuItems = document.querySelectorAll(".menu-item");
 
+    // The overlay authors inside <header>, which has `backdrop-blur`. A
+    // backdrop-filter makes that ancestor the containing block for fixed
+    // descendants, so `fixed inset-0` would size to the header instead of the
+    // viewport — and the header's hide-on-scroll transform would drag the
+    // overlay off-screen with it. Reparenting to <body> escapes both.
+    if (content.parentElement !== document.body) {
+      document.body.appendChild(content);
+    }
+
     let isOpen = false;
+    let lockedScrollY = 0;
+    let isLocked = false;
+
+    // Pin the body while the overlay is up. Plain `overflow: hidden` is ignored
+    // by iOS Safari, so the body is taken out of flow at its current offset and
+    // restored on close — otherwise the page behind keeps scrolling and pokes
+    // out below the overlay.
+    function lockScroll() {
+      if (isLocked) return;
+      isLocked = true;
+      lockedScrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${lockedScrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.overflow = "hidden";
+    }
+
+    // restore=false when an in-page anchor is about to take over the scroll
+    // position, so we don't yank the user back to where the menu was opened.
+    function unlockScroll(restore = true) {
+      if (!isLocked) return;
+      isLocked = false;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.overflow = "";
+      if (restore) window.scrollTo(0, lockedScrollY);
+    }
 
     function openMenu() {
       isOpen = true;
+      lockScroll();
       toggle.classList.add("hidden"); // Hide the hamburger button entirely
       content.classList.remove("hidden");
       // Delay setting opacity to allow the transition to work
@@ -108,6 +148,7 @@ import AfwWordmark from "./AfwWordmark.astro";
 
     function closeMenu() {
       isOpen = false;
+      unlockScroll();
       toggle.classList.remove("hidden"); // Show the hamburger button again
       content.style.opacity = "0";
 
@@ -131,6 +172,10 @@ import AfwWordmark from "./AfwWordmark.astro";
     // Add click event to menu items for animation and closing
     menuItems.forEach((item) => {
       item.addEventListener("click", async (e) => {
+        // Release the lock synchronously: the anchor's default navigation fires
+        // as soon as this handler yields, and it can't scroll a fixed body.
+        unlockScroll(false);
+
         // Add brief highlight effect
         const originalBg = item.style.backgroundColor;
         const originalColor = item.style.color;
@@ -170,5 +215,14 @@ import AfwWordmark from "./AfwWordmark.astro";
 
   #dropdown-content.flex {
     display: flex;
+  }
+
+  /* Portaling to <body> drops the `md:hidden` the wrapper used to provide, so
+     re-assert it here at id specificity to beat the .flex rule above. */
+  @media (min-width: 768px) {
+    #dropdown-content,
+    #dropdown-content.flex {
+      display: none;
+    }
   }
 </style>

@@ -53,6 +53,13 @@ const eventGroups = [
   { title: "Past Events", events: pastEvents, upcoming: false },
 ].filter((bucket) => bucket.events.length > 0);
 
+// The last word of the headline gets the accent colour ("...Our Nature").
+const splitHeadline = (text?: string) => {
+  const match = text?.match(/^(.*\s)(\S+)$/);
+  return match ? { lead: match[1], last: match[2] } : null;
+};
+const headlineParts = splitHeadline(headline);
+
 const fmtDate = (d?: string) =>
   d
     ? new Date(d).toLocaleDateString("en-US", {
@@ -78,7 +85,7 @@ const fmtDate = (d?: string) =>
                 "absolute inset-0",
                 slides.length > 1 && "home-slide",
               ]}
-              style={`animation-delay:${(i * CYCLE).toFixed(2)}s`}
+              style={`animation-delay:${(i * CYCLE - FADE).toFixed(2)}s`}
             >
               <SanityImage
                 node={node}
@@ -106,12 +113,33 @@ const fmtDate = (d?: string) =>
         <h1
           class="font-bold leading-[0.95] tracking-[-0.01em] text-[clamp(2.25rem,8vw,6rem)] max-w-[16ch] mb-8"
         >
-          {next?.name ?? headline ?? "groundwaves"}
+          {
+            next?.name ??
+              (headlineParts ? (
+                <>
+                  {headlineParts.lead}
+                  <span class="home-headline-accent">{headlineParts.last}</span>
+                </>
+              ) : (
+                (headline ?? "groundwaves")
+              ))
+          }
         </h1>
         {
           headline && next && (
             <p class="text-xl md:text-2xl max-w-2xl mb-10 opacity-80">
-              {headline}
+              {
+                headlineParts ? (
+                  <>
+                    {headlineParts.lead}
+                    <span class="home-headline-accent">
+                      {headlineParts.last}
+                    </span>
+                  </>
+                ) : (
+                  headline
+                )
+              }
             </p>
           )
         }
@@ -196,10 +224,11 @@ const fmtDate = (d?: string) =>
 
 {
   slides.length > 1 && (
-    <style
-      is:inline
-      set:html={`
-      .home-slide {
+    <>
+      <style
+        is:inline
+        set:html={`
+      .home-slides.is-ready .home-slide {
         animation: home-crossfade ${TOTAL}s linear infinite both;
       }
       @keyframes home-crossfade {
@@ -208,10 +237,28 @@ const fmtDate = (d?: string) =>
         ${pct(CYCLE + FADE)} { opacity: 0 }
       }
       @media (prefers-reduced-motion: reduce) {
-        .home-slide { animation: none }
+        .home-slides.is-ready .home-slide { animation: none }
       }
     `}
-    />
+      />
+      <script
+        is:inline
+        set:html={`
+      (() => {
+        const slides = document.querySelector(".home-slides");
+        if (!slides) return;
+        const img = slides.querySelector("img");
+        const start = () => slides.classList.add("is-ready");
+        if (!img || img.complete) start();
+        else {
+          img.addEventListener("load", start, { once: true });
+          img.addEventListener("error", start, { once: true });
+        }
+      })();
+      `}
+      />
+
+    </>
   )
 }
 
@@ -235,6 +282,14 @@ const fmtDate = (d?: string) =>
   }
   body:has(.home-inverted) #site-header a:hover svg {
     fill: hsl(var(--color-accent-inverted));
+  }
+  /* the hamburger is a stroked icon (stroke="currentColor"), so the fill rules
+     above don't touch it — it needs `color` to read on the dark hero */
+  body:has(.home-inverted) #site-header #dropdown-toggle {
+    color: hsl(var(--color-fill));
+  }
+  body:has(.home-inverted) #site-header #dropdown-toggle:hover {
+    color: hsl(var(--color-accent-inverted));
   }
   /* the open mobile menu is a light full-screen panel inside the header —
      the inversion above would render it white-on-white, so restore the
@@ -261,6 +316,9 @@ const fmtDate = (d?: string) =>
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     color: hsl(var(--color-accent-bright));
   }
+  .home-headline-accent {
+    color: hsl(var(--color-accent-inverted));
+  }
   .home-meta-hero {
     color: hsl(var(--color-accent-inverted));
   }
@@ -278,17 +336,14 @@ const fmtDate = (d?: string) =>
   }
   /* Each slide runs the full cycle offset by its index, so the tail of one
      fade-out overlaps the head of the next fade-in. `both` fill keeps a slide
-     hidden through its start delay. */
+     hidden through its start delay. The first slide is shown on paint; the
+     animation only starts (via .is-ready) once its image has loaded, and its
+     negative delay places it mid-hold so it never fades in from nothing. */
   .home-slide {
     opacity: 0;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .home-slide {
-      animation: none;
-    }
-    .home-slide:first-child {
-      opacity: 1;
-    }
+  .home-slide:first-child {
+    opacity: 1;
   }
   .home-rule {
     border-color: hsla(var(--color-fill), 0.25);
