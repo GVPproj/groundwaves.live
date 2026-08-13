@@ -136,7 +136,7 @@ const fmtDate = (d?: string) =>
         </h1>
         {
           headline && next && (
-            <p class="text-xl md:text-2xl max-w-2xl mb-10 opacity-80">
+            <p class="text-xl md:text-2xl max-w-2xl mb-10">
               {headlineParts ? (
                 <>
                   {headlineParts.lead}
@@ -341,7 +341,13 @@ const fmtDate = (d?: string) =>
   /* The 35% stop is where the hero copy sits, so it sets the worst-case
      contrast. It was 0.3, which left the near-white h1 at 2.61:1 against a
      blown-out photo — below even the 3:1 large-text bar. 0.62 takes the
-     near-white text to 4.88:1 while the photo stays clearly readable.
+     near-white text to 4.88:1 while the photo stays clearly readable. The 78%
+     and 100% stops moved up with it only to keep the ramp monotonic — at the
+     old 0.55 the gradient would dip lighter below the text before darkening
+     again.
+     The sub-paragraph under the h1 renders at full opacity for the same
+     reason: at the opacity-80 it used to carry it measured 3.77:1 here, and at
+     text-xl (20px, non-bold) it needs 4.5.
      KNOWN GAP (WCAG 1.4.3): .home-meta-hero and .home-headline-accent are
      --color-accent-inverted, and orange cannot pass 4.5:1 over an arbitrary
      photo at any usable scrim — it needs the image ~96% covered. Accepted

@@ -163,13 +163,13 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
     --tw-prose-quote-borders: hsla(var(--color-accent), 0.4);
     --tw-prose-th-borders: hsla(var(--color-text-base), 0.3);
     --tw-prose-td-borders: hsla(var(--color-text-base), 0.15);
-  }
-  .ev-copy :global(a:hover) {
-    color: hsl(var(--color-accent-inverted-deep));
-  }
-  /* pairs with min-w-0 above: once the column can shrink, the raw-URL link text
-     still needs permission to break rather than spill out of it */
-  .ev-copy {
+
+    /* pairs with min-w-0 above: once the column can shrink, the raw-URL link
+       text still needs permission to break rather than spill out of it */
     overflow-wrap: break-word;
   }
+  /* no .ev-copy a:hover rule here on purpose: the typography plugin writes its
+     link colour through zero-specificity :where(), so the base `a:hover` in
+     base.css already wins and supplies the light-ground orange. Verified in
+     Chromium. */
 </style>
