@@ -53,6 +53,13 @@ import AfwWordmark from "./AfwWordmark.astro";
   .hide-on-scroll {
     transform: translateY(-100%);
   }
+  /* the hero crossfade and the footer hovers are both guarded; this was the
+     one animation that wasn't */
+  @media (prefers-reduced-motion: reduce) {
+    #site-header {
+      transition: none;
+    }
+  }
 </style>
 
 <script is:inline>

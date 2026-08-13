@@ -18,11 +18,15 @@
     --color-accent-inverted: 30.83, 100%, 49.61%; /* orange — dark only */
     --color-accent-inverted-deep: 30.83, 100%, 31%; /* orange — 4.85:1 light */
   }
+  /* Deliberately no `overflow-x: hidden` here: it clips horizontal overflow
+     rather than preventing it, so it hides a reflow failure instead of fixing
+     one — and it would hide any future regression too. Checked at 320px and at
+     400% zoom with the clip lifted: nothing overflows, so there was nothing for
+     it to hide. */
   html,
   body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
   }
 
   /* the nav "events" link is an in-page anchor on the homepage */

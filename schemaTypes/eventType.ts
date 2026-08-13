@@ -89,7 +89,21 @@ export const eventType = defineType({
     defineField({
       name: "eventCopy",
       type: "array",
-      of: [{ type: "block" }],
+      // No H1 on offer: the page already renders the event name as its <h1>, so
+      // an authored one gives the page two and breaks the heading outline
+      // (WCAG 1.3.1). Starting at H2 also keeps authors from skipping a level.
+      of: [
+        {
+          type: "block",
+          styles: [
+            { title: "Normal", value: "normal" },
+            { title: "Heading 2", value: "h2" },
+            { title: "Heading 3", value: "h3" },
+            { title: "Heading 4", value: "h4" },
+            { title: "Quote", value: "blockquote" },
+          ],
+        },
+      ],
       group: "editorial",
     }),
     defineField({

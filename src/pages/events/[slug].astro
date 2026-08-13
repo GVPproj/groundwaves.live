@@ -66,7 +66,11 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
     <section
       class="flex text-center flex-col mx-auto items-center pb-16 max-w-prose w-[100%]"
     >
-      <div class="items-center my-6">
+      <!-- min-w-0: as a flex item this defaults to min-width:auto, so it can't
+           shrink below its min-content width. One event's copy links raw URLs
+           as their own link text, which set a ~370px floor and pushed the whole
+           column past a 320px viewport. -->
+      <div class="items-center my-6 min-w-0 w-full">
         {
           !isPastEvent && event.tickets ? (
             <a href={event.tickets} class="no-underline">
@@ -162,5 +166,10 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
   }
   .ev-copy :global(a:hover) {
     color: hsl(var(--color-accent-inverted-deep));
+  }
+  /* pairs with min-w-0 above: once the column can shrink, the raw-URL link text
+     still needs permission to break rather than spill out of it */
+  .ev-copy {
+    overflow-wrap: break-word;
   }
 </style>

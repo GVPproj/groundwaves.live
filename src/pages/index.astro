@@ -34,6 +34,15 @@ const next = upcomingEvents[0];
 // Hero crossfade: every gallery image is stacked and runs the same keyframes,
 // offset by one cycle each. HOLD is the still time, FADE the overlap where the
 // outgoing and incoming image are both partly visible.
+//
+// This auto-plays indefinitely with no pause control, which is a known and
+// accepted gap against WCAG 2.2.2 (Level A). The judgement: the images are a
+// purely decorative background carrying no information, they sit behind a heavy
+// scrim, and the crossfade is a slow opacity fade with no motion — so the
+// distraction 2.2.2 guards against is minimal, while a visible pause button in
+// the hero costs more than it buys. `prefers-reduced-motion` (below) stops the
+// animation outright for anyone who has asked for that. Revisit if the gallery
+// ever carries meaning or the transition gains movement.
 const slides = gallery.slice(0, 6);
 const HOLD = 5;
 const FADE = 1.75;
