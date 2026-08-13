@@ -30,7 +30,28 @@ const pastEvents = await safeFetch<EventWithRefs[]>(
 
 const gallery = imageGallery ?? [];
 const next = upcomingEvents[0];
-const cards = [...upcomingEvents, ...pastEvents].slice(0, 6);
+
+// Hero crossfade: every gallery image is stacked and runs the same keyframes,
+// offset by one cycle each. HOLD is the still time, FADE the overlap where the
+// outgoing and incoming image are both partly visible.
+const slides = gallery.slice(0, 6);
+const HOLD = 5;
+const FADE = 1.75;
+const CYCLE = HOLD + FADE;
+const TOTAL = slides.length * CYCLE;
+const pct = (t: number) => `${((t / TOTAL) * 100).toFixed(3)}%`;
+
+// The homepage grid is the events listing now — there is no /events index —
+// so every event lands here rather than a slice of them.
+const eventHref = (event: EventWithRefs, upcoming: boolean) =>
+  upcoming && event.tickets
+    ? event.tickets
+    : `/events/${event.slug?.current ?? ""}`;
+
+const eventGroups = [
+  { title: "Upcoming", events: upcomingEvents, upcoming: true },
+  { title: "The archive", events: pastEvents, upcoming: false },
+].filter((bucket) => bucket.events.length > 0);
 
 const fmtDate = (d?: string) =>
   d
@@ -47,17 +68,28 @@ const fmtDate = (d?: string) =>
   <main class="home-inverted !mt-0 text-skin-fill">
     <!-- full-bleed hero -->
     <section
-      class="!block relative !max-w-none !px-0 !mx-auto min-h-[92svh] flex flex-col justify-end overflow-hidden"
+      class="!flex relative !max-w-none !px-0 !mx-auto min-h-[100svh] flex-col justify-start overflow-hidden"
     >
-      <SanityImage
-        node={gallery[0]}
-        width="2000"
-        classNames="absolute inset-0 w-full h-full object-cover opacity-70"
-      />
+      <div class="home-slides absolute inset-0 opacity-70">
+        {
+          slides.map((node: any, i: number) => (
+            <div
+              class:list={["absolute inset-0", slides.length > 1 && "home-slide"]}
+              style={`animation-delay:${(i * CYCLE).toFixed(2)}s`}
+            >
+              <SanityImage
+                node={node}
+                width="2000"
+                classNames="w-full h-full object-cover"
+              />
+            </div>
+          ))
+        }
+      </div>
       <div class="home-scrim absolute inset-0"></div>
 
       <div
-        class="relative max-w-screen-xl mx-auto w-full px-6 md:px-10 pb-16 pt-40"
+        class="relative max-w-screen-xl mx-auto w-full px-6 md:px-10 pb-16 pt-40 md:pt-52"
       >
         <p
           class="home-meta text-[0.7rem] md:text-xs uppercase tracking-[0.35em] opacity-85 mb-6"
@@ -81,15 +113,13 @@ const fmtDate = (d?: string) =>
           )
         }
         <div class="flex flex-wrap items-center gap-4">
-          <a href={next?.tickets ?? "/events"} class="no-underline">
+          <a href={next?.tickets ?? "#events"} class="no-underline">
             <button type="button" class="cta-button font-bold">
               {next?.tickets ? "Tickets" : "See events"}
             </button>
           </a>
           <a href={MAILING_LIST} class="no-underline">
-            <button type="button" class="cta-button font-bold">
-              Mailing list
-            </button>
+            <button type="button" class="cta-button font-bold"> Join </button>
           </a>
         </div>
       </div>
@@ -106,65 +136,81 @@ const fmtDate = (d?: string) =>
       )
     }
 
-    <!-- archive -->
-    <section class="!block max-w-screen-xl !mx-auto !px-6 md:!px-10 pb-24">
-      <div
-        class="home-rule flex items-baseline justify-between border-b pb-4 mb-10"
-      >
-        <h2 class="uppercase tracking-[0.2em] text-sm font-bold">The archive</h2>
-        <a
-          href="/events"
-          class="home-quiet-link text-xs uppercase tracking-[0.2em] no-underline"
-          >all →</a
-        >
-      </div>
+    <!-- events: the full listing lives here, the nav scrolls to it -->
+    <div id="events" class="scroll-mt-24 md:scroll-mt-28">
+      {
+        eventGroups.map((bucket) => (
+          <section class="!block max-w-screen-xl !mx-auto !px-6 md:!px-10 pb-24">
+            <div class="home-rule border-b pb-4 mb-10">
+              <h2 class="uppercase tracking-[0.2em] text-sm font-bold">
+                {bucket.title}
+              </h2>
+            </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-14">
-        {
-          cards.map((event) => (
-            <a
-              href={event.tickets ?? `/events/${event.slug?.current ?? ""}`}
-              class="group block no-underline text-skin-fill"
-            >
-              <div class="home-frame overflow-hidden mb-5">
-                <SanityImage
-                  node={event.image}
-                  width="800"
-                  classNames="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <p class="home-meta text-[0.7rem] uppercase tracking-[0.2em] mb-2">
-                {fmtDate(event.date)}
-              </p>
-              <h3 class="text-2xl font-semibold leading-tight mb-1">
-                {event.name}
-              </h3>
-              <p class="text-sm opacity-60">{event.venue?.name}</p>
-            </a>
-          ))
-        }
-      </div>
-    </section>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-14">
+              {bucket.events.map((event) => (
+                <a
+                  href={eventHref(event, bucket.upcoming)}
+                  class="group block no-underline text-skin-fill"
+                >
+                  <div class="home-frame overflow-hidden mb-5">
+                    <SanityImage
+                      node={event.image}
+                      width="800"
+                      classNames="w-full aspect-[4/5] object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <p class="home-meta text-[0.7rem] uppercase tracking-[0.2em] mb-2">
+                    {fmtDate(event.date)}
+                  </p>
+                  <h3 class="text-2xl font-semibold leading-tight mb-1">
+                    {event.name}
+                  </h3>
+                  <p class="text-sm opacity-60">{event.venue?.name}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))
+      }
+    </div>
 
     <!-- closing band -->
     <div class="home-band text-skin-base">
-      <div
-        class="max-w-screen-xl mx-auto px-6 md:px-10 py-20 md:py-28 text-center"
-      >
+      <div class="max-w-screen-xl mx-auto px-6 md:px-10 py-20 text-center">
         <h2
-          class="uppercase font-bold leading-[0.95] text-[clamp(1.75rem,5vw,3.5rem)] mb-8"
+          class="font-bold leading-[0.95] text-[clamp(1.75rem,5vw,3.5rem)] mb-8"
         >
-          Don't miss<br />the next one
+          Don't miss<br />the next one!
         </h2>
         <a href={MAILING_LIST} class="no-underline">
-          <button type="button" class="cta-button font-bold">
-            Join the list
-          </button>
+          <button type="button" class="cta-button font-bold"> Join </button>
         </a>
       </div>
     </div>
   </main>
 </Layout>
+
+{
+  slides.length > 1 && (
+    <style
+      is:inline
+      set:html={`
+      .home-slide {
+        animation: home-crossfade ${TOTAL}s linear infinite both;
+      }
+      @keyframes home-crossfade {
+        0%, 100% { opacity: 0 }
+        ${pct(FADE)}, ${pct(CYCLE)} { opacity: 1 }
+        ${pct(CYCLE + FADE)} { opacity: 0 }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .home-slide { animation: none }
+      }
+    `}
+    />
+  )
+}
 
 <!-- the site header is fixed and light by default; invert it over this page -->
 <style is:global>
@@ -198,15 +244,6 @@ const fmtDate = (d?: string) =>
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     color: #00c98a;
   }
-  .home-quiet-link {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    color: #f0f0eb;
-    border-bottom: 1px solid rgba(240, 240, 235, 0.4);
-  }
-  .home-quiet-link:hover {
-    color: #00c98a;
-    border-color: #00c98a;
-  }
   .home-band {
     background: #f0f0eb;
   }
@@ -215,8 +252,23 @@ const fmtDate = (d?: string) =>
       to bottom,
       rgba(0, 61, 42, 0.85) 0%,
       rgba(0, 61, 42, 0.3) 35%,
-      rgba(0, 61, 42, 0.95) 100%
+      rgba(0, 61, 42, 0.55) 78%,
+      rgba(0, 61, 42, 0.8) 100%
     );
+  }
+  /* Each slide runs the full cycle offset by its index, so the tail of one
+     fade-out overlaps the head of the next fade-in. `both` fill keeps a slide
+     hidden through its start delay. */
+  .home-slide {
+    opacity: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .home-slide {
+      animation: none;
+    }
+    .home-slide:first-child {
+      opacity: 1;
+    }
   }
   .home-rule {
     border-color: rgba(240, 240, 235, 0.25);

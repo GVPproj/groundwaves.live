@@ -4,6 +4,13 @@ to = "https://afriendlywave.com"
 status = 301
 force = true
 
+# the events index is now the grid on the homepage; /events/:slug still resolves
+[[redirects]]
+from = "/events"
+to = "/#events"
+status = 301
+force = true
+
 [[redirects]]
 from = "/admin*"
 to = "/admin"
