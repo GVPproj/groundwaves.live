@@ -42,7 +42,7 @@ const year = new Date().getFullYear();
         }
         {
           landAck && (
-            <div class="ft-ack mt-8 pl-5 border-l text-[0.8rem] italic leading-[1.7] opacity-70 [&_p]:mb-0">
+            <div class="ft-ack mt-8 pl-5 border-l text-base italic leading-[1.7]  [&_p]:mb-0">
               <PortableText value={[landAck]} />
             </div>
           )
@@ -51,7 +51,9 @@ const year = new Date().getFullYear();
 
       <!-- links read as a directory: hairline rows you scan, not inline text -->
       <div class="ft-sidecar md:pl-16 md:border-l">
-        <h2 class="ft-label font-mono text-[0.7rem] uppercase tracking-[0.3em] mb-6">
+        <h2
+          class="ft-label font-mono text-[0.7rem] uppercase tracking-[0.3em] mb-6"
+        >
           Groundwaves
         </h2>
         <ul class="list-none p-0 m-0">
