@@ -178,7 +178,7 @@ const fmtDate = (d?: string) =>
               {bucket.events.map((event) => (
                 <a
                   href={eventHref(event, bucket.upcoming)}
-                  class="group block no-underline text-skin-fill"
+                  class="home-card group block no-underline text-skin-fill"
                 >
                   <SanityImage
                     node={event.image}
@@ -292,8 +292,10 @@ const fmtDate = (d?: string) =>
   body:has(.home-inverted) #dropdown-content a {
     color: hsl(var(--color-accent));
   }
+  /* the deep orange, not the bright one: this panel is a light ground, where
+     the bright orange is 2.19:1 */
   body:has(.home-inverted) #dropdown-content a:hover {
-    color: hsl(var(--color-accent-inverted));
+    color: hsl(var(--color-accent-inverted-deep));
   }
   body:has(.home-inverted) #dropdown-content a svg {
     fill: hsl(var(--color-accent-inverted));
@@ -323,14 +325,31 @@ const fmtDate = (d?: string) =>
   .home-band {
     background: hsl(var(--color-fill));
   }
+  /* The 35% stop is where the hero copy sits, so it sets the worst-case
+     contrast. It was 0.3, which left the near-white h1 at 2.61:1 against a
+     blown-out photo — below even the 3:1 large-text bar. 0.62 takes the
+     near-white text to 4.88:1 while the photo stays clearly readable.
+     KNOWN GAP (WCAG 1.4.3): .home-meta-hero and .home-headline-accent are
+     --color-accent-inverted, and orange cannot pass 4.5:1 over an arbitrary
+     photo at any usable scrim — it needs the image ~96% covered. Accepted
+     deliberately to keep the hero's accent colour; revisit by recolouring
+     those two to --color-fill if the gap ever needs closing. */
   .home-scrim {
     background: linear-gradient(
       to bottom,
       hsla(var(--color-accent-deep), 0.85) 0%,
-      hsla(var(--color-accent-deep), 0.3) 35%,
-      hsla(var(--color-accent-deep), 0.55) 78%,
-      hsla(var(--color-accent-deep), 0.8) 100%
+      hsla(var(--color-accent-deep), 0.62) 35%,
+      hsla(var(--color-accent-deep), 0.7) 78%,
+      hsla(var(--color-accent-deep), 0.85) 100%
     );
+  }
+  /* the dark ground wants the bright orange; the base a:hover is the deep one,
+     which is 2.36:1 here */
+  .home-card:hover {
+    color: hsl(var(--color-accent-inverted));
+  }
+  .home-statement :global(a:hover) {
+    color: hsl(var(--color-accent-inverted));
   }
   /* Each slide runs the full cycle offset by its index, so the tail of one
      fade-out overlaps the head of the next fade-in. `both` fill keeps a slide

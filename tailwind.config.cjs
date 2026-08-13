@@ -17,6 +17,7 @@ module.exports = {
         base: withOpacity("--color-text-base"),
         accent: withOpacity("--color-accent"),
         "accent-inverted": withOpacity("--color-accent-inverted"),
+        "accent-inverted-deep": withOpacity("--color-accent-inverted-deep"),
         inverted: withOpacity("--color-fill"),
         fill: withOpacity("--color-fill"),
       },

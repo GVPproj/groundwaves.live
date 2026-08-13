@@ -74,7 +74,7 @@ const year = new Date().getFullYear();
         </ul>
 
         <a
-          class="ft-afw mt-12 inline-flex"
+          class="ft-afw mt-12 inline-flex no-underline"
           href={AFW}
           target="_blank"
           rel="noopener noreferrer"
@@ -90,7 +90,7 @@ const year = new Date().getFullYear();
       <p class="mb-0">&copy; {year} Groundworks</p>
       <p class="mb-0">
         Website: <a
-          class="italic text-sm text-skin-accent-inverted"
+          class="ft-credit italic text-sm text-skin-accent-inverted"
           href={GVP}
           target="_blank"
           rel="noopener noreferrer">grahamvanpelt.dev</a
@@ -133,6 +133,11 @@ const year = new Date().getFullYear();
     transition: color 150ms ease;
   }
   .ft-link:hover {
+    color: hsl(var(--color-accent-inverted));
+  }
+  /* the only footer link that inherits the base a:hover, which is tuned for the
+     light ground — it lands at 2.89:1 on this dark blue without this */
+  .ft-credit:hover {
     color: hsl(var(--color-accent-inverted));
   }
   .ft-afw {

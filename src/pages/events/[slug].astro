@@ -69,7 +69,7 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
       <div class="items-center my-6">
         {
           !isPastEvent && event.tickets ? (
-            <a href={event.tickets}>
+            <a href={event.tickets} class="no-underline">
               <SanityImage
                 node={event.image}
                 width="800"
@@ -105,7 +105,7 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
         >
           {event.name}
         </h1>
-        <div class="text-left prose-base">
+        <div class="ev-copy text-left prose prose-base">
           <PortableText value={event.eventCopy} />
         </div>
         {
@@ -137,5 +137,29 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
      page sits on the light ground, not the dark hero */
   .ev-meta {
     color: hsl(var(--color-accent));
+  }
+
+  /* This carried `prose-base` without `prose`, so the typography plugin never
+     applied — prose-base is only a size modifier and emits font-size/margin
+     alone. With `prose` on, the plugin's own greys would override the site
+     palette, so point its variables back at our tokens. */
+  .ev-copy {
+    --tw-prose-body: hsl(var(--color-text-base));
+    --tw-prose-headings: hsl(var(--color-text-base));
+    --tw-prose-lead: hsl(var(--color-text-base));
+    --tw-prose-bold: hsl(var(--color-text-base));
+    --tw-prose-quotes: hsl(var(--color-text-base));
+    --tw-prose-captions: hsl(var(--color-text-base));
+    --tw-prose-code: hsl(var(--color-text-base));
+    --tw-prose-links: hsl(var(--color-accent));
+    --tw-prose-counters: hsl(var(--color-text-base));
+    --tw-prose-bullets: hsl(var(--color-accent));
+    --tw-prose-hr: hsla(var(--color-text-base), 0.2);
+    --tw-prose-quote-borders: hsla(var(--color-accent), 0.4);
+    --tw-prose-th-borders: hsla(var(--color-text-base), 0.3);
+    --tw-prose-td-borders: hsla(var(--color-text-base), 0.15);
+  }
+  .ev-copy :global(a:hover) {
+    color: hsl(var(--color-accent-inverted-deep));
   }
 </style>
