@@ -1,12 +1,9 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
-// import { sanityClient } from "sanity:client";
 import { schemaTypes } from "./schemaTypes";
 import { structure } from "./structure";
 import { defaultDocumentNode } from "./structure/defaultDocumentNode";
-
-// const { projectId, dataset } = sanityClient.config();
 
 // Astro serves this config through Vite (import.meta.env), but the Sanity CLI
 // — `sanity schema extract`, used by `npm run codegen` — loads it via esbuild

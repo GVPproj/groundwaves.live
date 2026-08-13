@@ -10,24 +10,8 @@ function withOpacity(variableName) {
 }
 
 module.exports = {
-  content: [
-		'./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-		'./node_modules/flowbite/**/*.js'
-	],
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
-    // Remove the following screen breakpoint or add other breakpoints
-    // if one breakpoint is not enough for you
-    // screens: {
-    //   sm: "768px",
-    //   lg: '1024px',
-
-    // },
-
-    // Uncomment the following extend
-    // if existing Tailwind color palette will be used
-
-    // extend: {
-
     textColor: {
       skin: {
         base: withOpacity("--color-text-base"),
@@ -44,8 +28,6 @@ module.exports = {
         "fill-muted": withOpacity("--color-fill-gradient-end"),
         accent: withOpacity("--color-accent"),
         inverted: withOpacity("--color-text-base"),
-        card: withOpacity("--color-card"),
-        "card-muted": withOpacity("--color-card-muted"),
       },
     },
     outlineColor: {
@@ -55,9 +37,7 @@ module.exports = {
     },
     borderColor: {
       skin: {
-        line: withOpacity("--color-border"),
         fill: withOpacity("--color-text-base"),
-        accent: withOpacity("--color-accent"),
       },
     },
     fill: {
@@ -72,7 +52,6 @@ module.exports = {
       skin: {
         base: "var(--color-text-base)",
         accent: "var(--color-accent)",
-        highlight: "var(--color-card)",
       },
     },
 
@@ -91,8 +70,5 @@ module.exports = {
     },
     // },
   },
-  plugins: [
-		require('flowbite/plugin'),
-		require('@tailwindcss/typography'),
-	],
+  plugins: [require('@tailwindcss/typography')],
 };

@@ -2,16 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Force light theme and disable dark mode */
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: light !important;
-  }
-}
-
 @layer base {
-  :root,
-  html[data-theme="light"] {
+  :root {
     --color-fill: 60, 14.29%, 93.14%; /* neutral gray */
     --color-fill-gradient-end: 60, 14.29%, 91.14%; /* neutral gray */
     --color-text-base: 226.32, 100%, 22.35%; /* main blue */
@@ -19,22 +11,6 @@
     --color-accent-deep: 161.31, 100%, 11.96%; /* accent hue as a dark ground (homepage) */
     --color-accent-bright: 161.19, 100%, 39.41%; /* accent hue lifted for contrast on the dark ground */
     --color-accent-inverted: 30.83, 100%, 49.61%; /* orange */
-    --color-card: 226.32, 100%, 22.35%; /* orange */
-    --color-card-muted: 53.11, 100%, 64.12%; /* yellow */
-    --color-border: 160.75, 100%, 31.18%; /* yellow */
-  }
-  /* Override dark theme to use light theme values */
-  html[data-theme="dark"] {
-    --color-fill: 60, 14.29%, 93.14%; /* neutral gray */
-    --color-fill-gradient-end: 60, 14.29%, 91.14%; /* neutral gray */
-    --color-text-base: 226.32, 100%, 22.35%; /* main blue */
-    --color-accent: 160.75, 100%, 31.18%; /* green */
-    --color-accent-deep: 161.31, 100%, 11.96%; /* accent hue as a dark ground (homepage) */
-    --color-accent-bright: 161.19, 100%, 39.41%; /* accent hue lifted for contrast on the dark ground */
-    --color-accent-inverted: 30.83, 100%, 49.61%; /* orange */
-    --color-card: 226.32, 100%, 22.35%; /* orange */
-    --color-card-muted: 53.11, 100%, 64.12%; /* yellow */
-    --color-border: 160.75, 100%, 31.18%; /* yellow */
   }
   html,
   body {
@@ -59,19 +35,6 @@
     margin: 0;
     padding: 0;
   }
-  /* Always show sun icon, never show moon icon */
-  #sun-svg {
-    display: block !important;
-  }
-  #moon-svg {
-    display: none !important;
-  }
-  html[data-theme="dark"] #moon-svg {
-    display: none !important;
-  }
-  html[data-theme="dark"] #sun-svg {
-    display: block !important;
-  }
   main {
     @apply mt-32 md:mt-40;
   }
@@ -93,10 +56,6 @@
     @apply inline-block fill-skin-base hover:fill-skin-accent;
   }
 }
-.cta {
-  @apply flex h-fit flex-col items-center rounded border border-skin-line p-8 text-center font-semibold  mt-8;
-}
-
 .cta-button {
   @apply cursor-pointer bg-skin-accent text-skin-fill rounded-full text-sm md:text-xl px-5 py-2.5 
   uppercase transition duration-150 ease-in-out hover:bg-skin-accent-inverted hover:text-skin-base

@@ -16,7 +16,7 @@ This is **Groundwaves v3**, an Astro-based website for a music event organizatio
 Run all commands from the project root:
 
 ```bash
-npm run dev        # Start development server at localhost:4321
+npm run dev        # Start development server at localhost:4323
 npm run build      # Build production site to ./dist/
 npm run preview    # Preview production build locally
 npm run astro      # Run Astro CLI commands
@@ -32,29 +32,34 @@ npm run astro      # Run Astro CLI commands
 - **TypeScript**: Type safety
 
 ### Key Directories
-- `src/pages/`: Route-based pages (index, events, about, afw)
-- `src/components/`: Reusable Astro and React components
+- `src/pages/`: Route-based pages (index, events/[slug])
+- `src/components/`: Reusable Astro components
 - `src/layouts/`: Page layout templates
-- `src/data/`: Static data files (AFW event content)
 - `schemaTypes/`: Sanity schema definitions
 - `structure/`: Sanity studio structure configuration
 
 ### Content Management
 - **Sanity Studio**: Available at `/admin` route
 - **Schema Types**: Events, Artists, Venues, Index/About content
-- **Static Data**: AFW (Active Full Weekend) event data in `src/data/afwContent.ts`
 
 ### Pages Structure
-- **index.astro**: Homepage with hero content from Sanity
-- **events.astro**: Event listings from Sanity
-- **about.astro**: About page content from Sanity
-- **afw.astro**: Special event page using static data
+The whole public site is two routes plus the studio:
+- **index.astro**: Homepage — hero, statement, and the full event listing
+  (upcoming + past). There is no separate events index; `/events` redirects to
+  `/#events`.
+- **events/[slug].astro**: Individual event pages from Sanity
+- **/admin**: Sanity Studio
+
+The about copy lives in the footer, not on its own page — `/about` redirects to
+`/#about`. `/afw` redirects off-site to afriendlywave.com.
 
 ### Component Patterns
-- Mixed Astro/React architecture
-- Client-side hydration with `client:load` directive
+- Astro components throughout; no client-side React islands. The React
+  integration stays because Sanity Studio needs it.
 - Sanity image optimization via `SanityImage.astro`
 - Portable Text rendering for rich content
+- Sanity fetches go through `safeFetch` in `src/lib/sanity.ts`, which returns a
+  fallback when credentials are absent so the site still builds.
 
 ## Configuration Files
 
@@ -84,9 +89,8 @@ Required environment variables:
 - Content structure managed via `structure/` directory
 
 ### Static Content
-- AFW event data is hardcoded in `src/data/afwContent.ts`
-- Images stored in `src/assets/` and `public/` directories
-- Font files in `public/fonts/`
+- Font files in `public/fonts/` — woff2 only, and only the weights declared in
+  `src/styles/base.css`
 
 ## Common Tasks
 
