@@ -31,11 +31,6 @@ module.exports = {
         inverted: withOpacity("--color-text-base"),
       },
     },
-    outlineColor: {
-      skin: {
-        fill: withOpacity("--color-accent"),
-      },
-    },
     borderColor: {
       skin: {
         fill: withOpacity("--color-text-base"),
@@ -48,12 +43,6 @@ module.exports = {
         "accent-inverted": withOpacity("--color-accent-inverted"),
       },
       transparent: "transparent",
-    },
-    stroke: {
-      skin: {
-        base: "var(--color-text-base)",
-        accent: "var(--color-accent)",
-      },
     },
 
     // This replaces Tailwind's defaults rather than extending them, so only the
@@ -69,11 +58,7 @@ module.exports = {
         gradend: withOpacity("--color-fill-gradient-end"),
         accent: withOpacity("--color-accent"),
       },
-      fontSize: {
-        dynamic: "clamp(1rem, 3vw, 2.25rem)",
-      },
     },
-    // },
   },
   plugins: [require('@tailwindcss/typography')],
 };

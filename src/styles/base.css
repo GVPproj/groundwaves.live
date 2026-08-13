@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --color-fill: 60, 14.29%, 93.14%; /* neutral gray */
-    --color-fill-gradient-end: 60, 14.29%, 91.14%; /* neutral gray */
+    --color-fill: 60, 14.29%, 93.14%;
+    --color-fill-gradient-end: 60, 14.29%, 91.14%;
     --color-text-base: 226.32, 100%, 22.35%; /* main blue */
     /* Contrast for the light-ground tokens is set against
        --color-fill-gradient-end, not --color-fill: the body is a gradient, so
@@ -39,8 +39,7 @@
     }
   }
 
-  /* selection is fully opaque: at bg-opacity-70 the near-white selected text
-     sat at 2.96:1 on the blended ground, against 5:1 at full strength */
+  /* selection stays fully opaque — blending it drops the selected text to ~3:1 */
   body {
     @apply flex flex-col min-h-screen bg-gradient-to-b from-fill to-gradend font-serif text-skin-base text-opacity-90
         antialiased selection:bg-skin-accent selection:text-skin-inverted;
@@ -73,9 +72,6 @@
     @apply inline-block fill-skin-base hover:fill-skin-accent;
   }
 
-  /* The old rule set outline-width/offset/colour but no outline-style, so it
-     computed to `none` and never painted — and it wasn't scoped to focus. The
-     site had no author-defined focus indicator at all. */
   :where(a, button):focus-visible {
     outline: 2px solid hsl(var(--color-accent));
     outline-offset: 2px;
@@ -142,67 +138,44 @@
   @apply text-lg md:text-[2.5rem] px-10 py-5;
 }
 
-/* fonts */
-
-/* fraunces-300 - latin */
+/* Only the weights the site actually uses — 700 is the heaviest. Adding one
+   here means adding the matching woff2 to public/fonts. */
 @font-face {
-  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
+  font-display: swap;
   font-family: "Fraunces";
   font-style: normal;
   font-weight: 300;
   src: url("/fonts/fraunces-v30-latin-300.woff2") format("woff2");
 }
 
-/* fraunces-regular - latin */
 @font-face {
-  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
+  font-display: swap;
   font-family: "Fraunces";
   font-style: normal;
   font-weight: 400;
   src: url("/fonts/fraunces-v30-latin-regular.woff2") format("woff2");
 }
 
-/* fraunces-italic - latin */
 @font-face {
-  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
+  font-display: swap;
   font-family: "Fraunces";
   font-style: italic;
   font-weight: 400;
   src: url("/fonts/fraunces-v30-latin-italic.woff2") format("woff2");
 }
 
-/* fraunces-500 - latin */
 @font-face {
-  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
+  font-display: swap;
   font-family: "Fraunces";
   font-style: normal;
   font-weight: 500;
   src: url("/fonts/fraunces-v30-latin-500.woff2") format("woff2");
 }
 
-/* fraunces-700 - latin */
 @font-face {
-  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
+  font-display: swap;
   font-family: "Fraunces";
   font-style: normal;
   font-weight: 700;
   src: url("/fonts/fraunces-v30-latin-700.woff2") format("woff2");
-}
-
-/* fraunces-800 - latin */
-@font-face {
-  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
-  font-family: "Fraunces";
-  font-style: normal;
-  font-weight: 800;
-  src: url("/fonts/fraunces-v30-latin-800.woff2") format("woff2");
-}
-
-/* fraunces-900 - latin */
-@font-face {
-  font-display: swap; /* Show fallback fonts immediately while custom fonts load */
-  font-family: "Fraunces";
-  font-style: normal;
-  font-weight: 900;
-  src: url("/fonts/fraunces-v30-latin-900.woff2") format("woff2");
 }

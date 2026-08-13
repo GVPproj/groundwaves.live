@@ -53,8 +53,7 @@ Astro.response.headers.set(
       content="https://res.cloudinary.com/dngvurpdw/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1747231904/AFW_Illustration_12_sci8jw.jpg"
     />
     <title>{title}</title>
-    <!-- Preload Fonts -->
-    <!-- Preload only essential fonts for performance -->
+    <!-- only the weights above the fold; the rest load on demand -->
     <link
       rel="preload"
       href="/fonts/fraunces-v30-latin-regular.woff2"
@@ -76,7 +75,6 @@ Astro.response.headers.set(
       type="font/woff2"
       crossorigin
     />
-    <!-- <ViewTransitions /> -->
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

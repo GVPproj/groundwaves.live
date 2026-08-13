@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { safeFetch } from "../lib/sanity";
+import { MAILING_LIST } from "../lib/links";
 import { PortableText } from "astro-portabletext";
 import SanityImage from "../components/fragments/SanityImage.astro";
 import type { Event, Venue } from "../../sanity.types";
@@ -11,8 +12,6 @@ type EventWithRefs = Omit<Event, "venue" | "slug"> & {
   slug?: { current: string };
   venue?: Venue;
 };
-
-const MAILING_LIST = "https://rkbce3s6n3o.typeform.com/to/FMhtniXO";
 
 const { headline, heroText, imageGallery } = await safeFetch(
   `*[_type == "indexContent"]{headline, heroText, imageGallery}[0]`,
@@ -35,14 +34,10 @@ const next = upcomingEvents[0];
 // offset by one cycle each. HOLD is the still time, FADE the overlap where the
 // outgoing and incoming image are both partly visible.
 //
-// This auto-plays indefinitely with no pause control, which is a known and
-// accepted gap against WCAG 2.2.2 (Level A). The judgement: the images are a
-// purely decorative background carrying no information, they sit behind a heavy
-// scrim, and the crossfade is a slow opacity fade with no motion — so the
-// distraction 2.2.2 guards against is minimal, while a visible pause button in
-// the hero costs more than it buys. `prefers-reduced-motion` (below) stops the
-// animation outright for anyone who has asked for that. Revisit if the gallery
-// ever carries meaning or the transition gains movement.
+// KNOWN GAP (WCAG 2.2.2): this auto-plays with no pause control. Accepted
+// because the images are decorative, sit behind a heavy scrim, and fade
+// without movement; `prefers-reduced-motion` (below) stops it outright.
+// Revisit if the gallery ever carries meaning or the transition gains motion.
 const slides = gallery.slice(0, 6);
 const HOLD = 5;
 const FADE = 1.75;
@@ -326,12 +321,8 @@ const fmtDate = (d?: string) =>
     color: hsl(var(--color-accent-bright));
   }
   /* same treatment as .ft-label in the footer */
-  .home-label {
-    color: hsl(var(--color-accent-inverted));
-  }
-  .home-headline-accent {
-    color: hsl(var(--color-accent-inverted));
-  }
+  .home-label,
+  .home-headline-accent,
   .home-meta-hero {
     color: hsl(var(--color-accent-inverted));
   }
@@ -339,15 +330,11 @@ const fmtDate = (d?: string) =>
     background: hsl(var(--color-fill));
   }
   /* The 35% stop is where the hero copy sits, so it sets the worst-case
-     contrast. It was 0.3, which left the near-white h1 at 2.61:1 against a
-     blown-out photo — below even the 3:1 large-text bar. 0.62 takes the
-     near-white text to 4.88:1 while the photo stays clearly readable. The 78%
-     and 100% stops moved up with it only to keep the ramp monotonic — at the
-     old 0.55 the gradient would dip lighter below the text before darkening
-     again.
+     contrast: 0.62 puts the near-white h1 at 4.88:1 over a blown-out photo
+     while the image stays clearly readable. The 78% and 100% stops exist to
+     keep the ramp monotonic, so it never dips lighter below the text.
      The sub-paragraph under the h1 renders at full opacity for the same
-     reason: at the opacity-80 it used to carry it measured 3.77:1 here, and at
-     text-xl (20px, non-bold) it needs 4.5.
+     reason — at text-xl (20px, non-bold) it needs 4.5:1.
      KNOWN GAP (WCAG 1.4.3): .home-meta-hero and .home-headline-accent are
      --color-accent-inverted, and orange cannot pass 4.5:1 over an arbitrary
      photo at any usable scrim — it needs the image ~96% covered. Accepted

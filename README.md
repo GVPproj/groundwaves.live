@@ -2,7 +2,7 @@
 
 A modern website for a music event organization built with Astro, featuring content management through Sanity CMS and responsive design with Tailwind CSS.
 
-![Groundwaves Preview](public/previewGH.png)
+![Groundwaves Preview](docs/previewGH.png)
 
 ## Technologies
 
@@ -14,8 +14,8 @@ A modern website for a music event organization built with Astro, featuring cont
 ## Setup
 
 ```bash
-npm install        # Install dependencies
-npm run codegen    # Generate TypeScript types from Sanity schemas
+pnpm install        # Install dependencies
+pnpm run codegen    # Generate TypeScript types from Sanity schemas
 ```
 
 The `codegen` command extracts your Sanity schema and generates TypeScript types in `sanity.types.ts`. Run this after cloning the repo or whenever you modify Sanity schema definitions.
@@ -23,10 +23,10 @@ The `codegen` command extracts your Sanity schema and generates TypeScript types
 ## Development
 
 ```bash
-npm run dev        # Start development server at localhost:4321
-npm run build      # Build production site
-npm run preview    # Preview production build
-npm run codegen    # Regenerate Sanity types after schema changes
+pnpm run dev        # Start development server at localhost:4323
+pnpm run build      # Build production site
+pnpm run preview    # Preview production build
+pnpm run codegen    # Regenerate Sanity types after schema changes
 ```
 
 ## Deployment

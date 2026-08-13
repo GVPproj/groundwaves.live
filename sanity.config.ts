@@ -6,7 +6,7 @@ import { structure } from "./structure";
 import { defaultDocumentNode } from "./structure/defaultDocumentNode";
 
 // Astro serves this config through Vite (import.meta.env), but the Sanity CLI
-// — `sanity schema extract`, used by `npm run codegen` — loads it via esbuild
+// — `sanity schema extract`, used by `pnpm run codegen` — loads it via esbuild
 // in CJS, where `import.meta` is empty. process.env covers that case.
 const env: Record<string, string | undefined> =
   import.meta.env ?? process.env;

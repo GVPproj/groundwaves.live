@@ -1,6 +1,6 @@
 ---
-// Astro Dropdown component to replace ReactDropdown
 import AfwWordmark from "./AfwWordmark.astro";
+import { MAILING_LIST } from "../../lib/links";
 ---
 
 <div id="astro-dropdown" class="md:hidden">
@@ -12,7 +12,6 @@ import AfwWordmark from "./AfwWordmark.astro";
     aria-controls="dropdown-content"
   >
     <svg
-      id="menu-icon"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -26,21 +25,6 @@ import AfwWordmark from "./AfwWordmark.astro";
         stroke-linejoin="round"
         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
     </svg>
-    <svg
-      id="close-icon"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="h-8 w-8 hidden"
-      aria-hidden="true"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M6 18L18 6M6 6l12 12"></path>
-    </svg>
   </button>
 
   <div
@@ -53,9 +37,7 @@ import AfwWordmark from "./AfwWordmark.astro";
     z-50 fixed inset-0 opacity-0 transition-opacity duration-300"
   >
     <div class="fixed top-4 left-8 z-50">
-      <a class="text-3xl font-bold no-underline" href="/" data-astro-reload
-        >groundwaves</a
-      >
+      <a class="text-3xl font-bold no-underline" href="/">groundwaves</a>
     </div>
     <div class="fixed top-5 right-8 z-50">
       <button
@@ -92,7 +74,7 @@ import AfwWordmark from "./AfwWordmark.astro";
         <div>about us</div>
       </a>
       <a
-        href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO"
+        href={MAILING_LIST}
         class="cta-button font-bold"
         aria-label="Join Mailing List"
       >
@@ -103,17 +85,13 @@ import AfwWordmark from "./AfwWordmark.astro";
 </div>
 
 <script>
-  // Initialize dropdown functionality
   function setupDropdown() {
     const dropdown = document.getElementById("astro-dropdown");
-    if (!dropdown || dropdown.dataset.ready) return;
-    dropdown.dataset.ready = "true";
+    if (!dropdown) return;
 
     const toggle = document.getElementById("dropdown-toggle");
     const closeBtn = document.getElementById("dropdown-close");
     const content = document.getElementById("dropdown-content");
-    const menuIcon = document.getElementById("menu-icon");
-    const closeIcon = document.getElementById("close-icon");
     const menuItems = document.querySelectorAll(".menu-item");
 
     // The overlay authors inside <header>, which has `backdrop-blur`. A
@@ -183,7 +161,7 @@ import AfwWordmark from "./AfwWordmark.astro";
       isOpen = true;
       lockScroll();
       toggle.setAttribute("aria-expanded", "true");
-      toggle.classList.add("hidden"); // Hide the hamburger button entirely
+      toggle.classList.add("hidden");
       content.classList.remove("hidden");
       setBackgroundInert(true);
       document.addEventListener("keydown", onKeydown);
@@ -206,35 +184,31 @@ import AfwWordmark from "./AfwWordmark.astro";
       // ignored, and the toggle lives inside the header we just inerted.
       setBackgroundInert(false);
       toggle.setAttribute("aria-expanded", "false");
-      toggle.classList.remove("hidden"); // Show the hamburger button again
+      toggle.classList.remove("hidden");
       content.style.opacity = "0";
       toggle.focus();
 
-      // Wait for transition to complete before hiding
+      // matches the 300ms opacity transition above
       setTimeout(() => {
         content.classList.remove("flex");
         content.classList.add("hidden");
-      }, 300); // Match transition duration
+      }, 300);
     }
 
-    // Toggle dropdown when button is clicked
     toggle.addEventListener("click", () => {
       openMenu();
     });
 
-    // Close dropdown when close button is clicked
     closeBtn.addEventListener("click", () => {
       closeMenu();
     });
 
-    // Add click event to menu items for animation and closing
     menuItems.forEach((item) => {
       item.addEventListener("click", async (e) => {
         // Release the lock synchronously: the anchor's default navigation fires
         // as soon as this handler yields, and it can't scroll a fixed body.
         unlockScroll(false);
 
-        // Add brief highlight effect
         const originalBg = item.style.backgroundColor;
         const originalColor = item.style.color;
 
@@ -251,18 +225,8 @@ import AfwWordmark from "./AfwWordmark.astro";
         closeMenu();
       });
     });
-
-    // Close menu on page navigation
-    document.addEventListener("astro:page-load", () => {
-      if (isOpen) {
-        closeMenu();
-      }
-    });
   }
 
-  // Run setup once DOM is loaded
-  document.addEventListener("astro:page-load", setupDropdown);
-  // Also run on initial page load
   document.addEventListener("DOMContentLoaded", setupDropdown);
 </script>
 

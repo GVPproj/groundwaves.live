@@ -3,7 +3,7 @@ import { sanityClient } from "sanity:client";
 // True when real Sanity credentials are configured. When they're absent
 // (e.g. local dev without a .env), we skip network fetches and return
 // fallback data so the app still renders instead of crashing at build time.
-export const sanityEnabled = Boolean(
+const sanityEnabled = Boolean(
   import.meta.env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
 );
 
@@ -24,5 +24,3 @@ export async function safeFetch<T>(
     return fallback;
   }
 }
-
-export { sanityClient };

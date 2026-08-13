@@ -1,6 +1,7 @@
 ---
 import AstroDropdown from "./AstroDropdown.astro";
 import AfwWordmark from "./AfwWordmark.astro";
+import { MAILING_LIST } from "../../lib/links";
 ---
 
 <header
@@ -13,7 +14,6 @@ import AfwWordmark from "./AfwWordmark.astro";
     <a
       class="text-3xl md:text-4xl font-bold pb-2 md:pb-0 no-underline"
       href="/"
-      data-astro-reload
     >
       groundwaves
     </a>
@@ -38,7 +38,7 @@ import AfwWordmark from "./AfwWordmark.astro";
         <a href="/#about">about</a>
       </nav>
       <a
-        href="https://rkbce3s6n3o.typeform.com/to/FMhtniXO"
+        href={MAILING_LIST}
         class="cta-button font-bold ml-auto"
         aria-label="Join Mailing List"
       >
@@ -71,10 +71,8 @@ import AfwWordmark from "./AfwWordmark.astro";
     if (!header) return;
     const currentScrollY = window.scrollY;
     if (currentScrollY > lastScrollY && currentScrollY > 10) {
-      // Scrolling down
       header.classList.add("hide-on-scroll");
     } else {
-      // Scrolling up
       header.classList.remove("hide-on-scroll");
     }
     lastScrollY = currentScrollY;

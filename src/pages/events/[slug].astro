@@ -4,13 +4,12 @@ import { PortableText } from "astro-portabletext";
 import { YouTube } from "astro-embed";
 import Layout from "../../layouts/Layout.astro";
 import SanityImage from "../../components/fragments/SanityImage.astro";
-import type { Event, Venue, Artist } from "../../sanity.types";
+import type { Event, Venue } from "../../sanity.types";
 
 // Event type with expanded references (from GROQ queries with ->)
 type EventWithRefs = Event & {
   slug: string;
   venue?: Venue;
-  headline?: Artist;
 };
 
 export async function getStaticPaths() {
@@ -25,7 +24,6 @@ export async function getStaticPaths() {
       image,
       youtubeEmbeds,
       tickets,
-      headline->,
       venue->
     }`,
     [],
@@ -108,22 +106,16 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
         </div>
         {
           event.youtubeEmbeds &&
-            event.youtubeEmbeds.map((emb: string) => {
-              if (typeof emb !== "string") {
-                console.warn(`Invalid YouTube ID: ${emb}`);
-                return null;
-              }
-              // youtubeEmbeds is a flat array of ID strings with no per-video
-              // title to pass, so the event name is the best label available —
-              // it beats astro-embed's default bare "Play".
-              return (
-                <YouTube
-                  class="w-full mx-auto mt-8"
-                  id={emb}
-                  playlabel={`Play: ${event.name}`}
-                />
-              );
-            })
+            // youtubeEmbeds is a flat array of ID strings with no per-video
+            // title to pass, so the event name is the best label available —
+            // it beats astro-embed's default bare "Play".
+            event.youtubeEmbeds.map((emb: string) => (
+              <YouTube
+                class="w-full mx-auto mt-8"
+                id={emb}
+                playlabel={`Play: ${event.name}`}
+              />
+            ))
         }
         {
           !isPastEvent && event?.tickets && (
@@ -144,10 +136,8 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
     color: hsl(var(--color-accent));
   }
 
-  /* This carried `prose-base` without `prose`, so the typography plugin never
-     applied — prose-base is only a size modifier and emits font-size/margin
-     alone. With `prose` on, the plugin's own greys would override the site
-     palette, so point its variables back at our tokens. */
+  /* The typography plugin ships its own greys, which would override the site
+     palette — point its variables back at our tokens. */
   .ev-copy {
     --tw-prose-body: hsl(var(--color-text-base));
     --tw-prose-headings: hsl(var(--color-text-base));
@@ -168,8 +158,6 @@ const meta = [dateRange, event.venue?.name].filter(Boolean).join(" · ");
        text still needs permission to break rather than spill out of it */
     overflow-wrap: break-word;
   }
-  /* no .ev-copy a:hover rule here on purpose: the typography plugin writes its
-     link colour through zero-specificity :where(), so the base `a:hover` in
-     base.css already wins and supplies the light-ground orange. Verified in
-     Chromium. */
+  /* No a:hover rule here on purpose: the plugin writes its link colour through
+     zero-specificity :where(), so the base `a:hover` already wins. */
 </style>

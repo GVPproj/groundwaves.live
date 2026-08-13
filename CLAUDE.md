@@ -16,10 +16,10 @@ This is **Groundwaves v3**, an Astro-based website for a music event organizatio
 Run all commands from the project root:
 
 ```bash
-npm run dev        # Start development server at localhost:4323
-npm run build      # Build production site to ./dist/
-npm run preview    # Preview production build locally
-npm run astro      # Run Astro CLI commands
+pnpm run dev        # Start development server at localhost:4323
+pnpm run build      # Build production site to ./dist/
+pnpm run preview    # Preview production build locally
+pnpm run astro      # Run Astro CLI commands
 ```
 
 ## Architecture
@@ -77,7 +77,7 @@ Required environment variables:
 ## Deployment
 
 - **Platform**: Netlify
-- **Build Command**: `npm run build`
+- **Build Command**: `pnpm run build`
 - **Publish Directory**: `dist/`
 - **Site URL**: https://groundwaves.live
 
