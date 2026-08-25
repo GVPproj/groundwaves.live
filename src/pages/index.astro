@@ -312,18 +312,18 @@ const fmtDate = (d?: string) =>
   /* the open mobile menu is a light full-screen panel inside the header —
      the inversion above would render it white-on-white, so restore the
      default palette here */
-  body:has(.home-inverted) #dropdown-content a {
+  body:has(.home-inverted) #dropdown-content a:not(.cta-button) {
     color: hsl(var(--color-accent));
   }
   /* the deep orange, not the bright one: this panel is a light ground, where
      the bright orange is 2.19:1 */
-  body:has(.home-inverted) #dropdown-content a:hover {
+  body:has(.home-inverted) #dropdown-content a:not(.cta-button):hover {
     color: hsl(var(--color-accent-inverted-deep));
   }
-  body:has(.home-inverted) #dropdown-content a svg {
+  body:has(.home-inverted) #dropdown-content a:not(.cta-button) svg {
     fill: hsl(var(--color-accent-inverted));
   }
-  body:has(.home-inverted) #dropdown-content a:hover svg {
+  body:has(.home-inverted) #dropdown-content a:not(.cta-button):hover svg {
     fill: hsl(var(--color-accent));
   }
 </style>
