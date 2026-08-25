@@ -22,8 +22,44 @@ try {
 } catch (error) {
   console.error(error);
 }
+
+// Intrinsic width/height so the browser reserves the box before the file
+// arrives. Without them the event grid grows as each image loads, which shifts
+// everything below it — including #about, so a fragment navigation there
+// lands short. The asset ref encodes the source size
+// (image-<id>-<w>x<h>-<ext>); the builder applies the crop by default, so the
+// same crop is applied here and the result scaled to the requested width.
+// Only the ratio matters for layout, since call sites size with CSS.
+const ref: string | undefined = node?.asset?._ref ?? node?.asset?._id;
+const sourceSize = ref?.match(/-(\d+)x(\d+)-/);
+let dimensions: { width: number; height: number } | undefined;
+if (sourceSize) {
+  const crop = node.crop ?? {};
+  const sourceWidth = Number(sourceSize[1]);
+  const sourceHeight = Number(sourceSize[2]);
+  const croppedWidth =
+    sourceWidth * (1 - (crop.left ?? 0) - (crop.right ?? 0));
+  const croppedHeight =
+    sourceHeight * (1 - (crop.top ?? 0) - (crop.bottom ?? 0));
+  if (croppedWidth > 0 && croppedHeight > 0) {
+    // fit("max") never upscales
+    const renderWidth = Math.min(Number(width), croppedWidth);
+    dimensions = {
+      width: Math.round(renderWidth),
+      height: Math.round((renderWidth * croppedHeight) / croppedWidth),
+    };
+  }
+}
 ---
 
 {
-  image && <img src={image.url()} alt={node.alt || ""} class={classNames} />
+  image && (
+    <img
+      src={image.url()}
+      alt={node.alt || ""}
+      class={classNames}
+      width={dimensions?.width}
+      height={dimensions?.height}
+    />
+  )
 }
