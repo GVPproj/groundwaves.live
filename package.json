@@ -2,43 +2,48 @@
   "name": "groundwavesv3",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "codegen": "sanity schema extract && sanity typegen generate"
+    "codegen": "sanity schema extract --force && sanity typegen generate"
   },
   "dependencies": {
-    "@astrojs/netlify": "^8.2.1",
-    "@astrojs/react": "^6.0.2",
-    "@sanity/astro": "^3.4.1",
-    "@sanity/client": "^7.23.2",
-    "@sanity/image-url": "^1.2.0",
-    "@sanity/vision": "^3.99.0",
+    "@astrojs/netlify": "^8.2.5",
+    "@astrojs/react": "^6.0.5",
+    "@sanity/astro": "^3.5.1",
+    "@sanity/client": "^8.5.0",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^6.12.0",
     "@tailwindcss/typography": "^0.5.20",
-    "@types/react": "^18.3.31",
-    "@types/react-dom": "^18.3.7",
-    "astro": "^7.2.1",
-    "astro-embed": "^0.13.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "astro": "^7.3.1",
+    "astro-embed": "^0.13.1",
     "astro-portabletext": "^0.13.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "sanity": "^3.99.0",
-    "sanity-plugin-documents-pane": "^2.4.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sanity": "^6.12.0",
+    "sanity-plugin-documents-pane": "^4.1.19",
     "tailwindcss": "^3.4.19",
-    "vite": "^8.1.4"
+    "vite": "^8.2.2"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "prettier": "^3.8.4",
+    "autoprefixer": "^10.5.4",
+    "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1"
   },
   "packageManager": "pnpm@10.34.4",
-  "overrides": {
-    "sanity": {
-      "framer-motion": "12.42.2"
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "@sanity/visual-editing@5>@sanity/client": "^7.24.0 || ^8.0.0"
+      }
     }
   }
 }

@@ -1,11 +1,10 @@
 ---
 const { node, classNames } = Astro.props;
 const { width = 960 } = Astro.props;
-import imageUrlBuilder from "@sanity/image-url";
-import type { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
+import { createImageUrlBuilder, type ImageUrlBuilder } from "@sanity/image-url";
 import { sanityClient } from "sanity:client";
 
-const builder = imageUrlBuilder(sanityClient);
+const builder = createImageUrlBuilder(sanityClient);
 let image: ImageUrlBuilder | undefined;
 
 // See https://www.sanity.io/docs/presenting-images for general documentation on
@@ -37,8 +36,7 @@ if (sourceSize) {
   const crop = node.crop ?? {};
   const sourceWidth = Number(sourceSize[1]);
   const sourceHeight = Number(sourceSize[2]);
-  const croppedWidth =
-    sourceWidth * (1 - (crop.left ?? 0) - (crop.right ?? 0));
+  const croppedWidth = sourceWidth * (1 - (crop.left ?? 0) - (crop.right ?? 0));
   const croppedHeight =
     sourceHeight * (1 - (crop.top ?? 0) - (crop.bottom ?? 0));
   if (croppedWidth > 0 && croppedHeight > 0) {

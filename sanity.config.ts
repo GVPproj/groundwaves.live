@@ -8,14 +8,18 @@ import { defaultDocumentNode } from "./structure/defaultDocumentNode";
 // Astro serves this config through Vite (import.meta.env), but the Sanity CLI
 // — `sanity schema extract`, used by `pnpm run codegen` — loads it via esbuild
 // in CJS, where `import.meta` is empty. process.env covers that case.
-const env: Record<string, string | undefined> =
-  import.meta.env ?? process.env;
+const projectId =
+  import.meta.env?.PUBLIC_SANITY_STUDIO_PROJECT_ID ??
+  process.env.PUBLIC_SANITY_STUDIO_PROJECT_ID;
+const dataset =
+  import.meta.env?.PUBLIC_SANITY_STUDIO_DATASET ??
+  process.env.PUBLIC_SANITY_STUDIO_DATASET;
 
 export default defineConfig({
   name: "default",
   title: "Groundwaves CMS",
-  projectId: env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
-  dataset: env.PUBLIC_SANITY_STUDIO_DATASET,
+  projectId,
+  dataset,
   plugins: [structureTool({ structure, defaultDocumentNode }), visionTool()],
   schema: {
     types: schemaTypes,

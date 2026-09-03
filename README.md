@@ -13,6 +13,8 @@ A modern website for a music event organization built with Astro, featuring cont
 
 ## Setup
 
+Node.js 22.12 or newer is required.
+
 ```bash
 pnpm install        # Install dependencies
 pnpm run codegen    # Generate TypeScript types from Sanity schemas

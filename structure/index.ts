@@ -1,10 +1,8 @@
 import type { StructureResolver } from "sanity/structure";
-import {
-  CalendarIcon,
-  UsersIcon,
-  PinIcon,
-  AddDocumentIcon,
-} from "@sanity/icons";
+import { AddDocumentIcon } from "@sanity/icons/AddDocument";
+import { CalendarIcon } from "@sanity/icons/Calendar";
+import { PinIcon } from "@sanity/icons/Pin";
+import { UsersIcon } from "@sanity/icons/Users";
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -24,7 +22,7 @@ export const structure: StructureResolver = (S) =>
         .schemaType("event")
         .icon(CalendarIcon)
         .child(
-          S.documentList().title("Upcoming Events").filter("date > now()")
+          S.documentList().title("Upcoming Events").filter("date > now()"),
         ),
       S.listItem()
         .title("Past Events")

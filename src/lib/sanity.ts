@@ -1,11 +1,10 @@
+import type { QueryParams } from "@sanity/client";
 import { sanityClient } from "sanity:client";
 
 // True when real Sanity credentials are configured. When they're absent
 // (e.g. local dev without a .env), we skip network fetches and return
 // fallback data so the app still renders instead of crashing at build time.
-const sanityEnabled = Boolean(
-  import.meta.env.PUBLIC_SANITY_STUDIO_PROJECT_ID,
-);
+const sanityEnabled = Boolean(import.meta.env.PUBLIC_SANITY_STUDIO_PROJECT_ID);
 
 /**
  * Fetch from Sanity, returning `fallback` when Sanity is disabled or the
@@ -14,7 +13,7 @@ const sanityEnabled = Boolean(
 export async function safeFetch<T>(
   query: string,
   fallback: T,
-  params?: Record<string, unknown>,
+  params: QueryParams = {},
 ): Promise<T> {
   if (!sanityEnabled) return fallback;
   try {
